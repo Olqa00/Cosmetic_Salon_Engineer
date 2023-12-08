@@ -1,0 +1,106 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+<div class="auth-card mx-auto">
+    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <div clas="auth-full-header">
+            <h2 class="auth-header">@sharedResource["RegisteronSite"]</h2>
+            <span class="auth-caption">
+                @sharedResource["CreateFreeAccount"]
+            </span>
+        </div>
+        
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+        <div class="auth-inputs">
+
+            <div class="row mb-3">
+                <div class="auth-input-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15 8C15 8.79565 14.6839 9.55871 14.1213 10.1213C13.5587 10.6839 12.7956 11 12 11C11.2044 11 10.4413 10.6839 9.87868 10.1213C9.31607 9.55871 9 8.79565 9 8C9 7.20435 9.31607 6.44129 9.87868 5.87868C10.4413 5.31607 11.2044 5 12 5C12.7956 5 13.5587 5.31607 14.1213 5.87868C14.6839 6.44129 15 7.20435 15 8ZM12 12.5C13.1935 12.5 14.3381 12.0259 15.182 11.182C16.0259 10.3381 16.5 9.19347 16.5 8C16.5 6.80653 16.0259 5.66193 15.182 4.81802C14.3381 3.97411 13.1935 3.5 12 3.5C10.8065 3.5 9.66193 3.97411 8.81802 4.81802C7.97411 5.66193 7.5 6.80653 7.5 8C7.5 9.19347 7.97411 10.3381 8.81802 11.182C9.66193 12.0259 10.8065 12.5 12 12.5ZM21 20C21 21.5 19.5 21.5 19.5 21.5H4.5C4.5 21.5 3 21.5 3 20C3 18.5 4.5 14 12 14C19.5 14 21 18.5 21 20ZM19.5 19.994C19.4985 19.625 19.269 18.515 18.252 17.498C17.274 16.52 15.4335 15.5 12 15.5C8.565 15.5 6.726 16.52 5.748 17.498C4.731 18.515 4.503 19.625 4.5 19.994H19.5Z" fill="#574646" />
+                    </svg>
+                </div>
+                <div class="col-md-6">
+
+                    <div class="form-floating auth-input">
+                        <input asp-for="Input.FirstName" class="form-control" autocomplete="given-name" aria-required="true" placeholder="First Name" />
+                        <label asp-for="Input.FirstName">@sharedResource["FirstName"]</label>
+                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating auth-input">
+                        <input asp-for="Input.LastName" class="form-control" autocomplete="family-name" aria-required="true" placeholder="Last Name" />
+                        <label asp-for="Input.LastName">@sharedResource["LastName"]</label>
+                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="auth-input-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 6.5C0 5.70435 0.316071 4.94129 0.87868 4.37868C1.44129 3.81607 2.20435 3.5 3 3.5H21C21.7956 3.5 22.5587 3.81607 23.1213 4.37868C23.6839 4.94129 24 5.70435 24 6.5V18.5C24 19.2956 23.6839 20.0587 23.1213 20.6213C22.5587 21.1839 21.7956 21.5 21 21.5H3C2.20435 21.5 1.44129 21.1839 0.87868 20.6213C0.316071 20.0587 0 19.2956 0 18.5V6.5ZM3 5C2.60218 5 2.22064 5.15804 1.93934 5.43934C1.65804 5.72064 1.5 6.10218 1.5 6.5V6.8255L12 13.1255L22.5 6.8255V6.5C22.5 6.10218 22.342 5.72064 22.0607 5.43934C21.7794 5.15804 21.3978 5 21 5H3ZM22.5 8.5745L15.363 12.857L22.5 17.171V8.576V8.5745ZM22.449 18.8915L13.9065 13.73L12 14.8745L10.092 13.73L1.551 18.89C1.6368 19.2086 1.82527 19.4901 2.08723 19.6908C2.34919 19.8914 2.67001 20.0001 3 20H21C21.3298 20.0002 21.6505 19.8917 21.9124 19.6914C22.1743 19.491 22.3629 19.2099 22.449 18.8915ZM1.5 17.171L8.637 12.857L1.5 8.5745V17.1695V17.171Z" fill="#574646" />
+                    </svg>
+                </div>
+                <div class="col-12">
+                    <div class="form-floating auth-input">
+                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                        <label asp-for="Input.Email">Email</label>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="auth-input-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                        <path d="M8.57143 4.5H5.45454C4.65122 4.5 4 5.15122 4 5.95454C4 13.9878 10.5122 20.5 18.5454 20.5C19.3487 20.5 20 19.8487 20 19.0454V15.9285L16.5715 13.6428L14.7936 15.4206C14.4849 15.7295 14.0234 15.8255 13.6354 15.6251C12.9774 15.2851 11.9096 14.6464 10.8572 13.6428C9.77951 12.6153 9.14812 11.5081 8.83122 10.8382C8.65362 10.4627 8.75644 10.0293 9.05014 9.73557L10.8572 7.92857L8.57143 4.5Z" stroke="#574646" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="col-12">
+                    <div class="form-floating auth-input">
+                        <input asp-for="Input.PhoneNumber" class="form-control" autocomplete="tel" placeholder="Phone number" />
+                        <label asp-for="Input.PhoneNumber">@sharedResource["PhoneNumber"]</label>
+                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="auth-input-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="25" viewBox="0 0 22 25" fill="none">
+                        <path d="M1.68945 12.1276C1.68945 11.3049 2.3564 10.6379 3.17911 10.6379H18.8205C19.6432 10.6379 20.3101 11.3049 20.3101 12.1276V20.3207C20.3101 21.9662 18.9763 23.3 17.3308 23.3H4.66876C3.02333 23.3 1.68945 21.9662 1.68945 20.3207V12.1276Z" stroke="#574646" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M4.66895 10.2655V10.0311C4.66895 7.70545 4.52902 5.11312 6.15333 3.44866C7.07964 2.49945 8.57855 1.69995 11 1.69995C13.4214 1.69995 14.9203 2.49945 15.8466 3.44866C17.4709 5.11312 17.331 7.70545 17.331 10.0311V10.2655" stroke="#574646" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating auth-input">
+                        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                        <label asp-for="Input.Password">@sharedResource["Password"]</label>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating auth-input">
+                        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                        <label asp-for="Input.ConfirmPassword">@sharedResource["RepeatPassword"]</label>
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="auth-button">
+            <button id="registerSubmit" type="submit" class="button btn btn-info">@sharedResource["Register"]</button>
+        </div>
+
+    </form>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

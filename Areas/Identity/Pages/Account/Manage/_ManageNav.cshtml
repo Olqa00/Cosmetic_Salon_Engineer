@@ -1,0 +1,24 @@
+﻿@inject SignInManager<User> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+<div>
+    <div class="navigation-container">
+        <h2 class="navigation-header">@sharedResource["Navigation"]</h2>
+        <div class="navigation-links">
+            <a class="navigation-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">@sharedResource["MyAccount"]</a>
+            <a class="navigation-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a>
+            <a class="navigation-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">@sharedResource["Password"]</a>
+            <a class="navigation-link @ManageNavPages.MyTreatmentsNavClass(ViewContext)" id="my-treatments" asp-page="./MyTreatments">@sharedResource["MyTreatments"]</a>
+            <a class="navigation-link @ManageNavPages.MyTrainingsNavClass(ViewContext)" id="my-trainings" asp-page="./MyTrainings">@sharedResource["MyTrainings"]</a>
+            <a class="navigation-link @ManageNavPages.DeleteAccountNavClass(ViewContext)" id="delete-account" asp-page="./DeleteAccount">@sharedResource["DeleteAccount"]</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+

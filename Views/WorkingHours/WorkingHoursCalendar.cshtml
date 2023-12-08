@@ -1,0 +1,182 @@
+﻿<main>
+    <!DOCTYPE html>
+    <html lang='en'>
+    <head>
+        <meta charset='utf-8' />
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>
+        <link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
+        <script src='fullcalendar/core/index.global.js'></script>
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/locales-all.js"></script>
+    </head>
+    <div class="row" style="margin: 25px;">
+        <div class="col-md-3 d-flex align-items-center">
+            <div class="navigation-container">
+                <h2 class="navigation-header">@sharedResource["Navigation"]</h2>
+                <div class="navigation-links">
+                    <a asp-area="" asp-controller="Appointments" asp-action="CalendarAdmin" class="navigation-link"> @sharedResource["Calendar"]</a>
+                    <a asp-action="WorkingHoursCalendar" class="navigation-link active"> @sharedResource["WorkingHours"]</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="treatment-selects py-4">
+                <div class="tretment-select">
+                    <label for="employeeSelect" class="select-label" style="justify-content: left;">@sharedResource["SelectEmployee"]</label>
+                    <select id="employeeSelect" class="form-select tretment-select" onchange="updateWorkingHours()">
+                        <option value="all">@sharedResource["All"]</option>
+                        @foreach (var employee in ViewBag.EmployeeId)
+                        {
+                            <option value="@employee.Value">@employee.Text</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div id='calendar' class="calendar-box"></div>
+            <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="eventModalLabel">@sharedResource["YourAppointment"]</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="eventModalContent">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var sharedResource = JSON.parse(`@Html.Raw(ViewBag.SharedResourceTranslations)`);
+        var initialLocaleCode = '@Html.Raw(ViewBag.language)';
+        var list = sharedResource.find(function (item) {
+                    return item.Name === 'WeeklyList';
+                })
+                if (list) {
+                    var weeklylist = list.Value;
+                } else {
+                    console.log('Nie znaleziono wartości dla wybranej nazwy.' + value);
+                }
+        document.addEventListener('DOMContentLoaded', function () {
+            updateWorkingHours();
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'timeGridWeek',
+                firstDay: 1,
+                headerToolbar: {
+                    left: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+                    center: 'title',
+                    right: 'today prev,next'
+                },
+                buttonText: {
+                    listWeek: weeklylist,
+                },
+                locale: initialLocaleCode,
+                slotMinTime: "06:00",
+                slotMaxTime: "24:00",
+                events: '/WorkingHours/GetWorkingHoursForCalendar',
+                eventClick: function (info) {
+                    // Wywołaj funkcję do obsługi kliknięcia na event
+                    handleEventClick(info.event);
+                }
+            });
+            calendar.render();
+        });
+        function handleEventClick(event) {
+            handleSingleEventClick(event);
+
+        }
+        function handleSingleEventClick(event) {
+
+            var selectedEmployee = document.getElementById('employeeSelect').value;
+            var userId = event.extendedProps.userid;
+            var startTime = new Date(event.start);
+            var endTime = new Date(event.end);
+
+            var dayWH = startTime.toLocaleString('pl-PL', {
+                year: 'numeric', month: '2-digit', day: '2-digit'
+            });
+            var startWH = startTime.toLocaleString('pl-PL', { hour: '2-digit', minute: '2-digit' });
+            var endTimeFormatted = endTime.toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' });
+            startTime.setMinutes(startTime.getMinutes() - startTime.getTimezoneOffset());
+            endTime.setMinutes(endTime.getMinutes() - endTime.getTimezoneOffset());
+            var formattedStartTime = startTime.toISOString().slice(0, 16);
+            var formattedEndTime = endTime.toISOString().slice(0, 16);
+            var content = `
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <div class="form-group">
+                                            <label class="control-label">@sharedResource["Date"]</label>
+                                            <input type="text" class="form-control" value="${dayWH}" disabled/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">@sharedResource["WorkingTimeStats"]</label>
+                                            <input type="text" class="form-control" value="${startWH}-${endTimeFormatted}" disabled/>
+                                        </div>
+                                        <button class="button btn-info d-flex justify-content-center" onclick="window.location.href='/WorkingHours/EditMerged?userId=${userId}&startWH=${formattedStartTime}&endWH=${formattedEndTime}'" class="btn btn-primary">@sharedResource["Details"]</button>
+                                    </div>
+
+                                </div>
+                            `;
+            document.getElementById('eventModalContent').innerHTML = content;
+            var eventModal = new bootstrap.Modal(document.getElementById('eventModal'));
+            eventModal.show();
+        }
+        function updateWorkingHours() {
+            var selectedEmployee = document.getElementById('employeeSelect').value;
+            $.ajax({
+                type: 'GET',
+                url: '/WorkingHours/GetWorkingHoursForCalendar',
+                data: {
+                    selectedEmployee: selectedEmployee
+                },
+                dataType: 'json',
+                success: function (data) {
+                    var events = data.events.map(function (item) {
+                        return {
+                            title: item.name,
+                            userid: item.userId,
+                            start: item.startDate,
+                            end: item.endDate,
+                            backgroundColor: item.userBackgroundColor
+                        };
+                    });
+
+                    var calendarEl = document.getElementById('calendar');
+                    var calendar = new FullCalendar.Calendar(calendarEl, {
+                        initialView: 'timeGridWeek',
+                        firstDay: 1,
+                        headerToolbar: {
+                            left: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+                            center: 'title',
+                            right: 'today prev,next'
+                        },
+                        buttonText: {
+                            listWeek: weeklylist,
+                        },
+                        locale: initialLocaleCode,
+                        slotMinTime: "06:00",
+                        slotMaxTime: "24:00",
+                        events: events,
+                        eventClick: function (info) {
+                            handleEventClick(info.event);
+                        }
+                    });
+                    calendar.render();
+                },
+                error: function (error) {
+                    console.error('Błąd podczas odświeżania kalendarza:', error);
+                }
+            });
+        }
+
+
+    </script>
+</main>

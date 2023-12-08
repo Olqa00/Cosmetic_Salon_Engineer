@@ -1,0 +1,70 @@
+﻿@page
+@model EmailModel
+@{
+    ViewData["ActivePage"] = ManageNavPages.Email;
+}
+
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="row">
+    <form id="email-form" class="profile-container gap-3" method="post">
+        <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+        @if (Model.IsEmailConfirmed)
+        {
+
+            <div class="personal-data-box">
+                <div class="input-box-container">
+                    <div class="input-box-icon">
+                        <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.3333 3.00001C18.3333 2.08334 17.5833 1.33334 16.6667 1.33334H3.33333C2.41667 1.33334 1.66667 2.08334 1.66667 3.00001M18.3333 3.00001V13C18.3333 13.9167 17.5833 14.6667 16.6667 14.6667H3.33333C2.41667 14.6667 1.66667 13.9167 1.66667 13V3.00001M18.3333 3.00001L10 8.83334L1.66667 3.00001" stroke="#667085" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+
+                    </div>
+                    <input asp-for="Email" class="input-box-username" placeholder=@sharedResource["ChooseUsername"] disabled />
+                    <!--
+                        <div class="input-group-append">
+                        <span class="h-100 input-group-text text-success font-weight-bold">✓</span>
+                    </div>
+                    -->
+                </div>
+                <label class="input-label">@sharedResource["CurrentEmail"]</label>
+                
+            </div>
+        }
+        else
+        {
+            <div class="personal-data-box">
+                <div class="input-box-container">
+                    <div class="input-box-icon">
+                        <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.3333 3.00001C18.3333 2.08334 17.5833 1.33334 16.6667 1.33334H3.33333C2.41667 1.33334 1.66667 2.08334 1.66667 3.00001M18.3333 3.00001V13C18.3333 13.9167 17.5833 14.6667 16.6667 14.6667H3.33333C2.41667 14.6667 1.66667 13.9167 1.66667 13V3.00001M18.3333 3.00001L10 8.83334L1.66667 3.00001" stroke="#667085" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+
+                    </div>
+                    <input asp-for="Email" class="input-box-username" placeholder=@sharedResource["ChooseUsername"] disabled />
+                </div>
+                <label class="input-label">@sharedResource["CurrentEmail"]</label>
+                <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="button btn btn-info">Send verification email</button>
+            </div>
+        }
+        <div class="personal-data-box">
+            <div class="input-box-container">
+                <div class="input-box-icon">
+                    <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.3333 3.00001C18.3333 2.08334 17.5833 1.33334 16.6667 1.33334H3.33333C2.41667 1.33334 1.66667 2.08334 1.66667 3.00001M18.3333 3.00001V13C18.3333 13.9167 17.5833 14.6667 16.6667 14.6667H3.33333C2.41667 14.6667 1.66667 13.9167 1.66667 13V3.00001M18.3333 3.00001L10 8.83334L1.66667 3.00001" stroke="#667085" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                </div>
+                <input asp-for="Input.NewEmail" class="input-box" autocomplete="email" aria-required="true" placeholder=@sharedResource["ChooseUsername"] />
+            </div>
+            <label class="input-label">@sharedResource["NewEmail"]</label>
+            <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
+        </div>
+
+
+        <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="button btn btn-info mt-3">@sharedResource["ChangeEmail"]</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

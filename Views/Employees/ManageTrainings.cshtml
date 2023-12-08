@@ -1,0 +1,306 @@
+﻿@model IEnumerable<Engineer_MVC.Models.Training>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<main>
+    <div class="row">
+        <div class="col-md-3 d-flex align-items-center">
+            <div class="navigation-container">
+                <h2 class="navigation-header">@sharedResource["Navigation"]</h2>
+                <div class="navigation-links">
+                    <a asp-action="ManageAppointments" class="navigation-link "> @sharedResource["ListAppointments"]</a>
+                    <a asp-action="ArchiveAppointments" class="navigation-link "> @sharedResource["AppointmentsArchive"]</a>
+                    <a asp-action="ManageTrainings" class="navigation-link active"> @sharedResource["TrainingList"]</a>
+                    <a asp-action="ArchiveTrainings" class="navigation-link "> @sharedResource["TrainingsArchives"]</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 mt-4">
+            <div class="treatment-table accordion" id="treatment-table">
+                @foreach (var training in Model)
+                {
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <div class="treatment-item-header row">
+                                <div class="col-9 row mx-0" data-bs-toggle="collapse" data-bs-target="#treatment-@training.Id">
+                                    <div class="col-3">
+                                        <svg class="treatment-item-arrow me-3" xmlns="http://www.w3.org/2000/svg" width="14" height="17" viewBox="0 0 14 17" fill="none">
+                                            <path d="M1.74561 2L7.25549 7.62882L12.7654 2" fill="#FFE8E8" />
+                                            <path d="M1.74561 2L7.25549 7.62882L12.7654 2" stroke="#9E7777" stroke-width="1.5" stroke-linecap="square" />
+                                            <path d="M1.74561 10.0412L7.25549 15.67L12.7654 10.0412" fill="#FFE8E8" />
+                                            <path d="M1.74561 10.0412L7.25549 15.67L12.7654 10.0412" stroke="#9E7777" stroke-width="1.5" stroke-linecap="square" />
+                                        </svg> @sharedResource[training.Treatment.Type]
+                                    </div>
+                                    <div class="col-auto">@sharedResource[training.Treatment.Name]</div>
+                                    <div class="col-5 ms-auto">@training.Date.ToString("dd.MM.yyyy HH:mm") - @training.EndTime.ToString("HH:mm")</div>
+                                </div>
+                                <div class="col-3 row justify-content-end">
+                                    <div class="col-auto">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="19" viewBox="0 0 21 19" fill="none" data-bs-toggle="modal" data-bs-target="#treatmentModal-@training.Id" onclick="ResetSelects('@training.Id', '@training.Treatment.Type', '@training.Treatment.Name','@training.EmployeeId')">
+                                            <path d="M1.43311 9.5193C1.43311 4.81422 5.44483 1 10.3935 1C15.3423 1 19.3539 4.81422 19.3539 9.5193C19.3539 14.2244 15.3423 18.0386 10.3935 18.0386C5.44483 18.0386 1.43311 14.2244 1.43311 9.5193Z" fill="#FFE8E8" stroke="#9E7777" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M7.6123 6.87537L13.1739 12.1632L7.6123 6.87537Z" fill="#FFE8E8" />
+                                            <path d="M7.6123 6.87537L13.1739 12.1632" stroke="#9E7777" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M13.1739 6.87537L7.6123 12.1632L13.1739 6.87537Z" fill="#FFE8E8" />
+                                            <path d="M13.1739 6.87537L7.6123 12.1632" stroke="#9E7777" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+
+                                    </div>
+                                    <div class="col-8 d-flex justify-content-end">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 22 20" fill="none">
+                                            <rect width="21.0833" height="20" transform="translate(0.524414)" fill="#FFE8E8" />
+                                            <path d="M20.5244 8.27365C20.5155 8.48563 20.4035 8.72773 20.186 8.91893C19.3154 9.6837 18.4444 10.4478 17.5728 11.2111C17.1659 11.5682 16.7584 11.9247 16.3504 12.2806C16.2921 12.3313 16.2773 12.3762 16.2952 12.4548C16.6084 13.8236 16.9191 15.193 17.2272 16.5629C17.2896 16.8382 17.351 17.114 17.4184 17.3883C17.5167 17.7946 17.3912 18.1961 17.0745 18.4234C16.7261 18.6734 16.3561 18.6896 15.9878 18.4712C14.8147 17.7738 13.6431 17.0737 12.473 16.3707C12.1998 16.2075 11.9233 16.0481 11.6547 15.8789C11.5648 15.8222 11.4996 15.8217 11.4073 15.8772C9.98435 16.7313 8.55828 17.5802 7.13699 18.4342C6.83515 18.6153 6.52685 18.6834 6.19321 18.5465C5.75179 18.3653 5.52117 17.9012 5.63086 17.4189C5.94108 16.0538 6.25177 14.6887 6.56293 13.3236C6.62842 13.0368 6.68697 12.7478 6.75795 12.4632C6.7785 12.381 6.76417 12.3325 6.70179 12.2782C6.16708 11.8131 5.63373 11.3465 5.10174 10.8782C4.35632 10.2238 3.60803 9.574 2.86692 8.91486C2.56435 8.64624 2.44964 8.30328 2.57368 7.9111C2.69771 7.51891 2.97494 7.28279 3.3884 7.24024C4.12115 7.1652 4.8551 7.10235 5.58856 7.03519C6.31414 6.96875 7.03972 6.90279 7.7653 6.8373C8.00716 6.81556 8.24902 6.79118 8.49112 6.77278C8.56904 6.76704 8.61062 6.73286 8.63978 6.66188C9.29701 5.11752 9.95535 3.57378 10.6148 2.03069C10.7969 1.60409 11.1222 1.36582 11.5356 1.37657C11.9491 1.38732 12.2474 1.58927 12.4113 1.96903C12.8575 3.00219 13.298 4.03775 13.7403 5.07282C13.9655 5.59861 14.1911 6.12582 14.4124 6.654C14.4463 6.73525 14.4948 6.7668 14.5797 6.77349C15.1628 6.82288 15.7458 6.87467 16.3286 6.92884C17.1772 7.00595 18.0257 7.0837 18.8741 7.16209C19.1437 7.18599 19.4135 7.20989 19.6824 7.24001C20.1714 7.29784 20.5282 7.7058 20.5244 8.27365Z" stroke="#9E7777" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg><svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 22 20" fill="none">
+                                            <rect width="21.0833" height="20" transform="translate(0.524414)" fill="#FFE8E8" />
+                                            <path d="M20.5244 8.27365C20.5155 8.48563 20.4035 8.72773 20.186 8.91893C19.3154 9.6837 18.4444 10.4478 17.5728 11.2111C17.1659 11.5682 16.7584 11.9247 16.3504 12.2806C16.2921 12.3313 16.2773 12.3762 16.2952 12.4548C16.6084 13.8236 16.9191 15.193 17.2272 16.5629C17.2896 16.8382 17.351 17.114 17.4184 17.3883C17.5167 17.7946 17.3912 18.1961 17.0745 18.4234C16.7261 18.6734 16.3561 18.6896 15.9878 18.4712C14.8147 17.7738 13.6431 17.0737 12.473 16.3707C12.1998 16.2075 11.9233 16.0481 11.6547 15.8789C11.5648 15.8222 11.4996 15.8217 11.4073 15.8772C9.98435 16.7313 8.55828 17.5802 7.13699 18.4342C6.83515 18.6153 6.52685 18.6834 6.19321 18.5465C5.75179 18.3653 5.52117 17.9012 5.63086 17.4189C5.94108 16.0538 6.25177 14.6887 6.56293 13.3236C6.62842 13.0368 6.68697 12.7478 6.75795 12.4632C6.7785 12.381 6.76417 12.3325 6.70179 12.2782C6.16708 11.8131 5.63373 11.3465 5.10174 10.8782C4.35632 10.2238 3.60803 9.574 2.86692 8.91486C2.56435 8.64624 2.44964 8.30328 2.57368 7.9111C2.69771 7.51891 2.97494 7.28279 3.3884 7.24024C4.12115 7.1652 4.8551 7.10235 5.58856 7.03519C6.31414 6.96875 7.03972 6.90279 7.7653 6.8373C8.00716 6.81556 8.24902 6.79118 8.49112 6.77278C8.56904 6.76704 8.61062 6.73286 8.63978 6.66188C9.29701 5.11752 9.95535 3.57378 10.6148 2.03069C10.7969 1.60409 11.1222 1.36582 11.5356 1.37657C11.9491 1.38732 12.2474 1.58927 12.4113 1.96903C12.8575 3.00219 13.298 4.03775 13.7403 5.07282C13.9655 5.59861 14.1911 6.12582 14.4124 6.654C14.4463 6.73525 14.4948 6.7668 14.5797 6.77349C15.1628 6.82288 15.7458 6.87467 16.3286 6.92884C17.1772 7.00595 18.0257 7.0837 18.8741 7.16209C19.1437 7.18599 19.4135 7.20989 19.6824 7.24001C20.1714 7.29784 20.5282 7.7058 20.5244 8.27365Z" stroke="#9E7777" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg><svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 22 20" fill="none">
+                                            <rect width="21.0833" height="20" transform="translate(0.524414)" fill="#FFE8E8" />
+                                            <path d="M20.5244 8.27365C20.5155 8.48563 20.4035 8.72773 20.186 8.91893C19.3154 9.6837 18.4444 10.4478 17.5728 11.2111C17.1659 11.5682 16.7584 11.9247 16.3504 12.2806C16.2921 12.3313 16.2773 12.3762 16.2952 12.4548C16.6084 13.8236 16.9191 15.193 17.2272 16.5629C17.2896 16.8382 17.351 17.114 17.4184 17.3883C17.5167 17.7946 17.3912 18.1961 17.0745 18.4234C16.7261 18.6734 16.3561 18.6896 15.9878 18.4712C14.8147 17.7738 13.6431 17.0737 12.473 16.3707C12.1998 16.2075 11.9233 16.0481 11.6547 15.8789C11.5648 15.8222 11.4996 15.8217 11.4073 15.8772C9.98435 16.7313 8.55828 17.5802 7.13699 18.4342C6.83515 18.6153 6.52685 18.6834 6.19321 18.5465C5.75179 18.3653 5.52117 17.9012 5.63086 17.4189C5.94108 16.0538 6.25177 14.6887 6.56293 13.3236C6.62842 13.0368 6.68697 12.7478 6.75795 12.4632C6.7785 12.381 6.76417 12.3325 6.70179 12.2782C6.16708 11.8131 5.63373 11.3465 5.10174 10.8782C4.35632 10.2238 3.60803 9.574 2.86692 8.91486C2.56435 8.64624 2.44964 8.30328 2.57368 7.9111C2.69771 7.51891 2.97494 7.28279 3.3884 7.24024C4.12115 7.1652 4.8551 7.10235 5.58856 7.03519C6.31414 6.96875 7.03972 6.90279 7.7653 6.8373C8.00716 6.81556 8.24902 6.79118 8.49112 6.77278C8.56904 6.76704 8.61062 6.73286 8.63978 6.66188C9.29701 5.11752 9.95535 3.57378 10.6148 2.03069C10.7969 1.60409 11.1222 1.36582 11.5356 1.37657C11.9491 1.38732 12.2474 1.58927 12.4113 1.96903C12.8575 3.00219 13.298 4.03775 13.7403 5.07282C13.9655 5.59861 14.1911 6.12582 14.4124 6.654C14.4463 6.73525 14.4948 6.7668 14.5797 6.77349C15.1628 6.82288 15.7458 6.87467 16.3286 6.92884C17.1772 7.00595 18.0257 7.0837 18.8741 7.16209C19.1437 7.18599 19.4135 7.20989 19.6824 7.24001C20.1714 7.29784 20.5282 7.7058 20.5244 8.27365Z" stroke="#9E7777" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg><svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 22 20" fill="none">
+                                            <rect width="21.0833" height="20" transform="translate(0.524414)" fill="#FFE8E8" />
+                                            <path d="M20.5244 8.27365C20.5155 8.48563 20.4035 8.72773 20.186 8.91893C19.3154 9.6837 18.4444 10.4478 17.5728 11.2111C17.1659 11.5682 16.7584 11.9247 16.3504 12.2806C16.2921 12.3313 16.2773 12.3762 16.2952 12.4548C16.6084 13.8236 16.9191 15.193 17.2272 16.5629C17.2896 16.8382 17.351 17.114 17.4184 17.3883C17.5167 17.7946 17.3912 18.1961 17.0745 18.4234C16.7261 18.6734 16.3561 18.6896 15.9878 18.4712C14.8147 17.7738 13.6431 17.0737 12.473 16.3707C12.1998 16.2075 11.9233 16.0481 11.6547 15.8789C11.5648 15.8222 11.4996 15.8217 11.4073 15.8772C9.98435 16.7313 8.55828 17.5802 7.13699 18.4342C6.83515 18.6153 6.52685 18.6834 6.19321 18.5465C5.75179 18.3653 5.52117 17.9012 5.63086 17.4189C5.94108 16.0538 6.25177 14.6887 6.56293 13.3236C6.62842 13.0368 6.68697 12.7478 6.75795 12.4632C6.7785 12.381 6.76417 12.3325 6.70179 12.2782C6.16708 11.8131 5.63373 11.3465 5.10174 10.8782C4.35632 10.2238 3.60803 9.574 2.86692 8.91486C2.56435 8.64624 2.44964 8.30328 2.57368 7.9111C2.69771 7.51891 2.97494 7.28279 3.3884 7.24024C4.12115 7.1652 4.8551 7.10235 5.58856 7.03519C6.31414 6.96875 7.03972 6.90279 7.7653 6.8373C8.00716 6.81556 8.24902 6.79118 8.49112 6.77278C8.56904 6.76704 8.61062 6.73286 8.63978 6.66188C9.29701 5.11752 9.95535 3.57378 10.6148 2.03069C10.7969 1.60409 11.1222 1.36582 11.5356 1.37657C11.9491 1.38732 12.2474 1.58927 12.4113 1.96903C12.8575 3.00219 13.298 4.03775 13.7403 5.07282C13.9655 5.59861 14.1911 6.12582 14.4124 6.654C14.4463 6.73525 14.4948 6.7668 14.5797 6.77349C15.1628 6.82288 15.7458 6.87467 16.3286 6.92884C17.1772 7.00595 18.0257 7.0837 18.8741 7.16209C19.1437 7.18599 19.4135 7.20989 19.6824 7.24001C20.1714 7.29784 20.5282 7.7058 20.5244 8.27365Z" stroke="#9E7777" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg><svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 22 20" fill="none">
+                                            <rect width="21.0833" height="20" transform="translate(0.524414)" fill="#FFE8E8" />
+                                            <path d="M20.5244 8.27365C20.5155 8.48563 20.4035 8.72773 20.186 8.91893C19.3154 9.6837 18.4444 10.4478 17.5728 11.2111C17.1659 11.5682 16.7584 11.9247 16.3504 12.2806C16.2921 12.3313 16.2773 12.3762 16.2952 12.4548C16.6084 13.8236 16.9191 15.193 17.2272 16.5629C17.2896 16.8382 17.351 17.114 17.4184 17.3883C17.5167 17.7946 17.3912 18.1961 17.0745 18.4234C16.7261 18.6734 16.3561 18.6896 15.9878 18.4712C14.8147 17.7738 13.6431 17.0737 12.473 16.3707C12.1998 16.2075 11.9233 16.0481 11.6547 15.8789C11.5648 15.8222 11.4996 15.8217 11.4073 15.8772C9.98435 16.7313 8.55828 17.5802 7.13699 18.4342C6.83515 18.6153 6.52685 18.6834 6.19321 18.5465C5.75179 18.3653 5.52117 17.9012 5.63086 17.4189C5.94108 16.0538 6.25177 14.6887 6.56293 13.3236C6.62842 13.0368 6.68697 12.7478 6.75795 12.4632C6.7785 12.381 6.76417 12.3325 6.70179 12.2782C6.16708 11.8131 5.63373 11.3465 5.10174 10.8782C4.35632 10.2238 3.60803 9.574 2.86692 8.91486C2.56435 8.64624 2.44964 8.30328 2.57368 7.9111C2.69771 7.51891 2.97494 7.28279 3.3884 7.24024C4.12115 7.1652 4.8551 7.10235 5.58856 7.03519C6.31414 6.96875 7.03972 6.90279 7.7653 6.8373C8.00716 6.81556 8.24902 6.79118 8.49112 6.77278C8.56904 6.76704 8.61062 6.73286 8.63978 6.66188C9.29701 5.11752 9.95535 3.57378 10.6148 2.03069C10.7969 1.60409 11.1222 1.36582 11.5356 1.37657C11.9491 1.38732 12.2474 1.58927 12.4113 1.96903C12.8575 3.00219 13.298 4.03775 13.7403 5.07282C13.9655 5.59861 14.1911 6.12582 14.4124 6.654C14.4463 6.73525 14.4948 6.7668 14.5797 6.77349C15.1628 6.82288 15.7458 6.87467 16.3286 6.92884C17.1772 7.00595 18.0257 7.0837 18.8741 7.16209C19.1437 7.18599 19.4135 7.20989 19.6824 7.24001C20.1714 7.29784 20.5282 7.7058 20.5244 8.27365Z" stroke="#9E7777" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </h2>
+                        <div id="treatment-@training.Id" class="accordion-collapse collapse" data-bs-parent="#treatment-table">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <img class="me-2" width="17" height="20" viewBox="0 0 17 20" src="~/ProfileImages/@(training.Employee?.ImagePath ?? "default.jpg")" )>
+                                                @sharedResource["Employee"]
+                                            </div>
+                                            <div class="col-auto">
+                                                @training.Employee?.FullName
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <svg class="me-2" style="margin-left:4px;" xmlns="http://www.w3.org/2000/svg" width="13" height="20" viewBox="0 0 13 20" fill="none">
+                                                    <path d="M9.053 3.85988C9.053 5.40246 7.80244 6.65298 6.2599 6.65298C4.71736 6.65298 3.4668 5.40246 3.4668 3.85988C3.4668 2.31729 4.71736 1.06677 6.2599 1.06677C7.80244 1.06677 9.053 2.31729 9.053 3.85988Z" stroke="#631E1E" stroke-width="1.5" stroke-linecap="round" />
+                                                    <path d="M6.26024 7.27368C2.03955 7.27368 0.984375 9.4461 0.984375 12.8599H3.46713V16.584C3.46713 17.9553 3.46713 19.0668 3.46713 19.0668H9.05334C9.05334 19.0668 9.05334 17.9553 9.05334 16.584V12.8599H11.5361C11.5361 9.4461 10.4809 7.27368 6.26024 7.27368Z" stroke="#631E1E" stroke-width="1.5" stroke-linecap="round" />
+                                                </svg>
+                                                @sharedResource["Participants"]
+                                            </div>
+                                            <div class="col-auto">
+                                                @(training.Users?.Count() ?? 0)  / @training.UsersNumber
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <svg class="me-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 21 19" fill="none">
+                                                    <path d="M10.4892 18C15.4379 18 19.4496 14.1944 19.4496 9.5C19.4496 4.80558 15.4379 1 10.4892 1C5.54052 1 1.52881 4.80558 1.52881 9.5C1.52881 14.1944 5.54052 18 10.4892 18Z" stroke="#631E1E" stroke-width="1.5" />
+                                                    <path d="M10.4893 4.81036V9.50002L12.9611 11.8448" stroke="#631E1E" stroke-width="1.5" stroke-linecap="round" />
+                                                </svg>
+                                                @sharedResource["Duration"]
+
+                                            </div>
+                                            <div class="col-auto">
+                                                @training.Duration min
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <svg class="me-2" xmlns="http://www.w3.org/2000/svg" width="17" height="20" viewBox="0 0 17 20" fill="none">
+                                                    <path d="M15.3777 3.48279H5.07234C3.17516 3.48279 1.63721 4.94172 1.63721 6.74141C1.63721 8.54104 3.17516 10 5.07234 10H11.9426C13.8397 10 15.3777 11.459 15.3777 13.2587C15.3777 15.0583 13.8397 16.5173 11.9426 16.5173H1.63721" stroke="#631E1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M8.18018 19V1" stroke="#631E1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                                @sharedResource["Cost"]
+                                            </div>
+                                            <div class="col-auto">
+                                                @training.Price Euro
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="buttons col-md-5">
+                                        <a asp-controller="Trainings" asp-action="EditParticipantsList" asp-route-id="@training.Id" class="buttonList btn btn-info">@sharedResource["ParticipantsList"]</a>
+                                        <a asp-controller="Trainings" asp-action="Edit" asp-route-id="@training.Id" class="buttonEdit btn btn-info">@sharedResource["Edit"]</a>
+                                        <a asp-controller="Trainings" asp-action="Delete" asp-route-id="@training.Id" class="buttonDelete btn btn-info">@sharedResource["Delete"]</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="treatmentModal-@training.Id" tabindex="-1" aria-labelledby="exampleModalLabel " aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">@sharedResource["HaveBeenChanges"]</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    @if (training != null)
+                                    {
+                                        <form asp-action="ManageTrainings" method="post">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <input type="hidden" asp-for="@training.Id" />
+                                            <input type="hidden" asp-for="@training.EmployeeId" />
+                                            <input type="hidden" asp-for="@training.TreatmentId" />
+                                            <input type="hidden" asp-for="@training.Ratings" />
+                                            <input type="hidden" asp-for="@training.Status" />
+                                            <input type="hidden" asp-for="@training.Users" />
+                                            <input type="hidden" asp-for="@training.UsersNumber" />
+                                            <div class="form-group">
+                                                <label class="control-label">@sharedResource["TypeTreatment"]</label>
+                                                <select id="TypeSelect-@training.Id" class="form-control" asp-for="@training.Treatment.Type" onchange="updateSelects(this, '@training.EmployeeId','@training.Id')">
+                                                    @foreach (var type in ViewBag.Types)
+                                                    {
+                                                        var isSelected = (type == @training.Treatment.Type) ? "selected" : "";
+                                                        <!option value="@type" @isSelected>@sharedResource[@type]</!option>
+                                                    }
+                                                </select>
+                                                <span asp-validation-for="@training.Treatment" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">@sharedResource["NameTreatment"]</label>
+                                                <select id="NamesSelect-@training.Id" class="form-control" asp-for="@training.Treatment.Name">
+                                                    @foreach (var name in ViewBag.Names)
+                                                    {
+                                                        var isSelected = (name == @training.Treatment.Name) ? "selected" : "";
+                                                        <!option value="@name" @isSelected>@name</!option>
+                                                    }
+                                                </select>
+                                                <span asp-validation-for="@training.Treatment" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label">@sharedResource["DateTreatment"]</label>
+                                                <input asp-for="@training.Date" class="form-control" />
+                                                <span asp-validation-for="@training.Date" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">@sharedResource["Duration"]</label>
+                                                <input asp-for="@training.Duration" class="form-control" />
+                                                <span asp-validation-for="@training.Duration" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">@sharedResource["Cost"]</label>
+                                                <input asp-for="@training.Price" class="form-control" />
+                                                <span asp-validation-for="@training.Price" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">@sharedResource["NumberParticipants"]</label>
+                                                <input class="form-control" id="UsersCountInput-@training.Id" disabled value="@ViewBag.UsersCount" />
+                                                <span asp-validation-for="@training.UsersNumber" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group mt-4">
+                                                <input type="submit" value='@sharedResource["Save"]' class="button btn btn-info d-flex justify-content-center" />
+                                            </div>
+                                        </form>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <script>
+        var sharedResource = JSON.parse(`@Html.Raw(ViewBag.SharedResourceTranslations)`);
+        function ResetSelects(trainingId, selectedType, selectedName, employeeId) {
+
+            // Set selectedType for TypeSelect
+            var typeSelect = document.getElementById('TypeSelect-' + trainingId);
+            if (typeSelect) {
+                typeSelect.value = selectedType;
+            }
+            var usersCountInput = document.getElementById('UsersCountInput-' + trainingId);
+            //Set selectedName for NamesSelect
+
+            $.ajax({
+                type: 'GET',
+                url: '/Employees/UpdateSelectsTraining',
+                data: {
+                    selectedTreatmentType: selectedType,
+                    employeeId: employeeId,
+                    trainingId: trainingId
+                },
+                dataType: 'json',
+                success: function (data) {
+                    // Update the options in the "Name" dropdown
+                    var namesSelect = document.getElementById('NamesSelect-' + trainingId);
+                    namesSelect.innerHTML = "";
+                    data.treatmentNames.forEach(function (name) {
+                        var resource = sharedResource.find(function (item) {
+                            return item.Name === name;
+                        });
+                        if (resource) {
+                            var valueResource = resource.Value;
+                        } else {
+                            console.log('Nie znaleziono wartości dla wybranej nazwy.' + value);
+                        }
+
+                        var option = document.createElement('option');
+                        option.value = name;
+                        option.text = valueResource;
+                        namesSelect.appendChild(option);
+                        if (data.usersCount !== undefined) {
+                            if (usersCountInput) {
+                                usersCountInput.value = data.usersCount;
+                            }
+                        }
+                    });
+
+                    if (selectedName) {
+                        namesSelect.value = selectedName;
+                    }
+                },
+                error: function (error) {
+                    console.error('Error refreshing dropdowns:', error);
+                }
+            });
+
+        }
+        function updateSelects(selectElement, employeeId, trainingId) {
+            var selectedTreatmentType = selectElement.value;
+            console.log(selectedTreatmentType);
+            console.log(employeeId);
+            console.log(trainingId);
+            $.ajax({
+                type: 'GET',
+                url: '/Employees/UpdateSelectsTraining',
+                data: {
+                    selectedTreatmentType: selectedTreatmentType,
+                    employeeId: employeeId,
+                    trainingId: trainingId
+                },
+                dataType: 'json',
+                success: function (data) {
+                    // Update the options in the "Name" dropdown
+                    var namesSelect = selectElement.parentElement.nextElementSibling.querySelector('select');
+                    namesSelect.innerHTML = "";
+                    data.treatmentNames.forEach(function (name) {
+                        var resource = sharedResource.find(function (item) {
+                            return item.Name === name;
+                        });
+                        if (resource) {
+                            var valueResource = resource.Value;
+                        } else {
+                            console.log('Nie znaleziono wartości dla wybranej nazwy.' + value);
+                        }
+                        var option = document.createElement('option');
+                        option.value = name;
+                        option.text = valueResource;
+                        namesSelect.appendChild(option);
+                    });
+                    if (data.selectedTreatmentName) {
+                        namesSelect.value = data.selectedTreatmentName;
+                    }
+                },
+                error: function (error) {
+                    console.error('Error refreshing dropdowns:', error);
+                }
+            });
+        }
+    </script>
+</main>

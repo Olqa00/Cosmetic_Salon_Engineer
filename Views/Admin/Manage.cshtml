@@ -1,0 +1,37 @@
+﻿@model List<Engineer_MVC.Models.ViewModels.ManageUserRolesViewModel>
+
+<form method="post">
+    <div>
+        <h2>@sharedResource["Manage"]</h2>
+        @sharedResource["AddRemoveRole"] / @ViewBag.UserName.
+    </div>
+    <div>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <div class="form-check m-1">
+                <input type="hidden" asp-for="@Model[i].RoleId" />
+                <input type="hidden" asp-for="@Model[i].RoleName" />
+                <input type="radio" asp-for="@Model[i].Selected" class="form-check-input" value="true" onchange="clearOtherRadios(@i)" />
+                <label class="form-check-label" asp-for="@Model[i].Selected">
+                    @Model[i].RoleName
+                </label>
+            </div>
+        }
+        <div asp-validation-summary="All" class="text-danger"></div>
+    </div>
+    <div>
+        <input type="submit" value="Update" class="btn btn-primary" style="width:auto" />
+        <a asp-action="UserList" asp-route-id="@ViewBag.userId" class="btn btn-primary" style="width:auto">@sharedResource["Cancel"]</a>
+    </div>
+</form>
+<script>
+    // Function to clear other radio buttons when one is selected
+    function clearOtherRadios(selectedIndex) {
+        const radioButtons = document.querySelectorAll("input[type='radio']");
+        radioButtons.forEach((radio, index) => {
+            if (index !== selectedIndex) {
+                radio.checked = false;
+            }
+        });
+    }
+</script>

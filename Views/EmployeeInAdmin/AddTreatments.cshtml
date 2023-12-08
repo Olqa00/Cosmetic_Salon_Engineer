@@ -1,0 +1,40 @@
+﻿@model Engineer_MVC.Models.ViewModels.UserTreatmentsViewModel
+<main>
+    <div class="row">
+        <div class="col-md-3 d-flex align-items-center">
+            <div class="navigation-container">
+                <h2 class="navigation-header">@sharedResource["Navigation"]</h2>
+                <div class="navigation-links">
+                    <a asp-action="Index" class="navigation-link" asp-route-userId=@Model.User.Id> @sharedResource["PersonalData"]</a>
+                    <a asp-action="Stats" class="navigation-link " asp-route-userId=@Model.User.Id> @sharedResource["Stats"]</a>
+                    <a asp-action="Calendar" class="navigation-link " asp-route-userId=@Model.User.Id> @sharedResource["Calendar"]</a>
+                    <a asp-action="WorkingHours" class="navigation-link " asp-route-userId=@Model.User.Id> @sharedResource["WorkingHours"]</a>
+                    <a asp-action="AppointmentsList" class="navigation-link " asp-route-userId=@Model.User.Id> @sharedResource["AppointmentsList"]</a>
+                    <a asp-action="TrainingsList" class="navigation-link" asp-route-userId=@Model.User.Id> @sharedResource["TrainingsList"]</a>
+                    <a asp-action="Roles" class="navigation-link " asp-route-userId=@Model.User.Id> @sharedResource["ChangeRoles"]</a>
+                    <a asp-action="AddTreatments" class="navigation-link active" asp-route-userId=@Model.User.Id> @sharedResource["EditSkills"]</a>
+                    <a asp-action="Delete" class="navigation-link " asp-route-userId=@Model.User.Id> @sharedResource["DeleteAccount"]</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <form method="post" class="profile-container gap-3">
+                <label class="roles-label">Zarządzaj umiejętnościami</label>
+                <div class="roles">
+                    @for (var i = 0; i < Model.Treatments.Count; i++)
+                    {
+                        <div class="single-role">
+                            <input type="hidden" asp-for="@Model.Treatments[i].TreatmentId" />
+                            <input type="hidden" asp-for="@Model.Treatments[i].TreatmentName" />
+                            <input type="checkbox" asp-for="@Model.Treatments[i].Selected" class="form-check-input" />
+                            <label class="form-check-label">@Model.Treatments[i].TreatmentType @Model.Treatments[i].TreatmentName</label>
+                        </div>
+                    }
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                </div>
+
+                <input type="submit" value=@sharedResource["SaveChanges"] class="button btn btn-info" />
+            </form>
+        </div>
+    </div>
+</main>

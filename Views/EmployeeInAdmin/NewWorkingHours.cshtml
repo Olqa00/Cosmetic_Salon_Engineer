@@ -1,0 +1,45 @@
+﻿@model Engineer_MVC.Models.WorkingHours
+<main>
+    <div class="row">
+        <div class="col-md-3 d-flex align-items-center">
+            <div class="navigation-container">
+                <h2 class="navigation-header">@sharedResource["Navigation"]</h2>
+                <div class="navigation-links">
+                    <a asp-action="Index" class="navigation-link " asp-route-userId="@ViewBag.UserId"> @sharedResource["PersonalData"]</a>
+                    <a asp-action="Stats" class="navigation-link " asp-route-userId="@ViewBag.UserId"> @sharedResource["Stats"]</a>
+                    <a asp-action="Calendar" class="navigation-link " asp-route-userId="@ViewBag.UserId"> @sharedResource["Calendar"]</a>
+                    <a asp-action="WorkingHours" class="navigation-link active" asp-route-userId="@ViewBag.UserId"> @sharedResource["WorkingHours"]</a>
+                    <a asp-action="AppointmentsList" class="navigation-link " asp-route-userId="@ViewBag.UserId"> @sharedResource["AppointmentsList"]</a>
+                    <a asp-action="TrainingsList" class="navigation-link" asp-route-userId="@ViewBag.UserId"> @sharedResource["TrainingsList"]</a>
+                    <a asp-action="Roles" class="navigation-link " asp-route-userId="@ViewBag.UserId"> @sharedResource["ChangeRoles"]</a>
+                    <a asp-action="AddTreatments" class="navigation-link " asp-route-userId="@ViewBag.UserId"> @sharedResource["EditSkills"]</a>
+                    <a asp-action="Delete" class="navigation-link " asp-route-userId="@ViewBag.UserId"> @sharedResource["DeleteAccount"]</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <form asp-action="NewWorkingHours" class="profile-container gap-3">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="control-label">@sharedResource["StartDate"]</label>
+                    <input asp-for="StartDate" class="form-control" />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">@sharedResource["EndDate"]</label>
+                    <input asp-for="EndDate" class="form-control" />
+                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" asp-for="EmployeeId" value="@ViewBag.UserId" />
+                </div>
+
+
+                <div class="form-group">
+                    <input type="submit" value=@sharedResource["SaveChanges"] class="button btn btn-info" />
+                </div>
+            </form>
+
+        </div>
+    </div>
+</main>

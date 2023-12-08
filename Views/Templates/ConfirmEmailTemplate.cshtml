@@ -1,0 +1,134 @@
+﻿@model Engineer_MVC.Models.ViewModels.EmailConfirmationModel
+@using Microsoft.AspNetCore.Localization;
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Potwierdź swój email</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Manrope:wght@600;800&family=Montagu+Slab:opsz,wght@16..144,400;16..144,600&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/styles.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Engineer_MVC.styles.css" asp-append-version="true" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <h1>@sharedResource["ConfirmEmail"]</h1>
+
+    <p style="margin-bottom: 50px;">@sharedResource["ToConfirmPressButton"]</p>
+
+    <a href='@Model.CallbackUrl' style="padding: 16px 24px;
+        align-items: flex-start;
+        gap: 8px;
+        border-radius: 6px;
+        background: #C7EBD1;
+        color: #055160;
+        font-family: 'Manrope', sans-serif;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: 125%; /* 17.5px */
+        letter-spacing: 1.68px;
+        text-transform: uppercase;
+        border: 0;">
+
+        @sharedResource["Confirm"]
+    </a>
+
+
+    <footer class="footer-container d-flex flex-column w-100 py-3" style="margin-top: 40px;">
+        <div class="row">
+            <div class="col-md-4">
+                <h3 class="category-header">@sharedResource["Treatments"]</h3>
+                <ul class="category-links">
+                    <li><a class="links" asp-area="" asp-controller="Treatments" asp-action="Lashes">@sharedResource["Lashes"]</a></li>
+                    <li><a class="links" asp-area="" asp-controller="Treatments" asp-action="Eyebrows">@sharedResource["Eyebrows"]</a></li>
+                    <li><a class="links" asp-area="" asp-controller="Treatments" asp-action="Nails">@sharedResource["Nails"]</a></li>
+                    <li><a class="links" asp-area="" asp-controller="Treatments" asp-action="Skin">@sharedResource["Epilation"]</a></li>
+
+                </ul>
+            </div>
+
+            <div class="col-md-4">
+                <h3 class="category-header">@sharedResource["FindUs"]</h3>
+                <div>
+                    <div class="d-flex align-items-start flex-column gap-1" style="gap:4px;">
+                        <div class="d-flex gap-2" style="gap:4px;">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none">
+                                    <path d="M1.66663 17L6.36094 15.8954L16.9231 5.33323C17.9145 4.34194 17.9145 2.73475 16.9231 1.74346C15.9318 0.752179 14.3247 0.752179 13.3334 1.74346L2.77117 12.3057L1.66663 17Z" stroke="#353E5C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <div class="">
+                                engineer1mvc2023@gmail.com
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2" style="gap:4px;">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 18 19" fill="none">
+                                    <path d="M16.3218 8.32759C16.3218 13.0172 8.99421 18 8.99421 18C8.99421 18 1.66663 13.0172 1.66663 8.32759C1.66663 4.22414 5.10917 1 8.99421 1C12.8792 1 16.3218 4.22414 16.3218 8.32759Z" stroke="#353E5C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M8.99424 10.9656C10.4511 10.9656 11.6322 9.78452 11.6322 8.32763C11.6322 6.87074 10.4511 5.6897 8.99424 5.6897C7.53735 5.6897 6.35631 6.87074 6.35631 8.32763C6.35631 9.78452 7.53735 10.9656 8.99424 10.9656Z" stroke="#353E5C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <div class="">
+                                ul. Zachodnia 32
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2" style="gap:4px;">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 18 19" fill="none">
+                                    <path d="M16.3218 8.32759C16.3218 13.0172 8.99421 18 8.99421 18C8.99421 18 1.66663 13.0172 1.66663 8.32759C1.66663 4.22414 5.10917 1 8.99421 1C12.8792 1 16.3218 4.22414 16.3218 8.32759Z" stroke="#353E5C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M8.99424 10.9656C10.4511 10.9656 11.6322 9.78452 11.6322 8.32763C11.6322 6.87074 10.4511 5.6897 8.99424 5.6897C7.53735 5.6897 6.35631 6.87074 6.35631 8.32763C6.35631 9.78452 7.53735 10.9656 8.99424 10.9656Z" stroke="#353E5C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <div class="">
+                                18-400 Łomża
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <h3 class="category-header">@sharedResource["ContactUs"]</h3>
+                <div class="d-flex gap-3" style="gap:7px;">
+                    <a href="https://www.linkedin.com/in/aleksandra-niedźwiecka-a23638207/">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none">
+                            <path d="M0.333313 2.41981C0.333313 1.8426 0.536021 1.36641 0.941421 0.991237C1.34682 0.616051 1.87386 0.428467 2.5225 0.428467C3.15957 0.428467 3.67501 0.613159 4.06883 0.982579C4.47423 1.36353 4.67694 1.85991 4.67694 2.47176C4.67694 3.02587 4.48004 3.48762 4.08621 3.85704C3.68081 4.23799 3.14798 4.42847 2.48775 4.42847H2.47038C1.83331 4.42847 1.31787 4.23799 0.924047 3.85704C0.530218 3.47608 0.333313 2.997 0.333313 2.41981ZM0.559182 17.5713V6.00422H4.41632V17.5713H0.559182ZM6.55339 17.5713H10.4105V11.1124C10.4105 10.7084 10.4569 10.3967 10.5495 10.1774C10.7117 9.78488 10.9578 9.45298 11.2879 9.18171C11.6181 8.91042 12.0321 8.77478 12.5302 8.77478C13.8275 8.77478 14.4762 9.64635 14.4762 11.3895V17.5713H18.3333V10.9393C18.3333 9.23077 17.9279 7.93496 17.1171 7.05184C16.3063 6.16872 15.2349 5.72717 13.9028 5.72717C12.4086 5.72717 11.2445 6.36786 10.4105 7.64924V7.68388H10.3932L10.4105 7.64924V6.00422H6.55339C6.57655 6.37362 6.58814 7.52225 6.58814 9.45011C6.58814 11.378 6.57655 14.085 6.55339 17.5713Z" fill="#353E5C" />
+                        </svg>
+                    </a>
+                    <a href="https://www.facebook.com/ola.niedzwiecka.9/">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="18" viewBox="0 0 11 18" fill="none">
+                            <path d="M6.70627 18V9.78936H9.60096L10.0343 6.5895H6.70619V4.54653C6.70619 3.6201 6.97637 2.98879 8.37181 2.98879L10.1515 2.98799V0.126072C9.84369 0.0871459 8.78718 0 7.55819 0C4.99217 0 3.23543 1.49118 3.23543 4.22972V6.5895H0.333313V9.78936H3.23543V17.9999H6.70627V18Z" fill="#353E5C" />
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/ola.bear/">
+                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="Social Media Icon/Instagram">
+                                <path id="Instagram" fill-rule="evenodd" clip-rule="evenodd" d="M1.26025 10.1338C1.26025 6.53865 1.26025 4.74108 2.11695 3.44634C2.4995 2.86818 2.99464 2.37304 3.57281 1.99048C4.86754 1.13379 6.66511 1.13379 10.2603 1.13379C13.8554 1.13379 15.653 1.13379 16.9477 1.99048C17.5259 2.37304 18.021 2.86818 18.4036 3.44634C19.2603 4.74108 19.2603 6.53865 19.2603 10.1338C19.2603 13.7289 19.2603 15.5265 18.4036 16.8212C18.021 17.3994 17.5259 17.8945 16.9477 18.2771C15.653 19.1338 13.8554 19.1338 10.2603 19.1338C6.66511 19.1338 4.86754 19.1338 3.57281 18.2771C2.99464 17.8945 2.4995 17.3994 2.11695 16.8212C1.26025 15.5265 1.26025 13.7289 1.26025 10.1338ZM14.9195 10.134C14.9195 12.7073 12.8334 14.7934 10.2601 14.7934C7.68677 14.7934 5.60068 12.7073 5.60068 10.134C5.60068 7.5607 7.68677 5.47461 10.2601 5.47461C12.8334 5.47461 14.9195 7.5607 14.9195 10.134ZM10.2601 13.217C11.9628 13.217 13.3431 11.8367 13.3431 10.134C13.3431 8.43132 11.9628 7.05101 10.2601 7.05101C8.5574 7.05101 7.17709 8.43132 7.17709 10.134C7.17709 11.8367 8.5574 13.217 10.2601 13.217ZM15.1035 6.33534C15.7082 6.33534 16.1984 5.84517 16.1984 5.24051C16.1984 4.63586 15.7082 4.14569 15.1035 4.14569C14.4989 4.14569 14.0087 4.63586 14.0087 5.24051C14.0087 5.84517 14.4989 6.33534 15.1035 6.33534Z" fill="#353E5C" />
+                            </g>
+                        </svg>
+
+                    </a>
+                    <a href="https://github.com/Olqa00">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none">
+                            <path d="M9.26029 0.133545C4.29035 0.133545 0.260254 4.16293 0.260254 9.13358C0.260254 13.1101 2.83903 16.4837 6.41505 17.6737C6.86482 17.757 7.02999 17.4785 7.02999 17.2408C7.02999 17.0262 7.02159 16.3172 7.01778 15.5651C4.51389 16.1096 3.98556 14.5032 3.98556 14.5032C3.57616 13.463 2.98628 13.1864 2.98628 13.1864C2.16974 12.6278 3.04783 12.6392 3.04783 12.6392C3.95161 12.7027 4.4275 13.5667 4.4275 13.5667C5.2302 14.9426 6.53293 14.5448 7.04651 14.3149C7.12726 13.7332 7.36054 13.3362 7.6179 13.1114C5.61891 12.8838 3.51743 12.1121 3.51743 8.66355C3.51743 7.681 3.86902 6.87808 4.44479 6.24782C4.35133 6.0211 4.0433 5.10575 4.53196 3.86605C4.53196 3.86605 5.28772 3.62415 7.00762 4.7886C7.72547 4.58913 8.49542 4.48918 9.26029 4.48579C10.0252 4.48918 10.7957 4.58913 11.5149 4.7886C13.2328 3.62415 13.9875 3.86605 13.9875 3.86605C14.4774 5.10575 14.1692 6.0211 14.0757 6.24782C14.6528 6.87808 15.0019 7.68093 15.0019 8.66355C15.0019 12.1203 12.8965 12.8815 10.8924 13.1042C11.2152 13.3835 11.5029 13.9313 11.5029 14.7709C11.5029 15.9751 11.4924 16.9443 11.4924 17.2408C11.4924 17.4803 11.6544 17.7609 12.1107 17.6725C15.6847 16.4811 18.2603 13.1088 18.2603 9.13358C18.2603 4.16293 14.2307 0.133545 9.26029 0.133545Z" fill="#353E5C" />
+                            <path d="M3.63119 12.9544C3.61143 12.9991 3.54098 13.0125 3.47696 12.9818C3.41167 12.9525 3.37496 12.8915 3.39614 12.8466C3.41555 12.8006 3.486 12.7877 3.55115 12.8186C3.61658 12.8479 3.65385 12.9095 3.63119 12.9544ZM4.0739 13.3494C4.03099 13.3892 3.94706 13.3707 3.8901 13.3078C3.83123 13.245 3.82022 13.1612 3.86377 13.1207C3.90803 13.081 3.98941 13.0996 4.04842 13.1624C4.10729 13.2258 4.11873 13.3092 4.07383 13.3494L4.0739 13.3494ZM4.37764 13.8548C4.32244 13.8931 4.23223 13.8572 4.17654 13.7771C4.12141 13.6971 4.12141 13.6012 4.17774 13.5627C4.23364 13.5242 4.32244 13.5588 4.37891 13.6382C4.43396 13.7196 4.43396 13.8156 4.37756 13.8548L4.37764 13.8548ZM4.89122 14.4401C4.84188 14.4945 4.73685 14.4799 4.65991 14.4057C4.58127 14.3331 4.55932 14.2301 4.6088 14.1757C4.65871 14.1212 4.76437 14.1365 4.84188 14.2102C4.92002 14.2826 4.94387 14.3863 4.89129 14.4401H4.89122ZM5.55501 14.6378C5.53334 14.7082 5.43212 14.7403 5.33019 14.7103C5.22841 14.6795 5.16177 14.5969 5.18231 14.5257C5.20349 14.4547 5.30513 14.4214 5.40783 14.4534C5.50948 14.4841 5.57625 14.5661 5.55508 14.6378H5.55501ZM6.31056 14.7216C6.3131 14.7958 6.22663 14.8574 6.11962 14.8587C6.01198 14.861 5.92495 14.801 5.92382 14.728C5.92382 14.653 6.00831 14.592 6.11588 14.5903C6.22289 14.5882 6.31056 14.6478 6.31056 14.7216ZM7.05269 14.6931C7.06554 14.7655 6.99114 14.8399 6.88491 14.8597C6.78044 14.8788 6.68374 14.8341 6.6704 14.7623C6.65741 14.688 6.73322 14.6137 6.83748 14.5944C6.94392 14.5759 7.03914 14.6195 7.05269 14.6931Z" fill="#353E5C" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-info">
+            Cosmetic Panel - All rights reserved by Aleksandra Niedźwiecka. © 2023.
+        </div>
+    </footer>
+    
+    
+</body>
+
+</html>

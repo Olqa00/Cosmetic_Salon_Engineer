@@ -1,0 +1,105 @@
+﻿<main>
+	<div class="row">
+		<div class="col-md-3 d-flex align-items-center">
+			<div class="navigation-container">
+				<h2 class="navigation-header">@sharedResource["Navigation"]</h2>
+				<div class="navigation-links">
+					<a asp-action="EarningsStats" class="navigation-link "> @sharedResource["EarningsStats"]</a>
+					<a asp-action="WorkingTimeStats" class="navigation-link active"> @sharedResource["WorkingTimeStats"]</a>
+					<a asp-action="QuantityStats" class="navigation-link "> @sharedResource["QuantityStats"]</a>
+					<a asp-action="EmployeesStats" class="navigation-link "> @sharedResource["Employees"]</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-9 mt-3 employee-stats">
+			<div class="line-chart-container">
+				<div class="group-buttons-container">
+					<a>@sharedResource["SelectPeriod"]</a>
+					<div class="buttons">
+						<a class="buttonTime" id="week">@sharedResource["Week"]</a>
+						<a class="buttonTime" id="month">@sharedResource["Month"]</a>
+						<a class="buttonTime" id="year">@sharedResource["Year"]</a>
+					</div>
+				</div>
+				<canvas id="myLineChart" class="mt-3"></canvas>
+			</div>
+		</div>
+	</div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            //Line Chart
+            const ctx = document.getElementById('myLineChart');
+            let chart;
+            let period = "month";
+            setActiveButton('month');
+
+            const data = {
+                labels: [],
+                datasets: [
+                    {
+                        label: 'Czas pracy',
+                        data: [],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            };
+
+            function updateChart(data) {
+                if (data.activePeriod === 'week') {
+                    chart.data.labels = data.weeklyLabels;
+                    chart.data.datasets[0].data = data.weeklyData;
+                } else if (data.activePeriod === 'month') {
+                    chart.data.labels = data.monthlyLabels;
+                    chart.data.datasets[0].data = data.monthlyData;
+                } else if (data.activePeriod === 'year') {
+                    chart.data.labels = data.yearlyLabels;
+                    chart.data.datasets[0].data = data.yearlyData;
+                }
+                chart.data.datasets[0].label = '@sharedResource["WorkingTime"]';
+
+                chart.update();
+            }
+
+            function setActiveButton(activeButtonId) {
+                const buttonsTime = document.querySelectorAll('.buttonTime');
+                buttonsTime.forEach(button => {
+                    period = activeButtonId;
+                    if (button.id === activeButtonId) {
+                        button.classList.add('active');
+                    }
+                    else {
+                        button.classList.remove('active');
+                    }
+                });
+
+                pullData(period);
+            }
+
+            const weekButton = document.getElementById('week');
+            const monthButton = document.getElementById('month');
+            const yearButton = document.getElementById('year');
+
+            weekButton.addEventListener('click', () => setActiveButton('week'));
+            monthButton.addEventListener('click', () => setActiveButton('month'));
+            yearButton.addEventListener('click', () => setActiveButton('year'));
+
+            function pullData(period) {
+
+                fetch('/Admin/PullTimeStats')
+                    .then(response => response.json())
+                    .then(data => {
+                        data.activePeriod = period;
+                        updateChart(data);
+                    });
+
+            }
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: data
+            });
+        });
+    </script>
+</main>

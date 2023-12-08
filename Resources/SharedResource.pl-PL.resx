@@ -1,0 +1,1113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutUs" xml:space="preserve">
+    <value>O nas</value>
+  </data>
+  <data name="AboutUsText" xml:space="preserve">
+    <value>Nasz zespół poprzez profesjonalne podejście do realizacji swoich pasji stworzył miejsce, w którym wszyscy ludzie poczują się piękniej, a my dołożymy wszelkich starań, aby uwidocznić Waszą naturalność i delikatność.</value>
+  </data>
+  <data name="AccountSettings" xml:space="preserve">
+    <value>Ustawienia Konta</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Akcje</value>
+  </data>
+  <data name="AdaPosition" xml:space="preserve">
+    <value>Stylistka brwi</value>
+  </data>
+  <data name="AdaText" xml:space="preserve">
+    <value>Nie narzekaj, że masz pod górę,  gdy zmierzasz na szczyt</value>
+  </data>
+  <data name="AddNewWorkingHours" xml:space="preserve">
+    <value>Dodaj nowe godziny pracy</value>
+  </data>
+  <data name="AddRemoveRole" xml:space="preserve">
+    <value>Dodaj/ Usuń rolę</value>
+  </data>
+  <data name="AddTreatments" xml:space="preserve">
+    <value>Dodaj zabiegi</value>
+  </data>
+  <data name="AdminPage" xml:space="preserve">
+    <value>Strona Admina</value>
+  </data>
+  <data name="AdminPanel" xml:space="preserve">
+    <value>Panel Administratora</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Wszystkie</value>
+  </data>
+  <data name="AllEmployees" xml:space="preserve">
+    <value>Lista pracowników</value>
+  </data>
+  <data name="AllUsers" xml:space="preserve">
+    <value>Lista użytkowników</value>
+  </data>
+  <data name="AmazingWomen" xml:space="preserve">
+    <value>Niesamowite kobiety odpowiadające za piękno</value>
+  </data>
+  <data name="AniaPosition" xml:space="preserve">
+    <value>Manicurzystka</value>
+  </data>
+  <data name="AniaText" xml:space="preserve">
+    <value>Nie sama praca, ale jej cel sprawia, że to jest coś wyjątkowego</value>
+  </data>
+  <data name="Appointment" xml:space="preserve">
+    <value>Wizyta</value>
+  </data>
+  <data name="AppointmentCancellationDeleted" xml:space="preserve">
+    <value>Odwołanie twojej wizyty zostało usunięte.</value>
+  </data>
+  <data name="AppointmentCancelled" xml:space="preserve">
+    <value>Twoja wizyta została odwołana.</value>
+  </data>
+  <data name="AppointmentPL" xml:space="preserve">
+    <value>wizytę</value>
+  </data>
+  <data name="AppointmentsArchive" xml:space="preserve">
+    <value>Archiwum wizyt</value>
+  </data>
+  <data name="AppointmentsList" xml:space="preserve">
+    <value>Historia zabiegów</value>
+  </data>
+  <data name="Archives" xml:space="preserve">
+    <value>Archiwum</value>
+  </data>
+  <data name="AreYouSureDeleteAccount" xml:space="preserve">
+    <value>Czy jesteś pewien, że chcesz usunąć to konto?</value>
+  </data>
+  <data name="Armpits" xml:space="preserve">
+    <value>Pachy</value>
+  </data>
+  <data name="ArticlesNews" xml:space="preserve">
+    <value>Artykuły &amp; Aktualności</value>
+  </data>
+  <data name="Average1hour" xml:space="preserve">
+    <value>Zabieg trwa średnio godzinę.</value>
+  </data>
+  <data name="Average2hours" xml:space="preserve">
+    <value>Zabieg trwa średnio 2 godziny.</value>
+  </data>
+  <data name="Average30minutes" xml:space="preserve">
+    <value>Zabieg trwa średnio 30 minut.</value>
+  </data>
+  <data name="AverageEmployeeRating" xml:space="preserve">
+    <value>Średnia ocena pracownika w tym miesiącu</value>
+  </data>
+  <data name="AverageEpilation" xml:space="preserve">
+    <value>Długość trwania zabiegu waha się od 15 do 45 minut.</value>
+  </data>
+  <data name="AverageRatingsDays" xml:space="preserve">
+    <value>Średnie oceny z ostatnich 30dni</value>
+  </data>
+  <data name="AverageUserRating" xml:space="preserve">
+    <value>Średnia ocena przyznawana pracownikom w tym miesiącu</value>
+  </data>
+  <data name="Beautiful" xml:space="preserve">
+    <value>piękne</value>
+  </data>
+  <data name="BeforeTreatment" xml:space="preserve">
+    <value>Przed zabiegiem:</value>
+  </data>
+  <data name="Belly" xml:space="preserve">
+    <value>Brzuch</value>
+  </data>
+  <data name="Blog" xml:space="preserve">
+    <value>Aktualności</value>
+  </data>
+  <data name="BlogList" xml:space="preserve">
+    <value>Lista postów</value>
+  </data>
+  <data name="Calendar" xml:space="preserve">
+    <value>Kalendarz</value>
+  </data>
+  <data name="CalendarAppointments" xml:space="preserve">
+    <value>Kalendarz wizyt</value>
+  </data>
+  <data name="CalendarEmployee" xml:space="preserve">
+    <value>Kalendarz pracownika</value>
+  </data>
+  <data name="CalendarTrainings" xml:space="preserve">
+    <value>Kalendarz szkoleń</value>
+  </data>
+  <data name="CalendarUser" xml:space="preserve">
+    <value>Kalendarz użytkownika</value>
+  </data>
+  <data name="Calves" xml:space="preserve">
+    <value>Łydki</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
+  <data name="CancelAppointment" xml:space="preserve">
+    <value>Odwołaj zabieg</value>
+  </data>
+  <data name="CancellationAppointment" xml:space="preserve">
+    <value>Odwołanie wizyty</value>
+  </data>
+  <data name="CancelTrainingUser" xml:space="preserve">
+    <value>Odwołaj obecność na szkoleniu</value>
+  </data>
+  <data name="Cancer" xml:space="preserve">
+    <value>Nowotwory</value>
+  </data>
+  <data name="CannotAddUserToRole" xml:space="preserve">
+    <value>Nie ma możliwości dodania roli do użytkownika</value>
+  </data>
+  <data name="CannotRemoveUserRole" xml:space="preserve">
+    <value>Nie ma możliwości usunięcia roli użytkownika</value>
+  </data>
+  <data name="ChangeEmail" xml:space="preserve">
+    <value>Zmień Email</value>
+  </data>
+  <data name="ChangeRoles" xml:space="preserve">
+    <value>Zmień role</value>
+  </data>
+  <data name="ChangeRolesEmployee" xml:space="preserve">
+    <value>Zmień role pracownika</value>
+  </data>
+  <data name="ChangeRolesUser" xml:space="preserve">
+    <value>Zmień role użytkownika</value>
+  </data>
+  <data name="CheckYourEmailToReset" xml:space="preserve">
+    <value>Sprawdź swoją skrzynkę pocztową w celu zresetowania hasła.</value>
+  </data>
+  <data name="ChooseAJob" xml:space="preserve">
+    <value>Wybierz pracę, którą kochasz, a nie będziesz pracować ani jednego dnia przez całe życie</value>
+  </data>
+  <data name="ChooseFirstName" xml:space="preserve">
+    <value>Wpisz swoje imię.</value>
+  </data>
+  <data name="ChooseLanguage" xml:space="preserve">
+    <value>Wybierz język:</value>
+  </data>
+  <data name="ChooseLastName" xml:space="preserve">
+    <value>Wpisz swoje nazwisko.</value>
+  </data>
+  <data name="ChoosePhoneNumber" xml:space="preserve">
+    <value>Wpisz swój numer telefonu.</value>
+  </data>
+  <data name="ChooseUsername" xml:space="preserve">
+    <value>Wpisz swoją nazwę użytkownika.</value>
+  </data>
+  <data name="Classic" xml:space="preserve">
+    <value>Klasyczny</value>
+  </data>
+  <data name="ClassicDesc" xml:space="preserve">
+    <value>Manicure klasyczny to jeden z podstawowych typów stylizacji paznokci, który warto znać, aby zadbać o ich piękny wygląd. To sposób pielęgnacji paznokci, który obejmuje przede wszystkim ich skrócenie, zadbanie o skórki, a także o samą płytkę paznokciową. Tradycyjny manicure pozwala również na nadanie paznokciom pożądanego kształtu.</value>
+  </data>
+  <data name="ClassicMain" xml:space="preserve">
+    <value>To sposób pielęgnacji paznokci, który obejmuje przede wszystkim ich skrócenie, zadbanie o skórki, a także o samą płytkę paznokciową.</value>
+  </data>
+  <data name="ClickHere" xml:space="preserve">
+    <value>kliknięcia tutaj!</value>
+  </data>
+  <data name="Client" xml:space="preserve">
+    <value>Klient</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>Kolor</value>
+  </data>
+  <data name="ComeBackToUs" xml:space="preserve">
+    <value>A następnie wróć do nas!</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Potwierdź</value>
+  </data>
+  <data name="ConfirmEmail" xml:space="preserve">
+    <value>Potwierdź swój email!</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Powtórz nowe hasło</value>
+  </data>
+  <data name="ConfirmYourEmail" xml:space="preserve">
+    <value>Potwierdź swój email</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>Skontaktuj się z nami</value>
+  </data>
+  <data name="Contraindications" xml:space="preserve">
+    <value>Przeciwwskazania</value>
+  </data>
+  <data name="Cost" xml:space="preserve">
+    <value>Koszt</value>
+  </data>
+  <data name="CreateFreeAccount" xml:space="preserve">
+    <value>Załóż darmowe konto i uzyskaj dostęp do panelu kosmetycznego GRATIS.</value>
+  </data>
+  <data name="CreateNewPost" xml:space="preserve">
+    <value>Dodaj nowy post</value>
+  </data>
+  <data name="CreateTraining" xml:space="preserve">
+    <value>Stwórz szkolenie</value>
+  </data>
+  <data name="CurrentEmail" xml:space="preserve">
+    <value>Obecny Email</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Obecne hasło</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="DateTreatment" xml:space="preserve">
+    <value>Data zabiegu</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Usuń</value>
+  </data>
+  <data name="DeleteAccount" xml:space="preserve">
+    <value>Usuń konto</value>
+  </data>
+  <data name="DeleteCancel" xml:space="preserve">
+    <value>Usuń odwołanie</value>
+  </data>
+  <data name="DeleteEmployee" xml:space="preserve">
+    <value>Usuń konto pracownika</value>
+  </data>
+  <data name="DeleteTraining" xml:space="preserve">
+    <value>Odwołaj szkolenie</value>
+  </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>Usuń konto użytkownika</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Szczegóły</value>
+  </data>
+  <data name="DetailsTraining" xml:space="preserve">
+    <value>Szczegóły szkolenia</value>
+  </data>
+  <data name="Diabetes" xml:space="preserve">
+    <value>Cukrzyca</value>
+  </data>
+  <data name="DidTrainingNotPerformed" xml:space="preserve">
+    <value>Czy szkolenie nie zostało wykonane?</value>
+  </data>
+  <data name="Diodelaser" xml:space="preserve">
+    <value>Laser diodowy</value>
+  </data>
+  <data name="DiodelaserDesc" xml:space="preserve">
+    <value>W naszym salonie zabiegi depilacji wykonujemy najnowszym laserem diodowym LIGHTSHEER®DUET™ firmy Lumenis. Jest to najlepszy, certyfikowany sprzęt, który od wielu lat cieszy się niesłabnącą renomą na całym świecie. Tylko dzięki niemu trwała depilacja odbywa się w trzy razy szybciej! Cała procedura trwałego usuwania włosów laserem LightSheer jest bezpieczna, komfortowa i maksymalnie skuteczna. Tylko światło lasera diodowego precyzyjnie dociera do cebulek włosa i niszczy je bezpowrotnie.</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Czas trwania</value>
+  </data>
+  <data name="EarningsStats" xml:space="preserve">
+    <value>Zarobki</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edytuj</value>
+  </data>
+  <data name="EditParticipantsList" xml:space="preserve">
+    <value>Edytuj listę uczestników</value>
+  </data>
+  <data name="EditSkills" xml:space="preserve">
+    <value>Edytuj umiejętności</value>
+  </data>
+  <data name="EditSkillsEmployee" xml:space="preserve">
+    <value>Edytuj umiejętności pracownika</value>
+  </data>
+  <data name="EditTraining" xml:space="preserve">
+    <value>Edytuj szkolenie</value>
+  </data>
+  <data name="EditWorkingHours" xml:space="preserve">
+    <value>Edytuj godziny pracy</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Adres Email</value>
+  </data>
+  <data name="EmailWithResetLink" xml:space="preserve">
+    <value>Zostanie tam wysłany mail z linkiem resetującym</value>
+  </data>
+  <data name="EmilkaPosition" xml:space="preserve">
+    <value>Stylistka rzęs</value>
+  </data>
+  <data name="EmilkaText" xml:space="preserve">
+    <value>Kim chciałbyś być, kiedy dorośniesz?... Kimś dobrym</value>
+  </data>
+  <data name="Employee" xml:space="preserve">
+    <value>Pracownik</value>
+  </data>
+  <data name="EmployeeColor" xml:space="preserve">
+    <value>Kolor pracownika</value>
+  </data>
+  <data name="EmployeeList" xml:space="preserve">
+    <value>Lista pracowników</value>
+  </data>
+  <data name="EmployeePanel" xml:space="preserve">
+    <value>Panel Pracownika</value>
+  </data>
+  <data name="EmployeeProfile" xml:space="preserve">
+    <value>Profil pracownika</value>
+  </data>
+  <data name="Employees" xml:space="preserve">
+    <value>Pracownicy</value>
+  </data>
+  <data name="EmployeesStats" xml:space="preserve">
+    <value>Statystyki pracowników</value>
+  </data>
+  <data name="EmployeeStats" xml:space="preserve">
+    <value>Statystyki pracownika</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>Data zakończenia</value>
+  </data>
+  <data name="EndocrineDiseases" xml:space="preserve">
+    <value>Choroby endokrynologiczne</value>
+  </data>
+  <data name="EnterYourEmail" xml:space="preserve">
+    <value>Wprowadź swój email</value>
+  </data>
+  <data name="Epilation" xml:space="preserve">
+    <value>Depilacja</value>
+  </data>
+  <data name="EpilationDesc" xml:space="preserve">
+    <value>Laserowe usuwanie włosów to procedura oparta na cieple, która jest możliwa dzięki urządzeniu zwanemu laserem diodowym. Laser ten wytwarza energię cieplną, która jest pochłaniana przez pigment w mieszkach włosowych. Energia ta uszkadza mieszek włosowy i zapobiega odrastaniu nowych włosów.</value>
+  </data>
+  <data name="ExecuteAppointment" xml:space="preserve">
+    <value>Zabieg wykonała</value>
+  </data>
+  <data name="Expenses" xml:space="preserve">
+    <value>Wydatki</value>
+  </data>
+  <data name="Eyebrows" xml:space="preserve">
+    <value>Brwi</value>
+  </data>
+  <data name="EyebrowsDescriptionView" xml:space="preserve">
+    <value>Piękne brwi już od 5 euro</value>
+  </data>
+  <data name="EyebrowsTitle" xml:space="preserve">
+    <value>Z NAMI UZYSKASZ IDEALNY KSZTAŁT BRWI</value>
+  </data>
+  <data name="EyebrowsTreatment" xml:space="preserve">
+    <value>Zabieg brwi</value>
+  </data>
+  <data name="EyelashTitle" xml:space="preserve">
+    <value>Z NAMI UZYSKASZ IDEALNY KSZTAŁT RZĘS</value>
+  </data>
+  <data name="EyelashTreatment" xml:space="preserve">
+    <value>Zabieg rzęs</value>
+  </data>
+  <data name="FindUs" xml:space="preserve">
+    <value>Znajdź nas</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Imię</value>
+  </data>
+  <data name="ForAppointment" xml:space="preserve">
+    <value>zabiegowi?</value>
+  </data>
+  <data name="ForgotPasswordConfirmation" xml:space="preserve">
+    <value>Potwierdzenie przypomnienia hasła</value>
+  </data>
+  <data name="ForgotYourPassword" xml:space="preserve">
+    <value>Zapomniałeś hasła?</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>od</value>
+  </data>
+  <data name="Gel" xml:space="preserve">
+    <value>Żelowy</value>
+  </data>
+  <data name="GelDesc" xml:space="preserve">
+    <value>Do głównych zalet manicure żelowego można zaliczyć to, że pozwala na bardzo skuteczne przedłużenie płytki paznokcia. To fantastyczne rozwiązanie dla Pań, które nadmiernie obgryzają paznokcie, czy też dla tych kobiet, które borykają się z mocno zniszczoną płytką. Do manicure żelowego konieczny jest nie tylko sam żel budujący, ale i papierowe szablony, dzięki którym będzie można ten żel rozprowadzić.</value>
+  </data>
+  <data name="GelMain" xml:space="preserve">
+    <value>To fantastyczne rozwiązanie dla Pań, które nadmiernie obgryzają paznokcie.</value>
+  </data>
+  <data name="GetToKnowUs" xml:space="preserve">
+    <value>poznaj nas bliżej</value>
+  </data>
+  <data name="GiveRatingAppointment" xml:space="preserve">
+    <value>Jesteś pewien, że chcesz dać ocenę</value>
+  </data>
+  <data name="Hands" xml:space="preserve">
+    <value>Ręce</value>
+  </data>
+  <data name="Hands or feet" xml:space="preserve">
+    <value>Dłonie lub stopy</value>
+  </data>
+  <data name="HandsOrFeet" xml:space="preserve">
+    <value>Dłonie lub stopy</value>
+  </data>
+  <data name="HaveBeenChanges" xml:space="preserve">
+    <value>Czy nastąpiły jakieś zmiany</value>
+  </data>
+  <data name="Henna" xml:space="preserve">
+    <value>Henna</value>
+  </data>
+  <data name="HennaDesc" xml:space="preserve">
+    <value>Henna na skórze utrzymuje się do 2 tygodni, na włoskach do 6 tygodni. Przy zabiegu stosuje się prawdziwą hennę proszkową (która wnika w strukturę włosa zabarwiając go od środka, a nie koloryzując tylko na zewnątrz jak w przypadku farbek), regenerującą wodę kwiatową oraz nawilżający olejek.</value>
+  </data>
+  <data name="HennaMain" xml:space="preserve">
+    <value>Henna jest idealnym rozwiązaniem dla kobiet, których włoski są cienkie oraz rzadkie, bądź posiadają ubytki włosków.</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Strona główna</value>
+  </data>
+  <data name="HomeTitle" xml:space="preserve">
+    <value>Jesteśmy studiem kosmetycznym, które świadczy zabiegi oraz szkolenia z zakresu depilacji, manicure, stylizacji brwi oraz rzęs.</value>
+  </data>
+  <data name="Hybrid" xml:space="preserve">
+    <value>Hybrydowy</value>
+  </data>
+  <data name="HybridDesc" xml:space="preserve">
+    <value>Manicure hybrydowy wykonuje się za pomocą specjalnie przygotowanych do tego preparatów i dobrze działającej lampy. Do zrobienia manicure hybrydowego oprócz podstawowych akcesoriów potrzebna jest również baza. Konieczne jest także posiadanie specjalnego, hybrydowego lakieru, czyli takiego, który utwardza się w lampie. Ostatnim etapem wykonywania takiego manicure jest nałożenie świecącego lub całkowicie matowego topu.</value>
+  </data>
+  <data name="HybridMain" xml:space="preserve">
+    <value>Manicure hybrydowy wykonuje się za pomocą specjalnie przygotowanych do tego preparatów i lampy.</value>
+  </data>
+  <data name="ImportantInformation" xml:space="preserve">
+    <value>Ważne informacje:</value>
+  </data>
+  <data name="InfoAppointment" xml:space="preserve">
+    <value>Informacje o zabiegu</value>
+  </data>
+  <data name="InformationAppointment" xml:space="preserve">
+    <value>Informacje o zabiegu</value>
+  </data>
+  <data name="Intimate areas" xml:space="preserve">
+    <value>Okolice intymne</value>
+  </data>
+  <data name="IntimateAreas" xml:space="preserve">
+    <value>Okolice intymne</value>
+  </data>
+  <data name="InvaluableAppointments" xml:space="preserve">
+    <value>Nieocenione zabiegi</value>
+  </data>
+  <data name="IsAlways" xml:space="preserve">
+    <value>jest zawsze</value>
+  </data>
+  <data name="Italian" xml:space="preserve">
+    <value>Włoskie</value>
+  </data>
+  <data name="KatarzynaText" xml:space="preserve">
+    <value>Do sukcesu nie ma żadnej windy. Trzeba iść po schodach</value>
+  </data>
+  <data name="Kim" xml:space="preserve">
+    <value>Kim</value>
+  </data>
+  <data name="KimDesc" xml:space="preserve">
+    <value>Cała sława efektem Kim, jak nazwa wskazuje zapoczątkowała celebrytka Kim Kardashian.W całym efekcie chodzi o to by uzyskać tak zwany kontrolowany ład, który nie jest płaskim wachlarzem rzęs, lecz daje niespotykany nieco drapieżny, lecz z pewnością piękny efekt.</value>
+  </data>
+  <data name="KimMain" xml:space="preserve">
+    <value>Wybranie tej metody to idealny sposób na uwodzicielskie spojrzenie. Efekt rozsławiła Kim Kardiashian.</value>
+  </data>
+  <data name="Lamination" xml:space="preserve">
+    <value>Laminacja</value>
+  </data>
+  <data name="LaminationDesc" xml:space="preserve">
+    <value>Laminacja rzęs jest zabiegiem który zregeneruje, odżywi oraz wzmocni Twoje rzęsy. Jest przeznaczona dla kobiet, które cenią sobie naturalność, chcą odpocząć od przedłużania rzęs lub pragną zapomnieć o codziennym tuszowaniu swoich rzęs. Każdy zabieg dodatkowo połączony jest z koloryzacją. Otrzymujesz zatem ciemne, podkręcone oraz odżywione rzęsy na kilka tygodni!</value>
+  </data>
+  <data name="LaminationEyebrowsDesc" xml:space="preserve">
+    <value>Zabieg laminacji brwi to trwałe ułożenie włosków, w odpowiedniej pozycji i w odpowiednim kształcie. Dzięki działaniu kwasu tioglikolowego, który wykorzystywany jest podczas zabiegu, łuska włosa zostaje otwarta, a następnie włoski stają się bardziej elastyczne i podatne na ustawienie w odpowiednim kierunku. Następnie tworzy nowe wiązania i odbudowujemy strukturę włosków brwi.</value>
+  </data>
+  <data name="LaminationEyebrowsMain" xml:space="preserve">
+    <value>Zabieg sprawi, że brwi będą wyglądały na pełniejsze oraz gęstsze.</value>
+  </data>
+  <data name="LaminationLashesMain" xml:space="preserve">
+    <value>Wzmacnia włoski, sprawia, że oczy wyglądają naturalnie i pięknie bez konieczności podkręcania ich zalotką albo używania specjalistycznego tuszu.</value>
+  </data>
+  <data name="LaserEpilation" xml:space="preserve">
+    <value>Depilacja laserowa</value>
+  </data>
+  <data name="Lashes" xml:space="preserve">
+    <value>Rzęsy</value>
+  </data>
+  <data name="LashesDescriptionView" xml:space="preserve">
+    <value>Piękne rzęsy już od 15 euro</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Nazwisko</value>
+  </data>
+  <data name="Legs" xml:space="preserve">
+    <value>Nogi</value>
+  </data>
+  <data name="ListAppointments" xml:space="preserve">
+    <value>Lista zabiegów</value>
+  </data>
+  <data name="ListOfDoneTrainings" xml:space="preserve">
+    <value>Lista wykonanych szkoleń</value>
+  </data>
+  <data name="ListOfRequests" xml:space="preserve">
+    <value>Lista próśb o odwołanie</value>
+  </data>
+  <data name="LoadMoreAppointments" xml:space="preserve">
+    <value>Załaduj więcej wizyt</value>
+  </data>
+  <data name="LoadMorePosts" xml:space="preserve">
+    <value>Załaduj więcej postów</value>
+  </data>
+  <data name="LoadMoreTrainings" xml:space="preserve">
+    <value>Załaduj więcej szkoleń</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Zaloguj się</value>
+  </data>
+  <data name="LoginSite" xml:space="preserve">
+    <value>Zaloguj się na stronę</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Wyloguj się</value>
+  </data>
+  <data name="MadeAsOrder" xml:space="preserve">
+    <value>Zamów</value>
+  </data>
+  <data name="MagdalenaOgarekPosition" xml:space="preserve">
+    <value>Stylistka brwi i rzęs</value>
+  </data>
+  <data name="MagdalenaOgarekText" xml:space="preserve">
+    <value>Sen nie staje się rzeczywistością dzięki magii; wymaga determinacji i ciężkiej pracy.</value>
+  </data>
+  <data name="MakeAnAppointment" xml:space="preserve">
+    <value>Umów się</value>
+  </data>
+  <data name="MakeAppointment" xml:space="preserve">
+    <value>Stwórz zabieg</value>
+  </data>
+  <data name="MakeAppointmentNow" xml:space="preserve">
+    <value>umów się już teraz</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Męski</value>
+  </data>
+  <data name="MaleDesc" xml:space="preserve">
+    <value>Przeprowadzenie manicure męskiego zakłada przede wszystkim skuteczne opracowanie płytki paznokciowej i skórek. Opiłowanie płytki do odpowiedniej długości, odsunięcie lub całkowite przecięcie skórek, a także nadanie paznokciom właściwego kształtu. W salonach kosmetycznych na Panów czekają nawet specjalne, całkowicie bezbarwne i nierzucające się w oczy odżywki, które dodatkowo fantastycznie pielęgnują płytkę.</value>
+  </data>
+  <data name="MaleMain" xml:space="preserve">
+    <value>Zabieg skierowany do mężczyzn, którzy chcą zadbać o swoje paznokcie.</value>
+  </data>
+  <data name="Manage" xml:space="preserve">
+    <value>Zarządzaj</value>
+  </data>
+  <data name="ManageAppointments" xml:space="preserve">
+    <value>Zarządzaj wizytami</value>
+  </data>
+  <data name="ManageParticipants" xml:space="preserve">
+    <value>Zarządzaj uczestnikami</value>
+  </data>
+  <data name="ManagePosts" xml:space="preserve">
+    <value>Zarządzaj postami</value>
+  </data>
+  <data name="ManageRoles" xml:space="preserve">
+    <value>Zarządzaj rolami</value>
+  </data>
+  <data name="ManageTraining" xml:space="preserve">
+    <value>Zarządzaj szkoleniami</value>
+  </data>
+  <data name="ManageUsers" xml:space="preserve">
+    <value>Zarządzaj użytkownikami</value>
+  </data>
+  <data name="ManageVisitsTraining" xml:space="preserve">
+    <value>Zarządzaj wizytami i szkoleniami</value>
+  </data>
+  <data name="Manicure" xml:space="preserve">
+    <value>Manicure</value>
+  </data>
+  <data name="MeetOurTeam" xml:space="preserve">
+    <value>Poznaj nasz zespół</value>
+  </data>
+  <data name="Method 1:1" xml:space="preserve">
+    <value>Metoda 1:1</value>
+  </data>
+  <data name="Method11" xml:space="preserve">
+    <value>Metoda 1:1</value>
+  </data>
+  <data name="Method11Desc" xml:space="preserve">
+    <value>Metoda przedłużania rzęs 1:1 jest idealna dla Pań, które preferują naturalny efekt podkreślenia rzęs. Cały zabieg polega na doklejeniu jednej sztucznej rzęsy, do jednej naturalnej, tworząc przy tym piękny subtelny wachlarz rzęs. Metoda sprawia, że rzęsy stają się ciemniejsze, dłuższe a oko bardziej otwarte.</value>
+  </data>
+  <data name="Method11Main" xml:space="preserve">
+    <value>Metoda przedłużania rzęs 1:1 jest idealna dla Pań, które preferują naturalny efekt podkreślenia rzęs.</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Miesiąc</value>
+  </data>
+  <data name="MoreAboutEpilation" xml:space="preserve">
+    <value>Więcej o depilacji</value>
+  </data>
+  <data name="MoreAboutEyebrows" xml:space="preserve">
+    <value>Więcej o brwiach</value>
+  </data>
+  <data name="MoreAboutLashes" xml:space="preserve">
+    <value>Więcej o rzęsach</value>
+  </data>
+  <data name="MoreAboutManicure" xml:space="preserve">
+    <value>Więcej o manicure</value>
+  </data>
+  <data name="MostPerformedTreatments" xml:space="preserve">
+    <value>Najczęściej wykonywane zabiegi</value>
+  </data>
+  <data name="MyAccount" xml:space="preserve">
+    <value>Mój profil</value>
+  </data>
+  <data name="MyTrainings" xml:space="preserve">
+    <value>Moje szkolenia</value>
+  </data>
+  <data name="MyTreatments" xml:space="preserve">
+    <value>Moje zabiegi</value>
+  </data>
+  <data name="Nails" xml:space="preserve">
+    <value>Manicure</value>
+  </data>
+  <data name="NailsDescriptionView" xml:space="preserve">
+    <value>Piękne paznokcie już od 15 euro</value>
+  </data>
+  <data name="NailsTitle" xml:space="preserve">
+    <value>Z nami twoje paznokcie będą wyglądać idealnie.</value>
+  </data>
+  <data name="NailsTreatment" xml:space="preserve">
+    <value>Zabieg paznokci</value>
+  </data>
+  <data name="NameTreatment" xml:space="preserve">
+    <value>Nazwa zabiegu</value>
+  </data>
+  <data name="Navigation" xml:space="preserve">
+    <value>Nawigacja</value>
+  </data>
+  <data name="NewEmail" xml:space="preserve">
+    <value>Nowy Email</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Nowe hasło</value>
+  </data>
+  <data name="NewWorkingHours" xml:space="preserve">
+    <value>Nowe godziny pracy</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Następna</value>
+  </data>
+  <data name="NoCaffeine" xml:space="preserve">
+    <value>Prosimy o ograniczenie napojów zawierających kofeinę.</value>
+  </data>
+  <data name="NoScoreList" xml:space="preserve">
+    <value>Lista nieocenionych zabiegów</value>
+  </data>
+  <data name="NothingPrepare" xml:space="preserve">
+    <value>Nie musisz w żaden sposób się przygotowywać, po prostu przyjdź! :)</value>
+  </data>
+  <data name="NoTreatments" xml:space="preserve">
+    <value>Brak zabiegów</value>
+  </data>
+  <data name="NumberParticipants" xml:space="preserve">
+    <value>Liczba uczestników</value>
+  </data>
+  <data name="OurTreatments" xml:space="preserve">
+    <value>Nasze Zabiegi</value>
+  </data>
+  <data name="OurTreatmentsHome" xml:space="preserve">
+    <value>Nasze zabiegi</value>
+  </data>
+  <data name="Paint" xml:space="preserve">
+    <value>Farbka</value>
+  </data>
+  <data name="PaintDesc" xml:space="preserve">
+    <value>Farbka do brwi utrzymuje się na włoskach od 2 do 3 tygodni. Ze skóry znika całkowicie już po kilku dniach. Efekty stosowania farbki do brwi są naturalne i delikatne, dlatego jest doskonałym wyborem dla osób, którym zależy na naturalnym efekcie</value>
+  </data>
+  <data name="PaintMain" xml:space="preserve">
+    <value>Idealnie sprawdzi się u kobiet, które mają gęste brwi oraz chcą aby efekt stylizacji wyglądał naturalnie i subtelnie.</value>
+  </data>
+  <data name="Participants" xml:space="preserve">
+    <value>Uczestnicy</value>
+  </data>
+  <data name="ParticipantsList" xml:space="preserve">
+    <value>Lista uczestników</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Hasło</value>
+  </data>
+  <data name="PasswordChangeConfirmation" xml:space="preserve">
+    <value>Potwierdzenie zmiany hasła</value>
+  </data>
+  <data name="Peeling" xml:space="preserve">
+    <value>Prosimy o wykonanie delikatnego peelingu brwi. </value>
+  </data>
+  <data name="PersonalData" xml:space="preserve">
+    <value>Dane osobowe</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Numer telefonu</value>
+  </data>
+  <data name="PleaseConfirm" xml:space="preserve">
+    <value>Proszę o potwierdzenie swojego konta za pomocą</value>
+  </data>
+  <data name="Polish" xml:space="preserve">
+    <value>Polskie</value>
+  </data>
+  <data name="Pregnancy" xml:space="preserve">
+    <value>Ciąża</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Poprzednia</value>
+  </data>
+  <data name="PriceList" xml:space="preserve">
+    <value>Cennik</value>
+  </data>
+  <data name="ProcedureNotPerformed" xml:space="preserve">
+    <value>Czy zabieg nie został wykonany?</value>
+  </data>
+  <data name="ProfileUser" xml:space="preserve">
+    <value>Profil użytkownika</value>
+  </data>
+  <data name="QuantityStats" xml:space="preserve">
+    <value>Ilość zabiegów</value>
+  </data>
+  <data name="QuantityStatsPL" xml:space="preserve">
+    <value>Ilosc zabiegow</value>
+  </data>
+  <data name="RateAppointment" xml:space="preserve">
+    <value>Oceń zabieg</value>
+  </data>
+  <data name="Rating" xml:space="preserve">
+    <value>Ocena</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Zarejestruj się</value>
+  </data>
+  <data name="RegisteronSite" xml:space="preserve">
+    <value>Zarejestruj się na stronie</value>
+  </data>
+  <data name="Regulation" xml:space="preserve">
+    <value>Regulacja</value>
+  </data>
+  <data name="RegulationDesc" xml:space="preserve">
+    <value>Regulacja brwi polega na usunięciu zbędnych włosków z brwi, które zaburzają nam pożądany kształt brwi lub jest ich po prostu w niektórych miejscach w nadmiarze. Celem regulacji, jest nadanie brwiom idealnego kształtu.</value>
+  </data>
+  <data name="RegulationMain" xml:space="preserve">
+    <value>Pomożemy ci uzyskać idealny kształt twoich brwi.</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Zapamiętaj mnie</value>
+  </data>
+  <data name="RemoveParticipation" xml:space="preserve">
+    <value>Usuń uczestnictwo</value>
+  </data>
+  <data name="RemoveTreatments" xml:space="preserve">
+    <value>Usuń Zabieg</value>
+  </data>
+  <data name="RepeatPassword" xml:space="preserve">
+    <value>Powtórz hasło</value>
+  </data>
+  <data name="Requests" xml:space="preserve">
+    <value>Prośby</value>
+  </data>
+  <data name="Resend" xml:space="preserve">
+    <value>Wyślij maila</value>
+  </data>
+  <data name="ResendEmailConfirmation" xml:space="preserve">
+    <value>Wyślij ponownie e-mail z potwierdzeniem</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>Zresetuj hasło</value>
+  </data>
+  <data name="RightNow" xml:space="preserve">
+    <value>już teraz</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="SalonOwner" xml:space="preserve">
+    <value>Właścicielka salonu</value>
+  </data>
+  <data name="SalonOwnerText" xml:space="preserve">
+    <value>Założycielka projektu COSMETICO, swoją przygodę ze stylizacją rzęs i brwi rozpoczęła w 2016 roku, a nieustanna chęć rozwoju i pomocy innym doprowadziła ją do roli szkoleniowca w powyższej tematyce. Specjalizuje się w makijażu permanentnym brwi oraz ust i jest zakochana we wszystkim co ma związek z pigmentacją. Wkłada całe swoje serce we wszystko co robi i ma nadzieję, że będziecie miały/ mieli szansę się o tym przekonać! Wraz z zespołem chciałaby zaprosić Cię do ich świata!</value>
+  </data>
+  <data name="SalonStats" xml:space="preserve">
+    <value>Statystyki salonu</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Zapisz</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Zapisz zmiany</value>
+  </data>
+  <data name="SelectChartType" xml:space="preserve">
+    <value>Wybierz typ wykresu</value>
+  </data>
+  <data name="SelectEmployee" xml:space="preserve">
+    <value>Wybierz pracownika:</value>
+  </data>
+  <data name="SelectPeriod" xml:space="preserve">
+    <value>Wybierz okres czasu</value>
+  </data>
+  <data name="SelectTreatmentName" xml:space="preserve">
+    <value>Wybierz zabieg:</value>
+  </data>
+  <data name="SelectTreatmentType" xml:space="preserve">
+    <value>Wybierz typ:</value>
+  </data>
+  <data name="SelectType" xml:space="preserve">
+    <value>Wybierz typ wykresu</value>
+  </data>
+  <data name="SelectUser" xml:space="preserve">
+    <value>Wybierz klienta</value>
+  </data>
+  <data name="SendCancelAppointment" xml:space="preserve">
+    <value>Twoje zapytanie o odwołanie wizyty zostało przesłane.</value>
+  </data>
+  <data name="Skills" xml:space="preserve">
+    <value>Umiejętności</value>
+  </data>
+  <data name="Skin" xml:space="preserve">
+    <value>Depilacja</value>
+  </data>
+  <data name="SkinDescriptionView" xml:space="preserve">
+    <value>Depilacja już od 40 euro</value>
+  </data>
+  <data name="SkinTitle" xml:space="preserve">
+    <value>Z nami twoje ciało będzie idealnie gładkie.</value>
+  </data>
+  <data name="SkinTreatment" xml:space="preserve">
+    <value>Zabieg depilacji</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Data rozpoczęcia</value>
+  </data>
+  <data name="Stats" xml:space="preserve">
+    <value>Statystyki</value>
+  </data>
+  <data name="StatsEmployee" xml:space="preserve">
+    <value>Statystyki pracownika</value>
+  </data>
+  <data name="StatsUser" xml:space="preserve">
+    <value>Statystyki użytkownika</value>
+  </data>
+  <data name="StayUpdated" xml:space="preserve">
+    <value>Bądź na bieżąco!</value>
+  </data>
+  <data name="SylwiaText" xml:space="preserve">
+    <value>Ciężka praca jeszcze nikomu nie zaszkodziła, ale po co ryzykować?</value>
+  </data>
+  <data name="TextPassword" xml:space="preserve">
+    <value>Wpisz hasło</value>
+  </data>
+  <data name="TimeInStudio" xml:space="preserve">
+    <value>Czas w salonie</value>
+  </data>
+  <data name="ToConfirmPressButton" xml:space="preserve">
+    <value>Aby potwierdzić email naciśnij poniższy przycisk:</value>
+  </data>
+  <data name="Training" xml:space="preserve">
+    <value>Szkolenie</value>
+  </data>
+  <data name="TrainingDate" xml:space="preserve">
+    <value>Data szkolenia</value>
+  </data>
+  <data name="TrainingList" xml:space="preserve">
+    <value>Lista szkoleń</value>
+  </data>
+  <data name="Trainings" xml:space="preserve">
+    <value>Szkolenia</value>
+  </data>
+  <data name="TrainingsArchives" xml:space="preserve">
+    <value>Archiwum szkoleń</value>
+  </data>
+  <data name="TrainingsList" xml:space="preserve">
+    <value>Historia szkoleń</value>
+  </data>
+  <data name="TreatBeauty" xml:space="preserve">
+    <value>Pozwól sobie na piękno!</value>
+  </data>
+  <data name="TreatmentDuration" xml:space="preserve">
+    <value>Czas trwania zabiegu:</value>
+  </data>
+  <data name="Treatments" xml:space="preserve">
+    <value>Zabiegi</value>
+  </data>
+  <data name="TypeTreatment" xml:space="preserve">
+    <value>Typ zabiegu</value>
+  </data>
+  <data name="UndoCancelAppointment" xml:space="preserve">
+    <value>Cofnij odwołanie zabiegu</value>
+  </data>
+  <data name="UndoTrainingUser" xml:space="preserve">
+    <value>Cofnij zgłoszenie o nieobecności na szkoleniu</value>
+  </data>
+  <data name="UserList" xml:space="preserve">
+    <value>Lista użytkowników</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Nazwa użytkownika</value>
+  </data>
+  <data name="UserPanel" xml:space="preserve">
+    <value>Panel Użytkownika</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Użytkownicy</value>
+  </data>
+  <data name="Week" xml:space="preserve">
+    <value>Tydzień</value>
+  </data>
+  <data name="WeeklyList" xml:space="preserve">
+    <value>Lista tygodniowa</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Witaj</value>
+  </data>
+  <data name="WelcomeBack" xml:space="preserve">
+    <value>Cieszymy się, że do nas wróciłeś!</value>
+  </data>
+  <data name="Wet look" xml:space="preserve">
+    <value>Wet look</value>
+  </data>
+  <data name="WetLookDesc" xml:space="preserve">
+    <value>Wet Look – często określane po prostu efektem mokrych rzęs. Efekt ten nadaje rzęsom objętości, gęstości, rzęsy wyglądają jakby były delikatnie mokre, lecz jednocześnie wciąż jest to naturalny look. Przy tej metodzie przedłużania wykorzystuje się naprzemiennie różne długości sztucznych rzęs, przyklejane w odpowiednim nachyleniu. Skleja się je pojedynczo lub w małych wiązkach.</value>
+  </data>
+  <data name="WetLookMain" xml:space="preserve">
+    <value>Efekt ten nadaje rzęsom objętości, gęstości, a rzęsy wyglądają jakby były delikatnie mokre.</value>
+  </data>
+  <data name="WhatIsIt" xml:space="preserve">
+    <value>Na czym polega?</value>
+  </data>
+  <data name="WhatYoulove" xml:space="preserve">
+    <value>To co kochasz</value>
+  </data>
+  <data name="WithUsWonder" xml:space="preserve">
+    <value>Z nami zamienisz się w kolejny cud świata. Poznaj naszych pracowników i umów sie na wizytę.</value>
+  </data>
+  <data name="WorkingHours" xml:space="preserve">
+    <value>Godziny Pracy</value>
+  </data>
+  <data name="WorkingHoursCalendar" xml:space="preserve">
+    <value>Kalendarz godzin pracy </value>
+  </data>
+  <data name="WorkingHoursEmployee" xml:space="preserve">
+    <value>Godziny pracy pracownika</value>
+  </data>
+  <data name="WorkingTime" xml:space="preserve">
+    <value>Czas pracy</value>
+  </data>
+  <data name="WorkingTimeStats" xml:space="preserve">
+    <value>Godziny pracy</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Rok</value>
+  </data>
+  <data name="YourAppointment" xml:space="preserve">
+    <value>Twój zabieg</value>
+  </data>
+  <data name="YourPasswordChanged" xml:space="preserve">
+    <value>Twoje hasło zostało zmienione.</value>
+  </data>
+  <data name="YourTraining" xml:space="preserve">
+    <value>Twoje szkolenie</value>
+  </data>
+  <data name="YourWorkingHours" xml:space="preserve">
+    <value>Twoje godziny pracy</value>
+  </data>
+</root>

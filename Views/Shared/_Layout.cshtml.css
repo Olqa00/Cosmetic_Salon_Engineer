@@ -1,0 +1,26 @@
+﻿/*.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+.submenu {
+    display: none;
+    position: fixed;
+    left: 0;
+    background-color: #f9f9f9;
+    width: 100%;
+    padding: 0;
+}
+.submenu ul {
+        list-style: none;
+        padding-left: 25px;
+}
+.nav-item:hover .submenu {
+    display: block;
+}
+.nav-item:hover .submenu ul {
+        display: flex;
+}
+ */

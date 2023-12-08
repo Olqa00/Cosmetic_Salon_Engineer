@@ -1,0 +1,112 @@
+﻿@model Engineer_MVC.Models.Appointment
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<h1>Create</h1>
+
+<h4>Appointment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Duration" class="control-label"></label>
+                <input asp-for="Duration" class="form-control" value="@ViewData["AverageTime"]" />
+                <span asp-validation-for="Duration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" value="@ViewData["AverageCost"]" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" class="form-control">
+                    <option value="To Do">To Do</option>
+                    <option value="Done">Done</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsLimited" /> @Html.DisplayNameFor(model => model.IsLimited)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="TreatmentId" class="control-label"></label>
+                <select asp-for="TreatmentId" class="form-control" asp-items="ViewBag.TreatmentId" onchange="updateEmployees()"></select>
+                <span asp-validation-for="TreatmentId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="EmployeeId" class="control-label"></label>
+                <select asp-for="EmployeeId" class ="form-control" asp-items="ViewBag.EmployeeId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<script>
+    function updateEmployees() {
+        var selectedTreatmentId = document.getElementById("TreatmentId").value;
+
+        $.ajax({
+            url: `/Appointments/GetEmployeesByTreatment?treatmentId=${selectedTreatmentId}`,
+            type: "GET",
+            success: function (data) {
+                var employeeDropdown = document.getElementById("EmployeeId");
+                while (employeeDropdown.firstChild) {
+                    employeeDropdown.removeChild(employeeDropdown.firstChild);
+                }
+                data.employeesWithTreatment.forEach(function (employee) {
+                    var option = document.createElement("option");
+                    option.value = employee.id;
+                    option.textContent = employee.fullName;
+                    employeeDropdown.appendChild(option);
+                });
+                var averageTime = parseFloat(data.averageTime);
+                var averageCost = parseFloat(data.averageCost);
+
+                if (!isNaN(averageTime)) {
+                    $("#Duration").val(averageTime);
+                }
+
+                if (!isNaN(averageCost)) {
+                    $("#Price").val(averageCost);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
+            }
+        });
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+        updateEmployees();
+    });
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,100 @@
+﻿@model Engineer_MVC.Models.Training
+
+@{
+    ViewData["Title"] = "Create";
+}
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<main>
+    <div class="row">
+        <div class="col-md-3 d-flex align-items-center">
+            <div class="navigation-container">
+                <h2 class="navigation-header">@sharedResource["Navigation"]</h2>
+                <div class="navigation-links">
+                    <a asp-action="TrainingList" class="navigation-link"> @sharedResource["TrainingList"]</a>
+                    <a asp-action="Create" class="navigation-link active ms-3"> @sharedResource["CreateTraining"]</a>
+                    <a asp-action="Calendar" class="navigation-link"> @sharedResource["Calendar"]</a>
+                    <a asp-action="DoneTrainings" class="navigation-link"> @sharedResource["Archives"]</a>
+                    <a asp-action="CancelTrainings" class="navigation-link"> @sharedResource["Requests"]</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 mt-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Date" class="control-label"></label>
+                    <input asp-for="Date" class="form-control" />
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Duration" class="control-label"></label>
+                    <input asp-for="Duration" class="form-control" />
+                    <span asp-validation-for="Duration" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Status" class="control-label"></label>
+                    <select asp-for="Status" class="form-control">
+                        <option value="To Do">To Do</option>
+                        <option value="Done">Done</option>
+                    </select>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UsersNumber" class="control-label"></label>
+                    <input asp-for="UsersNumber" class="form-control" />
+                    <span asp-validation-for="UsersNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TreatmentId" class="control-label"></label>
+                    <select asp-for="TreatmentId" class="form-control" asp-items="ViewBag.TreatmentId" onchange="updateEmployees()"></select>
+                    <span asp-validation-for="TreatmentId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmployeeId" class="control-label"></label>
+                    <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.EmployeeId"></select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<script>
+    function updateEmployees() {
+        var selectedTreatmentId = document.getElementById("TreatmentId").value;
+
+        $.ajax({
+            url: `/Trainings/GetEmployeesByTreatment?treatmentId=${selectedTreatmentId}`,
+            type: "GET",
+            success: function (data) {
+                var employeeDropdown = document.getElementById("EmployeeId");
+                while (employeeDropdown.firstChild) {
+                    employeeDropdown.removeChild(employeeDropdown.firstChild);
+                }
+                data.employeesWithTreatment.forEach(function (employee) {
+                    var option = document.createElement("option");
+                    option.value = employee.id;
+                    option.textContent = employee.fullName;
+                    employeeDropdown.appendChild(option);
+                });
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
+            }
+        });
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+        updateEmployees();
+    });
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

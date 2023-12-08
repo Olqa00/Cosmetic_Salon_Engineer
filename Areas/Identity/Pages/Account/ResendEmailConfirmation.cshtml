@@ -1,0 +1,42 @@
+﻿@page
+@model ResendEmailConfirmationModel
+@{
+    ViewData["Title"] = @sharedResource["ResendEmailConfirmation"];
+}
+
+<div class="auth-card mx-auto">
+    <form method="post">
+        <div class="auth-full-header">
+            <h2 class="auth-header">@sharedResource["EnterYourEmail"]</h2>
+            <span class="auth-caption">
+                @sharedResource["EmailWithResetLink"]
+            </span>
+        </div>
+        <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+        <div class="auth-inputs">
+            <div class="row mb-3">
+                <div class="auth-input-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 6.5C0 5.70435 0.316071 4.94129 0.87868 4.37868C1.44129 3.81607 2.20435 3.5 3 3.5H21C21.7956 3.5 22.5587 3.81607 23.1213 4.37868C23.6839 4.94129 24 5.70435 24 6.5V18.5C24 19.2956 23.6839 20.0587 23.1213 20.6213C22.5587 21.1839 21.7956 21.5 21 21.5H3C2.20435 21.5 1.44129 21.1839 0.87868 20.6213C0.316071 20.0587 0 19.2956 0 18.5V6.5ZM3 5C2.60218 5 2.22064 5.15804 1.93934 5.43934C1.65804 5.72064 1.5 6.10218 1.5 6.5V6.8255L12 13.1255L22.5 6.8255V6.5C22.5 6.10218 22.342 5.72064 22.0607 5.43934C21.7794 5.15804 21.3978 5 21 5H3ZM22.5 8.5745L15.363 12.857L22.5 17.171V8.576V8.5745ZM22.449 18.8915L13.9065 13.73L12 14.8745L10.092 13.73L1.551 18.89C1.6368 19.2086 1.82527 19.4901 2.08723 19.6908C2.34919 19.8914 2.67001 20.0001 3 20H21C21.3298 20.0002 21.6505 19.8917 21.9124 19.6914C22.1743 19.491 22.3629 19.2099 22.449 18.8915ZM1.5 17.171L8.637 12.857L1.5 8.5745V17.1695V17.171Z" fill="#574646" />
+                    </svg>
+                </div>
+                <div class="col-12">
+                    <div class="form-floating auth-input">
+                        <input asp-for="Input.Email" class="form-control" aria-required="true" placeholder="name@example.com" />
+                        <label asp-for="Input.Email" class="form-label"></label>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="auth-button">
+            <button type="submit" class="button btn btn-info">@sharedResource["Resend"]</button>
+        </div>
+    </form>
+
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

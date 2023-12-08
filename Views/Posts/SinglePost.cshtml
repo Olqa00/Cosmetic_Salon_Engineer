@@ -1,0 +1,16 @@
+﻿@model Engineer_MVC.Models.Post
+<head>
+    
+
+</head>
+<body>
+    <main class="single-post my-4">
+        <div class="d-flex justify-content-center post-featured-image my-4">
+            <img class="img-fluid post-image" src="~/PostImages/@Model.ImagePath" />
+        </div>
+        <div class="post-content-text">
+            @Html.Raw(Model.Body)
+        </div>
+    </main>
+
+</body>

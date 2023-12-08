@@ -1,0 +1,24 @@
+﻿@model WorkingHours
+
+<div class="edit-form">
+    <form asp-action="UpdateMerged" asp-route-userId="@ViewBag.UserId">
+        <input type="hidden" name="userId" value="@ViewBag.UserId">
+        <div class="row form-elements">
+            <label class="col-6 form-label" for="startWH">@sharedResource["StartDate"]</label>
+            <input class="col-6 form-input" type="datetime-local" id="startWH" name="startWH" value="@ViewBag.StartTime">
+            <input type="hidden" name="oldStartWH" value="@ViewBag.OldStartWH">
+        </div>
+        <div class="row py-4 form-elements">
+            <label class="col-6 form-label" for="endWH">@sharedResource["EndDate"]</label>
+            <input class="col-6 form-input" type="datetime-local" id="endWH" name="endWH" value="@ViewBag.EndTime">
+            <input type="hidden" name="oldEndWH" value="@ViewBag.OldEndWH">
+        </div>
+        <div class="row buttons">
+            <button type="submit" class="button btn-info col-4" formaction="/WorkingHours/UpdateMerged">@sharedResource["Edit"]</button>
+            <button type="submit" class="button btn-info col-4" style="background:#D7C7EB" formaction="/WorkingHours/DeleteMerged">@sharedResource["Delete"]</button>
+        </div>
+        
+    </form>
+    
+</div>
+

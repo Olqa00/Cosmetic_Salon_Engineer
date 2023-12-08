@@ -1,0 +1,46 @@
+﻿@model List<Post>
+@foreach (var post in Model)
+{
+    <div class=" col-md-4 p-4">
+
+        <div class="post-card">
+            <a asp-action="SinglePost" asp-route-id="@post.Id" style="text-decoration:unset">
+                <div class="card-image" style="background-image: url('@Url.Content("~/PostImages/" + post.ImagePath)')">
+                </div>
+                <div class="card-content">
+
+                    <div class="content-date">
+                        @post.date
+                    </div>
+                    <div class="content-title">
+                        @post.Title
+                    </div>
+                    <div class="content-text">
+                        @if (!string.IsNullOrEmpty(post.Body))
+                        {
+                            @Html.Raw(GetShortenedText(post.Body, 40))
+                        }
+                    </div>
+
+                    @functions {
+                    public string GetShortenedText(string text, int maxLength)
+                    {
+                        // Remove HTML tags
+                        var plainText = System.Text.RegularExpressions.Regex.Replace(text, "<.*?>", string.Empty);
+
+                        if (plainText.Length > maxLength)
+                        {
+                            return plainText.Substring(0, maxLength) + "...";
+                        }
+                        else
+                        {
+                            return plainText;
+                        }
+                    }
+                }
+            </div>
+        </a>
+    </div>
+</div>
+
+}

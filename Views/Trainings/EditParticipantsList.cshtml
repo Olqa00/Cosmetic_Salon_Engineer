@@ -1,0 +1,47 @@
+﻿@model Engineer_MVC.Models.ViewModels.EditParticipantsListModel
+<main>
+    <div class="row">
+        <div class="col-md-3 d-flex align-items-center">
+            <div class="navigation-container">
+                <h2 class="navigation-header">@sharedResource["Navigation"]</h2>
+                <div class="navigation-links">
+                    <a asp-action="TrainingList" class="navigation-link active"> @sharedResource["TrainingList"]</a>
+                    <a asp-action="Create" class="navigation-link ms-3"> @sharedResource["CreateTraining"]</a>
+                    <a asp-action="Calendar" class="navigation-link "> @sharedResource["Calendar"]</a>
+                    <a asp-action="DoneTrainings" class="navigation-link"> @sharedResource["Archives"]</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 mt-4">
+            <form method="post" class="profile-container gap-3">
+                <input type="hidden" name="trainingId" value="@ViewBag.trainingId" />
+                <label class="roles-label">@sharedResource["ManageParticipants"]</label>
+                <div class="roles">
+                    @{
+                        var i = 0;
+                    }
+
+                    @for (int j = 0; j < Model.UsersNumber; j++)
+                    {
+                        <div class="single-role mt-2">
+                            <label for="selectUser@i">@sharedResource["SelectUser"] @i</label>
+                            <select id="selectUser@i" name="SelectedUsers[@i]" class="form-control">
+                                <option value="">-- @sharedResource["SelectUser"] --</option>
+                                @foreach (var user in ViewBag.AllUsers)
+                                {
+                                    <!option value="@user.Value" @(i < Model.SelectedUsers.Count && Model.SelectedUsers[i] == user.Value ? "selected" : "")>
+                                        @user.Text
+                                    </!option>
+                                }
+                            </select>
+                        </div>
+                        i++; 
+                    }
+
+
+                </div>
+                <input type="submit" value=@sharedResource["SaveChanges"] class="button btn btn-info" />
+            </form>
+        </div>
+    </div>
+</main>

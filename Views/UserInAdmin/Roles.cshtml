@@ -1,0 +1,50 @@
+﻿@model Engineer_MVC.Models.ViewModels.UserProfileViewModel
+<main>
+	<div class="row">
+		<div class="col-md-3 d-flex align-items-center">
+			<div class="navigation-container">
+				<h2 class="navigation-header">@sharedResource["Navigation"]</h2>
+				<div class="navigation-links">
+					<a asp-action="Index" class="navigation-link " asp-route-userId=@Model.User.Id> @sharedResource["PersonalData"]</a>
+					<a asp-action="Stats" class="navigation-link " asp-route-userId=@Model.User.Id> @sharedResource["Stats"]</a>
+					<a asp-action="Calendar" class="navigation-link " asp-route-userId=@Model.User.Id> @sharedResource["Calendar"]</a>
+					<a asp-action="AppointmentsList" class="navigation-link " asp-route-userId=@Model.User.Id> @sharedResource["AppointmentsList"]</a>
+                    <a asp-action="TrainingsList" class="navigation-link" asp-route-userId=@Model.User.Id> @sharedResource["TrainingsList"]</a>
+                    <a asp-action="Roles" class="navigation-link active" asp-route-userId=@Model.User.Id> @sharedResource["ChangeRoles"]</a>
+					<a asp-action="Delete" class="navigation-link " asp-route-userId=@Model.User.Id> @sharedResource["DeleteAccount"]</a>
+				</div>
+			</div>
+		</div>
+        <div class="col-md-9">
+            <form method="post" class="profile-container gap-3">
+                <label class="roles-label">@sharedResource["ManageRoles"]</label>
+                <div class="roles">
+                    @for (var i = 0; i < Model.Roles.Count; i++)
+                    {
+                        <div class="single-role">
+                            <input type="hidden" asp-for="Roles[i].RoleId" />
+                            <input type="hidden" asp-for="Roles[i].RoleName" />
+                            <input type="radio" asp-for="Roles[i].Selected" class="radio" value="true" onchange="clearOtherRadios(@i)" />
+                            <label class="form-check-label" asp-for="Roles[i].Selected">@Model.Roles[i].RoleName</label>
+                        </div>
+                    }
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                </div>
+                <input type="submit" value=@sharedResource["SaveChanges"] class="button btn btn-info" />
+            </form>
+
+        </div>
+    </div>
+</main>
+
+<script>
+    // Function to clear other radio buttons when one is selected
+    function clearOtherRadios(selectedIndex) {
+        const radioButtons = document.querySelectorAll("input[type='radio']");
+        radioButtons.forEach((radio, index) => {
+            if (index !== selectedIndex) {
+                radio.checked = false;
+            }
+        });
+    }
+</script>

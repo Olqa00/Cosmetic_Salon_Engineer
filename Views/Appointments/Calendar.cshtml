@@ -1,0 +1,294 @@
+﻿<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>
+    <link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
+    <script src='fullcalendar/core/index.global.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/locales-all.js"></script>
+
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-3 d-flex align-items-center">
+            <div class="navigation-container">
+                <h2 class="navigation-header">@sharedResource["Navigation"]</h2>
+                <div class="navigation-links">
+                    <a asp-controller="Appointments" asp-action="Calendar" class="navigation-link active"> @sharedResource["CalendarAppointments"]</a>
+                    <a asp-controller="Trainings" asp-action="CalendarClient" class="navigation-link"> @sharedResource["CalendarTrainings"]</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9 mt-4">
+            <div class="treatment-selects py-4">
+                <div class="tretment-select col-4">
+                    <label for="treatmentTypeSelect" class="select-label">@sharedResource["SelectTreatmentType"]</label>
+                    <select id="treatmentTypeSelect" class="form-select tretment-select" onchange="updateAppointments()">
+                        <option value="all">@sharedResource["All"]</option>
+                        @foreach (var treatmentType in ViewBag.TreatmentTypes)
+                        {
+                            <option value="@treatmentType">@treatmentType</option>
+                        }
+                    </select>
+                </div>
+                <div class="tretment-select col-4">
+                    <label for="treatmentNameSelect" class="select-label">@sharedResource["SelectTreatmentName"]</label>
+                    <select id="treatmentNameSelect" class="form-select tretment-select" onchange="updateAppointments()">
+                        <option value="all">@sharedResource["All"]</option>
+                        @foreach (var treatmentName in ViewBag.TreatmentNames)
+                        {
+                            <option value="@treatmentName">@treatmentName</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div id='calendar' class="calendar-box"></div>
+
+            <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="eventModalLabel">@sharedResource["YourAppointment"]</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="eventModalContent">
+                                <!-- Treść modala zostanie tutaj wstawiona dynamicznie -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+
+        var sharedResource = JSON.parse(`@Html.Raw(ViewBag.SharedResourceTranslations)`);
+        var initialLocaleCode = '@Html.Raw(ViewBag.language)';
+        document.addEventListener('DOMContentLoaded', function () {
+            updateAppointments();
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'timeGridWeek',  
+                headerToolbar: {
+                    left: 'dayGridMonth,timeGridWeek,timeGridDay',
+                    center: 'title',
+                    right: 'today prev,next'
+                },
+                locale: initialLocaleCode,
+                slotMinTime: "06:00",
+                slotMaxTime: "24:00",
+                events: '/Appointments/GetAppointmentsForUserCalendar',
+                firstDay: 1,
+                
+                eventClick: function (info) {
+                    // Wywołaj funkcję do obsługi kliknięcia na event
+                    handleEventClick(info.event);
+                }
+            });
+            calendar.render();
+        });
+        function updateAppointments() {
+            var selectedTreatmentType = document.getElementById('treatmentTypeSelect').value;
+            var selectedTreatmentName = document.getElementById('treatmentNameSelect').value;
+            var resource = sharedResource.find(function (item) {
+                return item.Name === 'All';
+            })
+            if (resource) {
+                var allText = resource.Value;
+            } else {
+                console.log('Nie znaleziono wartości dla wybranej nazwy.' + value);
+            }
+            $.ajax({
+                type: 'GET',
+                url: '/Appointments/GetAppointmentsForUserCalendar',
+                data: {
+                    selectedTreatmentType: selectedTreatmentType,
+                    selectedTreatmentName: selectedTreatmentName
+                },
+                dataType: 'json',
+                success: function (data) {
+                    // Aktualizuj kalendarz
+                    var calendarEl = document.getElementById('calendar');
+                    var calendar = new FullCalendar.Calendar(calendarEl, {
+                        initialView: 'timeGridWeek',
+                        headerToolbar: {
+                            left: 'dayGridMonth,timeGridWeek,timeGridDay',
+                            center: 'title',
+                            right: 'today prev,next'
+                        },
+                        locale: initialLocaleCode,
+                        events: data.groups, // Poprawiony klucz 'events',
+                        firstDay: 1,
+                        slotMinTime: "06:00",
+                        slotMaxTime: "24:00",
+                        eventClick: function (info) {
+                            // Wywołaj funkcję do obsługi kliknięcia na event
+                            handleEventClick(info.event);
+                        }
+                    });
+                    calendar.render();
+
+                    // Aktualizuj selecty
+                    var treatmentTypes = data.treatmentTypes;
+                    var treatmentNames = data.treatmentNames;
+
+                    // Aktualizuj Treatment Type Select
+                    var treatmentTypeSelect = $('#treatmentTypeSelect');
+                    treatmentTypeSelect.empty();
+                    var resource = sharedResource.find(function (item) {
+                        return item.Name === 'All';
+                    })
+                    if (resource) {
+                        var allText = resource.Value;
+                    } else {
+                        console.log('Nie znaleziono wartości dla wybranej nazwy.' + value);
+                    }
+
+                    treatmentTypeSelect.append($('<option value="all">' + allText + '</option>'));
+                    $.each(treatmentTypes, function (index, value) {
+                        var resource = sharedResource.find(function (item) {
+                            return item.Name === value;
+                        })
+                        if (resource) {
+                            var valueResource = resource.Value;
+                        } else {
+                            console.log('Nie znaleziono wartości dla wybranej nazwy.' + value);
+                        }
+                        treatmentTypeSelect.append($('<option value="' + value + '">' + valueResource + '</option>'));
+                    });
+                    treatmentTypeSelect.val(selectedTreatmentType);
+
+                    // Aktualizuj Treatment Name Select
+                    var treatmentNameSelect = $('#treatmentNameSelect');
+                    treatmentNameSelect.empty();
+                    treatmentNameSelect.append($('<option value="all">' + allText + '</option>'));
+                    $.each(treatmentNames, function (index, value) {
+
+                        var resource = sharedResource.find(function (item) {
+                            return item.Name === value;
+                        });
+                        if (resource) {
+                            var valueResource = resource.Value;
+                        } else {
+                            console.log('Nie znaleziono wartości dla wybranej nazwy.' + value);
+                        }
+                        treatmentNameSelect.append($('<option value="' + value + '">' + valueResource + '</option>'));
+                    });
+                    treatmentNameSelect.val(selectedTreatmentName);
+                },
+
+
+                error: function (error) {
+                    console.error('Błąd podczas odświeżania kalendarza:', error);
+                }
+            });
+        }
+        function handleEventClick(event) {
+            if (event.extendedProps.groupedEvents) {
+                // Jeśli event jest grupą, wywołaj funkcję handleGroupClick
+                handleGroupClick(event.extendedProps.groupedEvents);
+            } else {
+                // W przeciwnym przypadku, wywołaj funkcję handleSingleEventClick
+                handleSingleEventClick(event);
+            }
+        }
+        function handleSingleEventClick(event) {
+            var title = event.title;
+            var startTime = event.start;
+            var endTime = event.end;
+            var employee = event.extendedProps.employee;
+            var treatmentId = event.extendedProps.treatmentId;
+
+            var content = `
+                                                        <h3>${title}</h3>
+                                                        <p>Start: ${startTime}</p>
+                                                        <p>End: ${endTime}</p>
+                                                        <p>Employee: ${employee}</p>
+                                                        <p>Treatment ID: ${treatmentId}</p>
+                                                    `;
+
+            document.getElementById('eventModalContent').innerHTML = content;
+            var eventModal = new bootstrap.Modal(document.getElementById('eventModal'));
+            eventModal.show();
+        }
+        function handleGroupClick(group) {
+            var modalContent = `
+                                                        <div id="eventCarousel" class="carousel slide" data-bs-ride="carousel">
+                                                            <div class="carousel-inner">
+                                                    `;
+
+            group.forEach((event, index) => {
+                var activeClass = index === 0 ? 'active' : '';
+
+                var title = event.title;
+                var startTime = new Date(event.start);
+                var endTime = new Date(event.end);
+                var employee = event.employee;
+                var treatmentId = event.treatmentId;
+                var employeeId = event.employeeId;
+                var cost = event.cost;
+
+                var startTimeFormatted = startTime.toLocaleString('pl-PL', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+
+                var endTimeFormatted = endTime.toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' });
+
+                var startFunction = event.start;
+                var endFunction = event.end;
+
+                modalContent += `
+                                                    <div class="carousel-item ${activeClass}">
+                                                        <div class="form-group">
+                                                            <label class="control-label">@sharedResource["Appointment"]</label>
+                                                            <input type="text" class="form-control" value="${title}" disabled />
+                                                        </div>
+                                                        <div class="form-group">
+                                                                    <label class="control-label">@sharedResource["DateTreatment"]</label>
+                                                            <input type="text" class="form-control" value="${startTimeFormatted}-${endTimeFormatted}" disabled />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label">@sharedResource["Cost"]</label>
+                                                            <input type="text" class="form-control" value="${cost} euro" disabled />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label">@sharedResource["Employee"]</label>
+                                                            <input type="text" class="form-control" value="${employee}" disabled />
+                                                        </div>
+                                                            <button class="button btn-info d-flex justify-content-center" onclick="window.location.href='/Appointments/MakeAppointment?employeeId=${employeeId}&treatmentId=${treatmentId}&start=${startFunction}&end=${endFunction}'" class="btn btn-primary">@sharedResource["Confirm"]</button>
+                                                    </div>
+                                                `;
+
+            });
+
+            if (group.length > 1) {
+                modalContent += `
+                                                    <a class="carousel-control-prev" href="#eventCarousel" role="button" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Previous</span>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#eventCarousel" role="button" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Next</span>
+                                                    </a>
+                                                `;
+            }
+
+            modalContent += `
+                                                    </div>
+                                                </div>
+                                            `;
+
+            document.getElementById('eventModalContent').innerHTML = modalContent;
+            var eventModal = new bootstrap.Modal(document.getElementById('eventModal'));
+            eventModal.show();
+        }
+
+
+    </script>
+</body>
+</html>

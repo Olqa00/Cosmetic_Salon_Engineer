@@ -1,0 +1,82 @@
+﻿@model Engineer_MVC.Models.ViewModels.PostsAdminViewModel
+
+@{
+    ViewData["Title"] = "IndexAdmin";
+}
+
+<h1>IndexAdmin</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-action="IndexAdmin" method="get">
+    <label asp-for="SelectedLanguage">@sharedResource["ChooseLanguage"]</label>
+    <select asp-for="SelectedLanguage" asp-items="@Model.LanguageOptions">
+        <option value="">@sharedResource["All"]</option>
+    </select>
+
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Image
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts.First().Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts.First().date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts.First().IsDeleted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts.First().IsVisible)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts.First().Language)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Posts)
+        {
+            <tr>
+                <td>
+                    <img src="@("~/PostImages/"+item.ImagePath)" asp-append-version="true" width="100px" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsDeleted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsVisible)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Language)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script>
+    // Handle change event of the select element
+    document.getElementById('SelectedLanguage').addEventListener('change', function () {
+        this.form.submit(); // Submit the form
+    });
+</script>

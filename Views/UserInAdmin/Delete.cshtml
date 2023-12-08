@@ -1,0 +1,112 @@
+﻿@model Engineer_MVC.Models.User
+<main>
+    <div class="row">
+        <div class="col-md-3 d-flex align-items-center">
+            <div class="navigation-container">
+                <h2 class="navigation-header">@sharedResource["Navigation"]</h2>
+                <div class="navigation-links">
+                    <a asp-action="Index" class="navigation-link " asp-route-userId=@Model.Id> @sharedResource["PersonalData"]</a>
+                    <a asp-action="Stats" class="navigation-link " asp-route-userId=@Model.Id> @sharedResource["Stats"]</a>
+                    <a asp-action="Calendar" class="navigation-link " asp-route-userId=@Model.Id> @sharedResource["Calendar"]</a>
+                    <a asp-action="AppointmentsList" class="navigation-link " asp-route-userId=@Model.Id> @sharedResource["AppointmentsList"]</a>
+                    <a asp-action="TrainingsList" class="navigation-link" asp-route-userId=@Model.Id> @sharedResource["TrainingsList"]</a>
+                    <a asp-action="Roles" class="navigation-link " asp-route-userId=@Model.Id> @sharedResource["ChangeRoles"]</a>
+                    <a asp-action="Delete" class="navigation-link active" asp-route-userId=@Model.Id> @sharedResource["DeleteAccount"]</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <form asp-action="Delete">
+                <div class="profile-container gap-3">
+                    <div class="profile-question mt-3">
+                        <label class="question">@sharedResource["AreYouSureDeleteAccount"]</label>
+                    </div>
+
+                    <div class="avatar-profile my-4">
+                        <div class="avatar-box">
+                            <div class="circle" style="background-image: url('@Url.Content("~/ProfileImages/" + @Model.ImagePath)');">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="personal-data-box">
+                        <div class="input-box-container">
+                            <div class="input-box-icon">
+                                <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18.3333 3.00001C18.3333 2.08334 17.5833 1.33334 16.6667 1.33334H3.33333C2.41667 1.33334 1.66667 2.08334 1.66667 3.00001M18.3333 3.00001V13C18.3333 13.9167 17.5833 14.6667 16.6667 14.6667H3.33333C2.41667 14.6667 1.66667 13.9167 1.66667 13V3.00001M18.3333 3.00001L10 8.83334L1.66667 3.00001" stroke="#667085" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+                            </div>
+                            <input class="input-box-username" asp-for=@Model.Email disabled />
+                        </div>
+                        <label class="input-label">@sharedResource["Username"]</label>
+                    </div>
+
+                    <div class="personal-data-box">
+                        <div class="input-box-container">
+                            <div class="input-box-icon">
+                                <svg width="22"
+                                     height="20"
+                                     viewBox="0 0 22 20"
+                                     fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11.275 9.06897C13.6216 9.06897 15.5239 7.26267 15.5239 5.03448C15.5239 2.8063 13.6216 1 11.275 1C8.92848 1 7.02621 2.8063 7.02621 5.03448C7.02621 7.26267 8.92848 9.06897 11.275 9.06897Z"
+                                          stroke="#353E5C"
+                                          stroke-width="1.5"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round" />
+                                    <path d="M4.5391 19H18.0112C19.504 19 20.6539 17.7811 19.9569 16.5277C18.9313 14.6839 16.5934 12.4828 11.2751 12.4828C5.95692 12.4828 3.61896 14.6839 2.59345 16.5277C1.89629 17.7811 3.04623 19 4.5391 19Z"
+                                          stroke="#353E5C"
+                                          stroke-width="1.5"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <input asp-for=@Model.FirstName class="input-box-username" disabled />
+                        </div>
+                        <label class="input-label">@sharedResource["FirstName"]</label>
+                    </div>
+
+                    <div class="personal-data-box">
+                        <div class="input-box-container">
+                            <div class="input-box-icon">
+                                <svg width="22"
+                                     height="20"
+                                     viewBox="0 0 22 20"
+                                     fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11.275 9.06897C13.6216 9.06897 15.5239 7.26267 15.5239 5.03448C15.5239 2.8063 13.6216 1 11.275 1C8.92848 1 7.02621 2.8063 7.02621 5.03448C7.02621 7.26267 8.92848 9.06897 11.275 9.06897Z"
+                                          stroke="#353E5C"
+                                          stroke-width="1.5"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round" />
+                                    <path d="M4.5391 19H18.0112C19.504 19 20.6539 17.7811 19.9569 16.5277C18.9313 14.6839 16.5934 12.4828 11.2751 12.4828C5.95692 12.4828 3.61896 14.6839 2.59345 16.5277C1.89629 17.7811 3.04623 19 4.5391 19Z"
+                                          stroke="#353E5C"
+                                          stroke-width="1.5"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <input asp-for=@Model.LastName class="input-box-username" disabled />
+                        </div>
+                        <label class="input-label">@sharedResource["LastName"]</label>
+                    </div>
+
+                    <div class="personal-data-box">
+                        <div class="input-box-container">
+                            <div class="input-box-icon">
+                                <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5.66429 1H2.38182C1.53582 1 0.850002 1.65122 0.850002 2.45454C0.850002 10.4878 7.70819 17 16.1682 17C17.0142 17 17.7 16.3487 17.7 15.5454V12.4285L14.0893 10.1428L12.217 11.9206C11.8919 12.2295 11.4059 12.3255 10.9973 12.1251C10.3044 11.7851 9.17983 11.1464 8.07145 10.1428C6.93655 9.11531 6.27161 8.00811 5.93788 7.33821C5.75084 6.9627 5.85912 6.52928 6.16843 6.23557L8.07145 4.42857L5.66429 1Z" stroke="#353E5C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+                            </div>
+                            <input asp-for=@Model.PhoneNumber class="input-box-username" disabled />
+                        </div>
+                        <label class="input-label">@sharedResource["PhoneNumber"]</label>
+                    </div>
+                    <input type="hidden" name="userId" value="@Model.Id" />
+                    <button id="update-profile-button" type="submit" class="button btn btn-info">@sharedResource["DeleteAccount"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>

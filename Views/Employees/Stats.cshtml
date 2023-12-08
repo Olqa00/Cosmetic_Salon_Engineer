@@ -1,0 +1,234 @@
+﻿
+<main class="employee-stats">
+    <div class="row mt-3 mb-5 justify-content-center">
+        <div class="col-8 line-chart-container">
+            <div class="group-buttons-container">
+                <a>@sharedResource["SelectPeriod"]</a>
+                <div class="buttons">
+                    <a class="buttonTime" id="week">@sharedResource["Week"]</a>
+                    <a class="buttonTime" id="month">@sharedResource["Month"]</a>
+                    <a class="buttonTime" id="year">@sharedResource["Year"]</a>
+                </div>
+            </div>
+            <div class="group-buttons-container mt-3">
+                <a>@sharedResource["SelectType"]</a>
+                <div class="buttons">
+                    <a class="buttonType" id="earnings">@sharedResource["EarningsStats"]</a>
+                    <a class="buttonType" id="time">@sharedResource["WorkingTime"]</a>
+                    <a class="buttonType" id="quantity">@sharedResource["QuantityStats"]</a>
+                </div>
+            </div>
+            <canvas id="myLineChart" class="mt-3"></canvas>
+        </div>
+    </div>
+    <div class="row mt-5 justify-content-center">
+        <div class="col-md-4 doughnut-chart-container d-flex flex-column">
+            <a>@sharedResource["AverageEmployeeRating"]</a>
+            <canvas id="myDoughnutChart"></canvas>
+            <div class="text-abs">
+                <label class="score">@sharedResource["Rating"]</label>
+                <span class="text-score"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4 pie-chart-container d-flex flex-column">
+            <a>@sharedResource["MostPerformedTreatments"]</a>
+            <canvas id="myPieChart"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var sharedResource = JSON.parse(`@Html.Raw(ViewBag.SharedResourceTranslations)`);
+        document.addEventListener("DOMContentLoaded", function () {
+            //Line Chart
+            const ctx = document.getElementById('myLineChart');
+            let chart;
+            let period = "month";
+            let type = "earnings";
+            setActiveButton('month', 'period');
+            setActiveButton('earnings', 'type');
+
+            const data = {
+                labels: [],
+                datasets: [
+                    {
+                        label: 'Zarobki',
+                        data: [],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            };
+
+            function updateChart(data) {
+                if (data.activePeriod === 'week') {
+                    chart.data.labels = data.weeklyLabels;
+                    chart.data.datasets[0].data = data.weeklyData;
+                } else if (data.activePeriod === 'month') {
+                    chart.data.labels = data.monthlyLabels;
+                    chart.data.datasets[0].data = data.monthlyData;
+                } else if (data.activePeriod === 'year') {
+                    chart.data.labels = data.yearlyLabels;
+                    chart.data.datasets[0].data = data.yearlyData;
+                }
+                if (type == 'earnings')
+                    chart.data.datasets[0].label = '@sharedResource["EarningsStats"]';
+                else if (type == 'time')
+                    chart.data.datasets[0].label = '@sharedResource["WorkingTime"]';
+                else if (type == 'quantity')
+                    chart.data.datasets[0].label = '@sharedResource["QuantityStatsPL"]';
+
+                chart.update();
+            }
+
+            function setActiveButton(activeButtonId, category) {
+                const buttonsType = document.querySelectorAll('.buttonType');
+                const buttonsTime = document.querySelectorAll('.buttonTime');
+                if (category == 'type') {
+                    buttonsType.forEach(button => {
+                        type = activeButtonId;
+                        if (button.id === activeButtonId) {
+                            button.classList.add('active');
+                        }
+                        else {
+                            button.classList.remove('active');
+                        }
+                    });
+
+                }
+                else if (category === 'period') {
+                    buttonsTime.forEach(button => {
+                        period = activeButtonId;
+                        if (button.id === activeButtonId) {
+                            button.classList.add('active');
+                        }
+                        else {
+                            button.classList.remove('active');
+                        }
+                    });
+                }
+
+                pullData(type, period);
+            }
+
+            const weekButton = document.getElementById('week');
+            const monthButton = document.getElementById('month');
+            const yearButton = document.getElementById('year');
+
+
+            const earningsButton = document.getElementById('earnings');
+            const timeButton = document.getElementById('time');
+            const quantityButton = document.getElementById('quantity');
+
+            weekButton.addEventListener('click', () => setActiveButton('week', 'period'));
+            monthButton.addEventListener('click', () => setActiveButton('month', 'period'));
+            yearButton.addEventListener('click', () => setActiveButton('year', 'period'));
+
+            earningsButton.addEventListener('click', () => setActiveButton('earnings', 'type'));
+            timeButton.addEventListener('click', () => setActiveButton('time', 'type'));
+            quantityButton.addEventListener('click', () => setActiveButton('quantity', 'type'));
+
+
+            function pullData(type, period) {
+                switch (type) {
+                    case 'earnings':
+                        fetch('/Employees/PullEarniningsStats')
+                            .then(response => response.json())
+                            .then(data => {
+                                data.activePeriod = period;
+                                updateChart(data);
+                            });
+                        break;
+                    case 'time':
+                        fetch('/Employees/PullTimeStats')
+                            .then(response => response.json())
+                            .then(data => {
+                                data.activePeriod = period;
+                                updateChart(data);
+                            });
+                        break;
+                    case 'quantity':
+                        fetch('/Employees/PullQuantityStats')
+                            .then(response => response.json())
+                            .then(data => {
+                                data.activePeriod = period;
+                                updateChart(data);
+                            });
+                        break;
+                }
+            }
+
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: data
+            });
+
+            //doughnutChart
+            let doughnutChart;
+            const ctxDoughnut = document.getElementById('myDoughnutChart').getContext('2d');
+
+            fetch('/Employees/PullAverageScore')
+                .then(response => response.json())
+                .then(data => {
+                    const averageRating = data.averageRating;
+                    const doughnutData = {
+                        datasets: [
+                            {
+                                data: [averageRating, 5 - averageRating],
+                                backgroundColor: ['#FFCE56', '#FFF2F2'],
+                            },
+                        ],
+                    };
+                    updateDoughnutChart(doughnutData, averageRating);
+                    const textAbsElement = document.querySelector('.text-score');
+                    if (textAbsElement) {
+                        console.log(averageRating);
+                        textAbsElement.textContent = `${averageRating}`;
+                    }
+                });
+            function updateDoughnutChart(doughnutData, averageRating) {
+
+                doughnutChart = new Chart(ctxDoughnut, {
+                    type: 'doughnut',
+                    data: doughnutData,
+                });
+            }
+            //Pie chart
+            let pieChart;
+            const ctxPie = document.getElementById('myPieChart').getContext('2d');
+            fetch('/Employees/PullMostTreatments')
+                .then(response => response.json())
+                .then(data => {
+                    const pieData = {
+                        labels: data.map(item => {
+                            const resourceType = sharedResource.find(resource => resource.Name === item.treatmentType);
+                            const resourceTypeName = resourceType ? resourceType.Value : `Brak wartości dla: ${item.treatmentType}`;
+
+                            const resourceTreatment = sharedResource.find(resource => resource.Name === item.treatmentName);
+                            const resourceTreatmentName = resourceTreatment ? resourceTreatment.Value : `Brak wartości dla: ${item.treatmentName}`;
+
+                            return `${resourceTypeName} - ${resourceTreatmentName}`;
+                        }),
+                        datasets: [
+                            {
+                                data: data.map(item => item.count),
+                                backgroundColor: ['#58AA6F', '#802D2D', '#BF7373', '#F2FFF6', '#FFF2F2'], // Kolory
+                            },
+                        ],
+                    };
+                    updatePieChart(pieData);
+                });
+
+            function updatePieChart(pieData) {
+
+                pieChart = new Chart(ctxPie, {
+                    type: 'pie',
+                    data: pieData,
+                });
+            }
+        });
+    </script>
+</main>
+

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Engineer_MVC.Models.Post>
+<main>
+	<div class="row">
+		<div class="col-md-3 d-flex align-items-center">
+			<div class="navigation-container">
+				<h2 class="navigation-header">@sharedResource["Navigation"]</h2>
+				<div class="navigation-links">
+					<a asp-action="PolishPosts" class="navigation-link "> @sharedResource["Polish"]</a>
+					<a asp-action="ItalianPosts" class="navigation-link active"> @sharedResource["Italian"]</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-9">
+            <p>
+                <a asp-action="Create">@sharedResource["CreateNewPost"]</a>
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Image
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.date)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsDeleted)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsVisible)
+                        </th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img src="@("~/PostImages/"+item.ImagePath)" asp-append-version="true" width="100px" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsDeleted)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsVisible)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+		</div>
+	</div>
+</main>

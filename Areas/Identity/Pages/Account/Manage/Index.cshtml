@@ -1,0 +1,133 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h3>@ViewData["Title"]</h3>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="row">
+    <div>
+        <form id="profile-form" method="post" enctype="multipart/form-data" class="profile-container gap-3">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+			<div class="avatar-profile my-4">
+                <div class="avatar-box">
+                    <div class="circle" style="background-image: url('@Url.Content("~/ProfileImages/" + @Model.ImagePath)');">
+                    </div>
+                </div>
+               
+				<div class="icon" onclick="uploadAvatar()">
+                        <svg id="upload-icon-svg" xmlns="http://www.w3.org/2000/svg"
+                         width="35"
+                         height="32"
+                         viewBox="0 0 35 32"
+                         fill="none">
+                        <path fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M11.974 5.33333C11.974 4.59733 12.5539 4 13.27 4H21.9113C22.6274 4 23.2073 4.59733 23.2073 5.33333C23.2073 6.06933 22.6274 6.66667 21.9113 6.66667H13.27C12.5539 6.66667 11.974 6.06933 11.974 5.33333ZM14.4706 28H20.7107C25.0931 28 27.285 28 28.8591 27.0373C29.5363 26.6239 30.1213 26.0879 30.5806 25.46C31.6323 24.02 31.6323 22.0133 31.6323 18C31.6323 13.9867 31.6323 11.9813 30.5792 10.54C30.1203 9.91215 29.5359 9.37619 28.8591 8.96267C27.285 8 25.0931 8 20.7107 8H14.4706C10.0882 8 7.89627 8 6.32219 8.96267C5.64542 9.37622 5.06095 9.91218 4.60209 10.54C3.54897 11.98 3.54897 13.9867 3.54897 17.9973V18C3.54897 22.0133 3.54897 24.0187 4.60069 25.46C5.05564 26.084 5.63977 26.62 6.32219 27.0373C7.89627 28 10.0882 28 14.4706 28ZM11.7395 18C11.7395 15.04 14.3596 12.6427 17.5906 12.6427C20.8216 12.6427 23.4418 15.0413 23.4418 18C23.4418 20.9587 20.8202 23.3573 17.5906 23.3573C14.3596 23.3573 11.7395 20.9573 11.7395 18ZM14.0802 18C14.0802 16.224 15.6529 14.7867 17.5906 14.7867C19.5284 14.7867 21.101 16.2253 21.101 18C21.101 19.7747 19.5284 21.2133 17.5906 21.2133C15.6529 21.2133 14.0802 19.7747 14.0802 18ZM26.1715 12.6427C25.5256 12.6427 25.0018 13.1227 25.0018 13.7147C25.0018 14.3053 25.5256 14.7853 26.1715 14.7853H26.9522C27.5981 14.7853 28.1219 14.3053 28.1219 13.7147C28.1219 13.1227 27.5981 12.6427 26.9522 12.6427H26.1715Z"
+                              fill="#9E7777" />
+                    </svg>
+                    
+                    <input asp-for="Input.ImagePath" id="upload-avatar-input" type="file" name="file" class="d-none" onchange="handleChangeFile()" />
+                    <script type="text/javascript">
+                        const element = document.getElementById("upload-avatar-input");
+                        const svgElement = document.getElementById("upload-icon-svg");
+
+                        function handleChangeFile() {
+                            svgElement.classList.add("uploaded-icon-svg");
+                        }
+
+
+                        function uploadAvatar() {
+                            element.click();
+                        }
+                    </script>
+				</div> 
+			</div>
+            
+            <div class="personal-data-box">
+                <div class="input-box-container">
+                    <div class="input-box-icon">
+                        <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.3333 3.00001C18.3333 2.08334 17.5833 1.33334 16.6667 1.33334H3.33333C2.41667 1.33334 1.66667 2.08334 1.66667 3.00001M18.3333 3.00001V13C18.3333 13.9167 17.5833 14.6667 16.6667 14.6667H3.33333C2.41667 14.6667 1.66667 13.9167 1.66667 13V3.00001M18.3333 3.00001L10 8.83334L1.66667 3.00001" stroke="#667085" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+
+                    </div>
+                    <input asp-for="Username" class="input-box-username" placeholder=@sharedResource["ChooseUsername"] disabled />
+                </div>
+                <label class="input-label">@sharedResource["Username"]</label>
+            </div>
+
+            <div class="personal-data-box">
+                <div class="input-box-container">
+                    <div class="input-box-icon">
+                        <svg width="22"
+                             height="20"
+                             viewBox="0 0 22 20"
+                             fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.275 9.06897C13.6216 9.06897 15.5239 7.26267 15.5239 5.03448C15.5239 2.8063 13.6216 1 11.275 1C8.92848 1 7.02621 2.8063 7.02621 5.03448C7.02621 7.26267 8.92848 9.06897 11.275 9.06897Z"
+                                  stroke="#353E5C"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                            <path d="M4.5391 19H18.0112C19.504 19 20.6539 17.7811 19.9569 16.5277C18.9313 14.6839 16.5934 12.4828 11.2751 12.4828C5.95692 12.4828 3.61896 14.6839 2.59345 16.5277C1.89629 17.7811 3.04623 19 4.5391 19Z"
+                                  stroke="#353E5C"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <input asp-for="Input.FirstName" class="input-box" placeholder=@sharedResource["ChooseFirstName"] />
+                </div>
+                <label class="input-label">@sharedResource["FirstName"]</label>
+            </div>
+
+            <div class="personal-data-box">
+                <div class="input-box-container">
+                    <div class="input-box-icon">
+                        <svg width="22"
+                             height="20"
+                             viewBox="0 0 22 20"
+                             fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.275 9.06897C13.6216 9.06897 15.5239 7.26267 15.5239 5.03448C15.5239 2.8063 13.6216 1 11.275 1C8.92848 1 7.02621 2.8063 7.02621 5.03448C7.02621 7.26267 8.92848 9.06897 11.275 9.06897Z"
+                                  stroke="#353E5C"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                            <path d="M4.5391 19H18.0112C19.504 19 20.6539 17.7811 19.9569 16.5277C18.9313 14.6839 16.5934 12.4828 11.2751 12.4828C5.95692 12.4828 3.61896 14.6839 2.59345 16.5277C1.89629 17.7811 3.04623 19 4.5391 19Z"
+                                  stroke="#353E5C"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <input asp-for="Input.LastName" class="input-box" placeholder=@sharedResource["ChooseLastName"] />
+                </div>
+                <label class="input-label">@sharedResource["LastName"]</label>
+            </div>
+
+            <div class="personal-data-box">
+                <div class="input-box-container">
+                    <div class="input-box-icon">
+                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.66429 1H2.38182C1.53582 1 0.850002 1.65122 0.850002 2.45454C0.850002 10.4878 7.70819 17 16.1682 17C17.0142 17 17.7 16.3487 17.7 15.5454V12.4285L14.0893 10.1428L12.217 11.9206C11.8919 12.2295 11.4059 12.3255 10.9973 12.1251C10.3044 11.7851 9.17983 11.1464 8.07145 10.1428C6.93655 9.11531 6.27161 8.00811 5.93788 7.33821C5.75084 6.9627 5.85912 6.52928 6.16843 6.23557L8.07145 4.42857L5.66429 1Z" stroke="#353E5C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+
+                    </div>
+                    <input asp-for="Input.PhoneNumber" class="input-box" placeholder=@sharedResource["ChoosePhoneNumber"] />
+                </div>
+                <label class="input-label">@sharedResource["PhoneNumber"]</label>
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <button id="update-profile-button" type="submit" class="button btn btn-info">@sharedResource["SaveChanges"]</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

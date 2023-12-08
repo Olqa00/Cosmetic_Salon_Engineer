@@ -1,0 +1,224 @@
+﻿<main>
+    <div class="row">
+        <div class="col-md-3 d-flex align-items-center">
+            <div class="navigation-container">
+                <h2 class="navigation-header">@sharedResource["Navigation"]</h2>
+                <div class="navigation-links">
+                    <a asp-action="EarningsStats" class="navigation-link"> @sharedResource["EarningsStats"]</a>
+                    <a asp-action="WorkingTimeStats" class="navigation-link "> @sharedResource["WorkingTimeStats"]</a>
+                    <a asp-action="QuantityStats" class="navigation-link "> @sharedResource["QuantityStats"]</a>
+                    <a asp-action="EmployeesStats" class="navigation-link active"> @sharedResource["Employees"]</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 mt-3 employee-stats">
+            <div class="line-chart-container mt-3">
+                <div class="group-buttons-container">
+                    <a>@sharedResource["SelectPeriod"]</a>
+                    <div class="buttons">
+                        <a class="buttonTime" id="week">@sharedResource["Week"]</a>
+                        <a class="buttonTime" id="month">@sharedResource["Month"]</a>
+                        <a class="buttonTime" id="year">@sharedResource["Year"]</a>
+                    </div>
+                </div>
+                <div class="group-buttons-container mt-3">
+                    <a>@sharedResource["SelectType"]</a>
+                    <div class="buttons">
+                        <a class="buttonType" id="earnings">@sharedResource["EarningsStats"]</a>
+                        <a class="buttonType" id="time">@sharedResource["WorkingTime"]</a>
+                        <a class="buttonType" id="quantity">@sharedResource["QuantityStats"]</a>
+                    </div>
+                </div>
+                <canvas id="myLineChart" class="mt-3"></canvas>
+            </div>
+            <div class="polar-chart-container mt-5 col-md-8">
+                <a>@sharedResource["AverageRatingsDays"]</a>
+                <canvas id="myPolarChart" class="mt-3"></canvas>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            //Line Chart
+            const ctx = document.getElementById('myLineChart');
+            let chart;
+            let period = "month";
+            let type = "earnings";
+            setActiveButton('month', 'period');
+            setActiveButton('earnings', 'type');
+
+            const data = {
+                labels: [],
+                datasets: []
+            };
+
+            function updateChart(data) {
+                while (chart.data.datasets.length > 0) {
+                    chart.data.datasets.pop();
+                }
+                const allLabels = [];
+
+                for (const employeeData of data) {
+                    if (data.activePeriod === 'week') {
+                        allLabels.push(...employeeData.weeklyLabels);
+                    } else if (data.activePeriod === 'month') {
+                        allLabels.push(...employeeData.monthlyLabels);
+                    } else if (data.activePeriod === 'year') {
+                        allLabels.push(...employeeData.yearlyLabels);
+                    }
+                }
+
+                chart.data.labels = [...new Set(allLabels)];
+
+                for (const employeeData of data) {
+                    const employeeDataset = {
+                        label: employeeData.employeeName,
+                        data: [],
+                        backgroundColor: employeeData.employeeColor,
+                        borderColor: employeeData.employeeColor,
+                        borderWidth: 1
+                    };
+
+                    if (data.activePeriod === 'week') {
+                        employeeDataset.data = employeeData.weeklyData;
+                    } else if (data.activePeriod === 'month') {
+                        employeeDataset.data = employeeData.monthlyData;
+                    } else if (data.activePeriod === 'year') {
+                        employeeDataset.data = employeeData.yearlyData;
+                    }
+
+                    chart.data.datasets.push(employeeDataset);
+                }
+
+                chart.update();
+            }
+
+            function setActiveButton(activeButtonId, category) {
+                const buttonsType = document.querySelectorAll('.buttonType');
+                const buttonsTime = document.querySelectorAll('.buttonTime');
+                if (category == 'type') {
+                    buttonsType.forEach(button => {
+                        type = activeButtonId;
+                        if (button.id === activeButtonId) {
+                            button.classList.add('active');
+                        }
+                        else {
+                            button.classList.remove('active');
+                        }
+                    });
+
+                }
+                else if (category === 'period') {
+                    buttonsTime.forEach(button => {
+                        period = activeButtonId;
+                        if (button.id === activeButtonId) {
+                            button.classList.add('active');
+                        }
+                        else {
+                            button.classList.remove('active');
+                        }
+                    });
+                }
+
+                pullData(type, period);
+            }
+
+            const weekButton = document.getElementById('week');
+            const monthButton = document.getElementById('month');
+            const yearButton = document.getElementById('year');
+
+
+            const earningsButton = document.getElementById('earnings');
+            const timeButton = document.getElementById('time');
+            const quantityButton = document.getElementById('quantity');
+
+            weekButton.addEventListener('click', () => setActiveButton('week', 'period'));
+            monthButton.addEventListener('click', () => setActiveButton('month', 'period'));
+            yearButton.addEventListener('click', () => setActiveButton('year', 'period'));
+
+            earningsButton.addEventListener('click', () => setActiveButton('earnings', 'type'));
+            timeButton.addEventListener('click', () => setActiveButton('time', 'type'));
+            quantityButton.addEventListener('click', () => setActiveButton('quantity', 'type'));
+
+
+            function pullData(type, period) {
+                switch (type) {
+                    case 'earnings':
+                        fetch('/Admin/PullAllEarniningsStats')
+                            .then(response => response.json())
+                            .then(data => {
+                                data.activePeriod = period;
+                                updateChart(data);
+                            });
+                        break;
+                    case 'time':
+                        fetch('/Admin/PullAllTimeStats')
+                            .then(response => response.json())
+                            .then(data => {
+                                data.activePeriod = period;
+                                updateChart(data);
+                            });
+                        break;
+                    case 'quantity':
+                        fetch('/Admin/PullAllQuantityStats')
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok');
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                console.log(data);
+                                data.activePeriod = period;
+                                updateChart(data);
+                            })
+                            .catch(error => {
+                                console.error('Fetch error:', error);
+                            });
+
+                }
+            }
+
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: data
+            });
+            //polar
+            const ctxPolar = document.getElementById('myPolarChart');
+            let chartPolar;
+            fetch('/Admin/PullAllScores')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    const averageRating = data.averageRatings;
+                    const polarData = {
+                        datasets: [
+                            {
+                                data: averageRating,
+                                backgroundColor: data.employeeColor,
+                            }
+                        ],
+                        labels: data.employeeNames
+                    };
+                    updatePolarChart(polarData);
+                });
+            function updatePolarChart(polarData) {
+
+                chartPolar = new Chart(ctxPolar, {
+                    type: 'polarArea',
+                    data: polarData,
+                    options: {
+                        scale: {
+                            ticks: {
+                                beginAtZero: true,
+                                max: 5,
+                                stepSize: 1
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</main>

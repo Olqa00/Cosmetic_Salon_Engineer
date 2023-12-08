@@ -1,0 +1,45 @@
+﻿@using Engineer_MVC.Data.Interfaces;
+@using Microsoft.AspNetCore.Identity
+@using Engineer_MVC.Models
+@using Engineer_MVC.Data.Services
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject IUserService UserService
+
+<ul class="nav justify-content-end">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <div class="navbar-nav d-flex flex-row">
+            <a class="nav-link">@sharedResource["Welcome"] @UserManager.GetUserName(User)!</a>
+                <div class="dropdown">
+                <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown"><img class="profileImg" src="/ProfileImages/@UserService.GetUserImagePath(User)" /></a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="Index">@sharedResource["AdminPanel"]</a></li>
+                    <li><a class="dropdown-item" asp-controller="Employees" asp-action="Index">@sharedResource["EmployeePanel"]</a></li>
+                    <li><a class="dropdown-item" id="manage" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@sharedResource["UserPanel"]</a></li>
+                    <li><a class="dropdown-item" id="logout" onclick="logout()">@sharedResource["Logout"]</a></li>
+
+                        <form class="d-none dropdown-item" id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button id="logout" type="submit">@sharedResource["Logout"]</button>
+                        </form>
+                        <script type="text/javascript">
+                            function logout() {
+
+                            document.getElementById("logoutForm").submit();
+                            }
+                        </script>
+                    
+
+                    </ul>
+                </div>
+        </div>
+    }
+    else
+    {
+        <div class="navbar-nav d-flex flex-row">
+            <a class="nav-link" id="login" asp-area="Identity" asp-page="/Account/Login">@sharedResource["Login"]</a>
+            <a class="nav-link" id="register" asp-area="Identity" asp-page="/Account/Register">@sharedResource["Register"]</a>
+        </div>
+    }
+</ul>

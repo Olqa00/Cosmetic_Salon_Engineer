@@ -1,0 +1,74 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+a {
+    padding: 5px 15px;
+    text-align: center;
+    border-radius: 3px;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    /*align-items: center;*/
+    background-color: #f2f2f2;
+    padding: 10px;
+    flex-direction: column;
+}
+
+.submenu {
+    display: none;
+    position: fixed;
+    left: 0;
+    background-color: #f9f9f9;
+    width: 100%;
+    padding: 12.5px 0;
+}
+
+    .submenu ul {
+        list-style: none;
+        padding-left: 25px;
+    }
+
+.nav-item:hover .submenu {
+    display: block;
+}
+
+    .nav-item:hover .submenu ul {
+        display: flex;
+    }
+.profileImg {
+    border-radius: 50px;
+    height: 50px;
+    /*width:50px;*/
+}
+.color-box {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+}
+#editor {
+    height: 600px;
+    width: auto;
+}
+.editor-container {
+    width: 600px; 
+}

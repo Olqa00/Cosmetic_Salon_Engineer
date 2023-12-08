@@ -1,0 +1,23 @@
+﻿@model Engineer_MVC.Models.MakeAppointmentViewModel
+
+@{
+    ViewData["Title"] = "Make Appointment";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <h3>Appointment Information</h3>
+    <p>Employee: @ViewBag.EmployeeFullName</p>
+    <p>Treatment: @ViewBag.TreatmentInfo</p>
+    <p>Start Date: @ViewBag.StartDate</p>
+    <p>End Date: @ViewBag.EndDate</p>
+    <p>Price: @ViewBag.Price</p>
+    <p hidden>Employee ID: @Model.EmployeeId</p>
+    <p hidden>Treatment ID: @Model.TreatmentId</p>
+    <p hidden>User ID: @Model.UserId</p>
+</div>
+
+<form method="post">
+    <button type="submit" class="btn btn-primary" name="submit">Potwierdź</button>
+</form>
