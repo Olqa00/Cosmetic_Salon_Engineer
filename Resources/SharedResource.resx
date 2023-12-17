@@ -354,6 +354,9 @@
   <data name="CreateNewPost" xml:space="preserve">
     <value>Create new post</value>
   </data>
+  <data name="CreatePost" xml:space="preserve">
+    <value>Create a new post</value>
+  </data>
   <data name="CreateTraining" xml:space="preserve">
     <value>Create training</value>
   </data>
@@ -845,6 +848,9 @@
   </data>
   <data name="Polish" xml:space="preserve">
     <value>Polish</value>
+  </data>
+  <data name="Posts" xml:space="preserve">
+    <value>Posts</value>
   </data>
   <data name="Pregnancy" xml:space="preserve">
     <value>Pregnancy</value>

@@ -88,6 +88,11 @@ namespace Engineer_MVC.Controllers
                         case "SinglePost":
                             pageData.State = "SinglePost";
                             break;
+                        case "Create":
+                            pageData.State = "Header";
+                            pageData.TopText = "Posts";
+                            pageData.BottomText = "CreatePost";
+                            break;
                     }
                     break;
                 case "Treatments":

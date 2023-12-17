@@ -1878,3 +1878,82 @@ body.page-Login .auth-card {
 .calendar-box .fc-list-day-side-text:hover {
   color: #bc5350;
 }
+
+.create-post {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
+  padding-top: 30px;
+}
+.create-post .single-box .title-label {
+  color: #344054;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+.create-post .single-box .title-input {
+  border-radius: 8px;
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+  width: 100%;
+  padding: 10px 11px 10px 10px;
+}
+.create-post .single-box .ql-toolbar {
+  border-radius: 8px;
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+  width: 100%;
+  padding: 10px 11px 10px 10px;
+}
+.create-post .single-box .ql-container {
+  border-radius: 8px;
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+  width: 100%;
+}
+.create-post .single-box .select-container {
+  border-radius: 8px;
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+  display: flex;
+  padding: 10px 14px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  width: 100%;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+.create-post .single-box .create-button {
+  padding: 16px 24px;
+  align-items: flex-start;
+  gap: 8px;
+  border-radius: 6px;
+  background: #C7EBD1;
+  color: #055160;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 125%; /* 17.5px */
+  letter-spacing: 1.68px;
+  text-transform: uppercase;
+  border: 0;
+  text-decoration: none;
+}
+.create-post .single-box .create-button:hover {
+  background: #C7EBD1;
+}
+.create-post .single-box .create-button:hover {
+  background: #C7EBD1;
+}

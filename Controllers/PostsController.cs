@@ -96,6 +96,7 @@ namespace Engineer_MVC.Controllers
             TempData["PostTitle"] = post.Title;
             return View(post);
         }
+        
         [Authorize(Roles = "Admin")]
         public IActionResult PolishPosts()
         {
