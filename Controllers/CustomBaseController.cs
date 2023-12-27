@@ -296,6 +296,11 @@ namespace Engineer_MVC.Controllers
                             pageData.TopText = "ManageTraining";
                             pageData.BottomText = "EditParticipantsList";
                             break;
+                        case "CancelTrainings":
+                            pageData.State = "Header";
+                            pageData.TopText = "ManageTraining";
+                            pageData.BottomText = "ListOfRequests";
+                            break;
                         case "Edit":
                             pageData.State = "Header";
                             pageData.TopText = "ManageTraining";

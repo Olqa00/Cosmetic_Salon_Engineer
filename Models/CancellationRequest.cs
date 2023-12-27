@@ -8,3 +8,4 @@
         public bool? IsCanceled { get; set; } 
     }
 }
+

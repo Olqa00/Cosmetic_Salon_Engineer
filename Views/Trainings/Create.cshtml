@@ -1,8 +1,5 @@
 ﻿@model Engineer_MVC.Models.Training
 
-@{
-    ViewData["Title"] = "Create";
-}
 <head>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -21,47 +18,47 @@
             </div>
         </div>
         <div class="col-md-9 mt-4">
-            <form asp-action="Create">
+            <form asp-action="Create" class="create-post gap-3">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Date" class="control-label"></label>
-                    <input asp-for="Date" class="form-control" />
+                <div class="single-box">
+                    <label class="title-label">@sharedResource["TrainingDate"]</label>
+                    <input asp-for="Date" class="title-input" />
                     <span asp-validation-for="Date" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Duration" class="control-label"></label>
-                    <input asp-for="Duration" class="form-control" />
+                <div class="single-box">
+                    <label class="title-label">@sharedResource["Duration"]</label>
+                    <input asp-for="Duration" class="title-input" />
                     <span asp-validation-for="Duration" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Price" class="control-label"></label>
-                    <input asp-for="Price" class="form-control" />
+                <div class="single-box">
+                    <label class="title-label">@sharedResource["Cost"]</label>
+                    <input asp-for="Price" class="title-input" />
                     <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Status" class="control-label"></label>
-                    <select asp-for="Status" class="form-control">
-                        <option value="To Do">To Do</option>
-                        <option value="Done">Done</option>
+                <div class="single-box">
+                    <label class="title-label">@sharedResource["Status"]</label>
+                    <select asp-for="Status" class="select-container">
+                        <option value="To Do">@sharedResource["ToDo"]</option>
+                        <option value="Done">@sharedResource["Done"]</option>
                     </select>
                     <span asp-validation-for="Status" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="UsersNumber" class="control-label"></label>
-                    <input asp-for="UsersNumber" class="form-control" />
+                <div class="single-box">
+                    <label class="title-label">@sharedResource["NumberParticipants"]</label>
+                    <input asp-for="UsersNumber" class="title-input" />
                     <span asp-validation-for="UsersNumber" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="TreatmentId" class="control-label"></label>
-                    <select asp-for="TreatmentId" class="form-control" asp-items="ViewBag.TreatmentId" onchange="updateEmployees()"></select>
+                <div class="single-box">
+                    <label class="title-label">@sharedResource["Treatment"]</label>
+                    <select asp-for="TreatmentId" class="select-container" asp-items="ViewBag.TreatmentId" onchange="updateEmployees()"></select>
                     <span asp-validation-for="TreatmentId" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="EmployeeId" class="control-label"></label>
-                    <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.EmployeeId"></select>
+                <div class="single-box">
+                    <label class="title-label">@sharedResource["TrainingProvider"]</label>
+                    <select asp-for="EmployeeId" class="select-container" asp-items="ViewBag.EmployeeId"></select>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                <div class="single-box">
+                    <input type="submit" value=@sharedResource["CreateTraining"] class="create-button" />
                 </div>
             </form>
         </div>

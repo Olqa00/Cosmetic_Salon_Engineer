@@ -234,6 +234,9 @@
   <data name="BlogList" xml:space="preserve">
     <value>Elenco messaggi</value>
   </data>
+  <data name="Body" xml:space="preserve">
+    <value>Contenuti</value>
+  </data>
   <data name="Calendar" xml:space="preserve">
     <value>Calendario</value>
   </data>
@@ -348,6 +351,9 @@
   <data name="Cost" xml:space="preserve">
     <value>Costo</value>
   </data>
+  <data name="Create" xml:space="preserve">
+    <value>Creare</value>
+  </data>
   <data name="CreateFreeAccount" xml:space="preserve">
     <value>Crea un account gratuito e accedi GRATUITAMENTE al pannello cosmetico.</value>
   </data>
@@ -404,6 +410,9 @@
   </data>
   <data name="DiodelaserDesc" xml:space="preserve">
     <value>Nel nostro salone, i trattamenti di epilazione vengono eseguiti utilizzando il nuovissimo laser a diodi LIGHTSHEER®DUET™ di Lumenis. Questa è la migliore attrezzatura certificata che gode da molti anni di una reputazione incrollabile in tutto il mondo. Solo grazie ad esso la depilazione permanente avviene tre volte più velocemente! L’intera procedura di depilazione permanente con il laser LightSheer è sicura, comoda ed estremamente efficace. Solo la luce del laser a diodi raggiunge con precisione i bulbi piliferi e li distrugge in modo irreversibile.</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Fatto</value>
   </data>
   <data name="Duration" xml:space="preserve">
     <value>Durata</value>
@@ -594,8 +603,14 @@
   <data name="IsAlways" xml:space="preserve">
     <value>è sempre</value>
   </data>
+  <data name="IsVisible" xml:space="preserve">
+    <value>È visibile</value>
+  </data>
   <data name="Italian" xml:space="preserve">
     <value>Italiana</value>
+  </data>
+  <data name="ItalianLanguage" xml:space="preserve">
+    <value>Italiano</value>
   </data>
   <data name="KatarzynaText" xml:space="preserve">
     <value>Non esiste un ascensore per il successo. Devi salire le scale</value>
@@ -624,6 +639,9 @@
   <data name="LaminationLashesMain" xml:space="preserve">
     <value>Rafforza i peli e rende gli occhi naturali e belli senza la necessità di arricciarli con un piegaciglia o utilizzare un mascara specializzato.</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Lingua</value>
+  </data>
   <data name="LaserEpilation" xml:space="preserve">
     <value>Depilazione laser</value>
   </data>
@@ -638,6 +656,9 @@
   </data>
   <data name="Legs" xml:space="preserve">
     <value>Gambe</value>
+  </data>
+  <data name="LimitedTreatment" xml:space="preserve">
+    <value>Trattamento limitato</value>
   </data>
   <data name="ListAppointments" xml:space="preserve">
     <value>Elenco dei trattamenti</value>
@@ -822,6 +843,9 @@
   <data name="PaintMain" xml:space="preserve">
     <value>È perfetto per le donne che hanno sopracciglia folte e desiderano che l'effetto styling sia naturale e discreto.</value>
   </data>
+  <data name="Participant" xml:space="preserve">
+    <value>Partecipante</value>
+  </data>
   <data name="Participants" xml:space="preserve">
     <value>Partecipanti</value>
   </data>
@@ -848,6 +872,9 @@
   </data>
   <data name="Polish" xml:space="preserve">
     <value>Polacca</value>
+  </data>
+  <data name="PolishLanguage" xml:space="preserve">
+    <value>Polacco</value>
   </data>
   <data name="Posts" xml:space="preserve">
     <value>Messaggi</value>
@@ -987,6 +1014,9 @@
   <data name="StatsUser" xml:space="preserve">
     <value>Statistiche utente</value>
   </data>
+  <data name="Status" xml:space="preserve">
+    <value>Stato</value>
+  </data>
   <data name="StayUpdated" xml:space="preserve">
     <value>Rimani aggiornato!</value>
   </data>
@@ -999,8 +1029,14 @@
   <data name="TimeInStudio" xml:space="preserve">
     <value>Tempo in studio</value>
   </data>
+  <data name="Title" xml:space="preserve">
+    <value>Titolo</value>
+  </data>
   <data name="ToConfirmPressButton" xml:space="preserve">
     <value>Per confermare la tua email premi il pulsante qui sotto:</value>
+  </data>
+  <data name="ToDo" xml:space="preserve">
+    <value>Non eseguito</value>
   </data>
   <data name="Training" xml:space="preserve">
     <value>Formazione</value>
@@ -1010,6 +1046,9 @@
   </data>
   <data name="TrainingList" xml:space="preserve">
     <value>Elenco allenamenti</value>
+  </data>
+  <data name="TrainingProvider" xml:space="preserve">
+    <value>Fornitore di formazione</value>
   </data>
   <data name="Trainings" xml:space="preserve">
     <value>Formazione</value>
@@ -1022,6 +1061,9 @@
   </data>
   <data name="TreatBeauty" xml:space="preserve">
     <value>Regalati la bellezza!</value>
+  </data>
+  <data name="Treatment" xml:space="preserve">
+    <value>Procedura</value>
   </data>
   <data name="TreatmentDuration" xml:space="preserve">
     <value>Durata del trattamento:</value>

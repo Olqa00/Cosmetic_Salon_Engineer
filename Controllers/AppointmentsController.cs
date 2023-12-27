@@ -626,13 +626,19 @@ namespace Engineer_MVC.Controllers
             var users = await _userManager.Users.ToListAsync();
             var userList = new List<User>(users);
             userList.Insert(0, new User { Id = null, FirstName = "", LastName = "" }); // Add an empty option
-
+            var treatments = _context.Treatment
+                .Select(t => new
+                {
+                    Id = t.Id,
+                    TypeAndName = $"{_sharedResource[t.Type]} {_sharedResource[t.Name]}"
+                })
+                .ToList();
             if (int.TryParse(Request.Query["TreatmentId"], out int selectedTreatmentId))
             {
                 var result = GetEmployeesByTreatment(selectedTreatmentId) as JsonResult;
                 var employeesWithTreatment = result.Value as List<dynamic>;
                 ViewData["EmployeeId"] = new SelectList(employeesWithTreatment, "Id", "FullName");
-                ViewData["TreatmentId"] = new SelectList(_context.Treatment, "Id", "Name", selectedTreatmentId);
+                ViewData["TreatmentId"] = new SelectList(treatments, "Id", "TypeAndName", selectedTreatmentId);
 
                 var selectedTreatment = _context.Treatment.FirstOrDefault(t => t.Id == selectedTreatmentId);
                 if (selectedTreatment != null)
@@ -645,7 +651,7 @@ namespace Engineer_MVC.Controllers
             {
                 // If no TreatmentId is selected, pass an empty list for employees
                 ViewData["EmployeeId"] = new SelectList(new List<dynamic>(), "Id", "FullName");
-                ViewData["TreatmentId"] = new SelectList(_context.Treatment, "Id", "Name");
+                ViewData["TreatmentId"] = new SelectList(treatments, "Id", "TypeAndName");
             }
 
             ViewData["UserId"] = new SelectList(userList, "Id", "FullName");
@@ -665,7 +671,13 @@ namespace Engineer_MVC.Controllers
             appointment.Treatment = treatment;
             appointment.Employee = employee;
             appointment.User = user;
-
+            var treatments = _context.Treatment
+                .Select(t => new
+                {
+                    Id = t.Id,
+                    TypeAndName = $"{_sharedResource[t.Type]} {_sharedResource[t.Name]}"
+                })
+                .ToList();
             var validationResults = new List<ValidationResult>();
             if (!Validator.TryValidateObject(appointment, new ValidationContext(appointment), validationResults, true))
             {
@@ -681,7 +693,7 @@ namespace Engineer_MVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["EmployeeId"] = new SelectList(_context.Users, "Id", "FullName", appointment.EmployeeId);
-            ViewData["TreatmentId"] = new SelectList(_context.Treatment, "Id", "Name", appointment.TreatmentId);
+            ViewData["TreatmentId"] = new SelectList(treatments, "Id", "Name", appointment.TreatmentId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "FullName", appointment.UserId);
             return View(appointment);
         }

@@ -223,6 +223,7 @@ namespace Engineer_MVC.Controllers
             var trainingsWithRequests = new List<TrainingWithRequestsViewModel>();
             var trainings = _context.Training
                 .Include(t => t.Users)
+                .Include(t=>t.Employee)
                 .Include(t => t.Treatment)
                 .Include(t=>t.Requests)
                 .Where(t => t.Requests.Any(r => r.IsCanceled == true))

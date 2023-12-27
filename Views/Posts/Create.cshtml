@@ -4,43 +4,43 @@
     <form asp-action="Create" enctype="multipart/form-data" class="create-post gap-3">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="single-box">
-            <label class="title-label">Tytuł</label>
+            <label class="title-label">@sharedResource["Title"]</label>
             <input asp-for="Title" class="title-input" />
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
         <div class="single-box editor-container">
-                <label class="title-label">Zawartość</label>
-                <div id="editor"></div>
-                <input asp-for="Body" id="bodyInput" type="hidden" />
-                <span asp-validation-for="Body" class="text-danger"></span>
+            <label class="title-label">@sharedResource["Body"]</label>
+            <div id="editor"></div>
+            <input asp-for="Body" id="bodyInput" type="hidden" />
+            <span asp-validation-for="Body" class="text-danger"></span>
         </div>
         <div class="single-box">
             <label class="title-label gap-2 d-flex">
-                <input class="form-check-box" asp-for="IsVisible" /> Jest widoczny
+                <input class="form-check-box" asp-for="IsVisible" /> @sharedResource["IsVisible"]
             </label>
         </div>
         <div class="single-box">
-            <label class="title-label">Język</label>
-                <select asp-for="Language" class="select-container">
-                    <option value="Italiano">Italiano</option>
-                    <option value="Polski">Polski</option>
-                </select>
-                <span asp-validation-for="Language" class="text-danger"></span>
+            <label class="title-label">@sharedResource["Language"]</label>
+            <select asp-for="Language" class="select-container">
+                <option value="Italiano">@sharedResource["ItalianLanguage"]</option>
+                <option value="Polski">@sharedResource["PolishLanguage"]</option>
+            </select>
+            <span asp-validation-for="Language" class="text-danger"></span>
         </div>
 
         <div class="single-box">
-            <input asp-for="ImagePath" type="file" name="file" class="input-file"/>
+            <input asp-for="ImagePath" type="file" name="file" class="input-file" />
             <span asp-validation-for="ImagePath" class="text-danger"></span>
         </div>
         <div class="single-box">
-            <input type="submit" value="Stwórz" class="create-button" />
+            <input type="submit" value=@sharedResource["Create"] class="create-button" />
         </div>
     </form>
 </div>
 
 @section Scripts {
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script src="~/js/quillresize.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -65,5 +65,7 @@
         });
     </script>
 
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
 }

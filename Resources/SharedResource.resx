@@ -234,6 +234,9 @@
   <data name="BlogList" xml:space="preserve">
     <value>List of Posts</value>
   </data>
+  <data name="Body" xml:space="preserve">
+    <value>Body</value>
+  </data>
   <data name="Calendar" xml:space="preserve">
     <value>Calendar</value>
   </data>
@@ -348,6 +351,9 @@
   <data name="Cost" xml:space="preserve">
     <value>Cost</value>
   </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
   <data name="CreateFreeAccount" xml:space="preserve">
     <value>Create a free account and get access to the cosmetic panel for FREE.</value>
   </data>
@@ -404,6 +410,9 @@
   </data>
   <data name="DiodelaserDesc" xml:space="preserve">
     <value>In our salon, hair removal treatments are performed using the latest LIGHTSHEER®DUET™ diode laser by Lumenis. This is the best, certified equipment that has enjoyed an unwavering reputation around the world for many years. Only thanks to it, permanent hair removal is done three times faster! The entire procedure of permanent hair removal with the LightSheer laser is safe, comfortable and extremely effective. Only the diode laser light precisely reaches the hair bulbs and destroys them irreversibly.</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Done</value>
   </data>
   <data name="Duration" xml:space="preserve">
     <value>Duration</value>
@@ -594,7 +603,13 @@
   <data name="IsAlways" xml:space="preserve">
     <value>is always</value>
   </data>
+  <data name="IsVisible" xml:space="preserve">
+    <value>Is visible</value>
+  </data>
   <data name="Italian" xml:space="preserve">
+    <value>Italian</value>
+  </data>
+  <data name="ItalianLanguage" xml:space="preserve">
     <value>Italian</value>
   </data>
   <data name="KatarzynaText" xml:space="preserve">
@@ -624,6 +639,9 @@
   <data name="LaminationLashesMain" xml:space="preserve">
     <value>It strengthens the hairs and makes the eyes look natural and beautiful without the need to curl them with an eyelash curler or use specialized mascara.</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
   <data name="LaserEpilation" xml:space="preserve">
     <value>Laser epilation</value>
   </data>
@@ -638,6 +656,9 @@
   </data>
   <data name="Legs" xml:space="preserve">
     <value>Legs</value>
+  </data>
+  <data name="LimitedTreatment" xml:space="preserve">
+    <value>Limited treatment</value>
   </data>
   <data name="ListAppointments" xml:space="preserve">
     <value>List of appointments</value>
@@ -822,6 +843,9 @@
   <data name="PaintMain" xml:space="preserve">
     <value>It is perfect for women who have thick eyebrows and want the styling effect to look natural and subtle.</value>
   </data>
+  <data name="Participant" xml:space="preserve">
+    <value>Participant</value>
+  </data>
   <data name="Participants" xml:space="preserve">
     <value>Participants</value>
   </data>
@@ -847,6 +871,9 @@
     <value>Please confirm your account by</value>
   </data>
   <data name="Polish" xml:space="preserve">
+    <value>Polish</value>
+  </data>
+  <data name="PolishLanguage" xml:space="preserve">
     <value>Polish</value>
   </data>
   <data name="Posts" xml:space="preserve">
@@ -990,6 +1017,9 @@
   <data name="StatsUser" xml:space="preserve">
     <value>User statistics</value>
   </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
   <data name="StayUpdated" xml:space="preserve">
     <value>Stay updated!</value>
   </data>
@@ -1002,8 +1032,14 @@
   <data name="TimeInStudio" xml:space="preserve">
     <value>Time in the studio</value>
   </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
   <data name="ToConfirmPressButton" xml:space="preserve">
     <value>To confirm your email, press the button below:</value>
+  </data>
+  <data name="ToDo" xml:space="preserve">
+    <value>To Do</value>
   </data>
   <data name="Training" xml:space="preserve">
     <value>Training</value>
@@ -1013,6 +1049,9 @@
   </data>
   <data name="TrainingList" xml:space="preserve">
     <value>Training list</value>
+  </data>
+  <data name="TrainingProvider" xml:space="preserve">
+    <value>Training provider</value>
   </data>
   <data name="Trainings" xml:space="preserve">
     <value>Training</value>
@@ -1025,6 +1064,9 @@
   </data>
   <data name="TreatBeauty" xml:space="preserve">
     <value>Treat yourself to beauty!</value>
+  </data>
+  <data name="Treatment" xml:space="preserve">
+    <value>Treatment</value>
   </data>
   <data name="TreatmentDuration" xml:space="preserve">
     <value>Treatment duration:</value>

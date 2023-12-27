@@ -24,3 +24,6 @@ namespace Engineer_MVC.Models
         public string FullName => $"{FirstName} {LastName}";
     }
 }
+
+
+

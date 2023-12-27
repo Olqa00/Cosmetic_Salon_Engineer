@@ -234,6 +234,9 @@
   <data name="BlogList" xml:space="preserve">
     <value>Lista postów</value>
   </data>
+  <data name="Body" xml:space="preserve">
+    <value>Zawartość</value>
+  </data>
   <data name="Calendar" xml:space="preserve">
     <value>Kalendarz</value>
   </data>
@@ -348,6 +351,9 @@
   <data name="Cost" xml:space="preserve">
     <value>Koszt</value>
   </data>
+  <data name="Create" xml:space="preserve">
+    <value>Stwórz</value>
+  </data>
   <data name="CreateFreeAccount" xml:space="preserve">
     <value>Załóż darmowe konto i uzyskaj dostęp do panelu kosmetycznego GRATIS.</value>
   </data>
@@ -407,6 +413,9 @@
   </data>
   <data name="DiodelaserDesc" xml:space="preserve">
     <value>W naszym salonie zabiegi depilacji wykonujemy najnowszym laserem diodowym LIGHTSHEER®DUET™ firmy Lumenis. Jest to najlepszy, certyfikowany sprzęt, który od wielu lat cieszy się niesłabnącą renomą na całym świecie. Tylko dzięki niemu trwała depilacja odbywa się w trzy razy szybciej! Cała procedura trwałego usuwania włosów laserem LightSheer jest bezpieczna, komfortowa i maksymalnie skuteczna. Tylko światło lasera diodowego precyzyjnie dociera do cebulek włosa i niszczy je bezpowrotnie.</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Wykonany</value>
   </data>
   <data name="Duration" xml:space="preserve">
     <value>Czas trwania</value>
@@ -597,8 +606,14 @@
   <data name="IsAlways" xml:space="preserve">
     <value>jest zawsze</value>
   </data>
+  <data name="IsVisible" xml:space="preserve">
+    <value>Jest widoczny</value>
+  </data>
   <data name="Italian" xml:space="preserve">
     <value>Włoskie</value>
+  </data>
+  <data name="ItalianLanguage" xml:space="preserve">
+    <value>Włoski</value>
   </data>
   <data name="KatarzynaText" xml:space="preserve">
     <value>Do sukcesu nie ma żadnej windy. Trzeba iść po schodach</value>
@@ -627,6 +642,9 @@
   <data name="LaminationLashesMain" xml:space="preserve">
     <value>Wzmacnia włoski, sprawia, że oczy wyglądają naturalnie i pięknie bez konieczności podkręcania ich zalotką albo używania specjalistycznego tuszu.</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Język</value>
+  </data>
   <data name="LaserEpilation" xml:space="preserve">
     <value>Depilacja laserowa</value>
   </data>
@@ -641,6 +659,9 @@
   </data>
   <data name="Legs" xml:space="preserve">
     <value>Nogi</value>
+  </data>
+  <data name="LimitedTreatment" xml:space="preserve">
+    <value>Zabieg limitowany</value>
   </data>
   <data name="ListAppointments" xml:space="preserve">
     <value>Lista zabiegów</value>
@@ -825,6 +846,9 @@
   <data name="PaintMain" xml:space="preserve">
     <value>Idealnie sprawdzi się u kobiet, które mają gęste brwi oraz chcą aby efekt stylizacji wyglądał naturalnie i subtelnie.</value>
   </data>
+  <data name="Participant" xml:space="preserve">
+    <value>Uczestnik</value>
+  </data>
   <data name="Participants" xml:space="preserve">
     <value>Uczestnicy</value>
   </data>
@@ -851,6 +875,9 @@
   </data>
   <data name="Polish" xml:space="preserve">
     <value>Polskie</value>
+  </data>
+  <data name="PolishLanguage" xml:space="preserve">
+    <value>Polski</value>
   </data>
   <data name="Posts" xml:space="preserve">
     <value>Posty</value>
@@ -993,8 +1020,14 @@
   <data name="StatsUser" xml:space="preserve">
     <value>Statystyki użytkownika</value>
   </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
   <data name="StayUpdated" xml:space="preserve">
     <value>Bądź na bieżąco!</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
   </data>
   <data name="SylwiaText" xml:space="preserve">
     <value>Ciężka praca jeszcze nikomu nie zaszkodziła, ale po co ryzykować?</value>
@@ -1005,8 +1038,14 @@
   <data name="TimeInStudio" xml:space="preserve">
     <value>Czas w salonie</value>
   </data>
+  <data name="Title" xml:space="preserve">
+    <value>Tytuł</value>
+  </data>
   <data name="ToConfirmPressButton" xml:space="preserve">
     <value>Aby potwierdzić email naciśnij poniższy przycisk:</value>
+  </data>
+  <data name="ToDo" xml:space="preserve">
+    <value>Niewykonany</value>
   </data>
   <data name="Training" xml:space="preserve">
     <value>Szkolenie</value>
@@ -1016,6 +1055,9 @@
   </data>
   <data name="TrainingList" xml:space="preserve">
     <value>Lista szkoleń</value>
+  </data>
+  <data name="TrainingProvider" xml:space="preserve">
+    <value>Prowadzący szkolenia</value>
   </data>
   <data name="Trainings" xml:space="preserve">
     <value>Szkolenia</value>
@@ -1028,6 +1070,9 @@
   </data>
   <data name="TreatBeauty" xml:space="preserve">
     <value>Pozwól sobie na piękno!</value>
+  </data>
+  <data name="Treatment" xml:space="preserve">
+    <value>Zabieg</value>
   </data>
   <data name="TreatmentDuration" xml:space="preserve">
     <value>Czas trwania zabiegu:</value>

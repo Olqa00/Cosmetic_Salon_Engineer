@@ -17,13 +17,13 @@ namespace Engineer_MVC.Models
         [Required]
         public string Status { get; set; }
         [Required]
-        public int UsersNumber { get; set; } //number of participants
+        public int UsersNumber { get; set; } 
         public int TreatmentId { get; set; }
-        public Treatment Treatment { get; set; } //one treatment
+        public Treatment Treatment { get; set; } 
         public string? EmployeeId { get; set; }
         [ForeignKey("EmployeeId")]
-        public User? Employee { get; set; } //one Employee
-        public ICollection<User>? Users { get; set; } //many Users
+        public User? Employee { get; set; } 
+        public ICollection<User>? Users { get; set; } 
         public ICollection<RatingForTraining>? Ratings { get; set; }
         public ICollection<CancellationRequest>? Requests { get; set; }
         [NotMapped]
