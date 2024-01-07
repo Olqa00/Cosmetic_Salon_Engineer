@@ -12,7 +12,7 @@ using System.Data;
 
 namespace Engineer_MVC.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    
     public class TreatmentsController : CustomBaseController
     {
         private readonly EngineerContext _context;
@@ -51,6 +51,7 @@ namespace Engineer_MVC.Controllers
             return View();
         }
         // GET: Treatments/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Treatment == null)
@@ -69,6 +70,7 @@ namespace Engineer_MVC.Controllers
         }
 
         // GET: Treatments/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -79,6 +81,7 @@ namespace Engineer_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("Id,Name,Description,Type,AverageTime,AverageCost")] Treatment treatment)
         {
             if (ModelState.IsValid)
@@ -91,6 +94,7 @@ namespace Engineer_MVC.Controllers
         }
 
         // GET: Treatments/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Treatment == null)
@@ -111,6 +115,7 @@ namespace Engineer_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Type,AverageTime,AverageCost")] Treatment treatment)
         {
             if (id != treatment.Id)
@@ -142,6 +147,7 @@ namespace Engineer_MVC.Controllers
         }
 
         // GET: Treatments/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Treatment == null)
@@ -160,6 +166,7 @@ namespace Engineer_MVC.Controllers
         }
 
         // POST: Treatments/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

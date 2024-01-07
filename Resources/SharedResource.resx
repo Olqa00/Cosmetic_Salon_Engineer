@@ -135,6 +135,9 @@
   <data name="AdaText" xml:space="preserve">
     <value>Don't complain about the uphill climb when you're on your way to the top</value>
   </data>
+  <data name="AddNewPostInfo" xml:space="preserve">
+    <value>There is a new post on the topic in the News tab</value>
+  </data>
   <data name="AddNewWorkingHours" xml:space="preserve">
     <value>Add new working hours</value>
   </data>
@@ -261,8 +264,14 @@
   <data name="CancelAppointment" xml:space="preserve">
     <value>Cancel the appointment</value>
   </data>
+  <data name="CanceledAppointment" xml:space="preserve">
+    <value>Appointment canceled</value>
+  </data>
   <data name="CancellationAppointment" xml:space="preserve">
     <value>Cancellation of the appointment</value>
+  </data>
+  <data name="CancelRequestAppointment" xml:space="preserve">
+    <value>Cancellation of an appointment cancellation request</value>
   </data>
   <data name="CancelTrainingUser" xml:space="preserve">
     <value>Cancel your attendance at the training</value>
@@ -276,8 +285,17 @@
   <data name="CannotRemoveUserRole" xml:space="preserve">
     <value>CannotRemoveUserRole</value>
   </data>
+  <data name="ChangedAppointmentInfo" xml:space="preserve">
+    <value>Your visit information has been changed</value>
+  </data>
   <data name="ChangeEmail" xml:space="preserve">
     <value>Change Email</value>
+  </data>
+  <data name="ChangeInfoAppointment" xml:space="preserve">
+    <value>Changing your visit</value>
+  </data>
+  <data name="ChangeInfoTraining" xml:space="preserve">
+    <value>Changing your training</value>
   </data>
   <data name="ChangeRoles" xml:space="preserve">
     <value>Change roles</value>
@@ -384,6 +402,9 @@
   <data name="DeleteAccount" xml:space="preserve">
     <value>Delete account</value>
   </data>
+  <data name="DeleteAppointment" xml:space="preserve">
+    <value>Deleting a visit</value>
+  </data>
   <data name="DeleteEmployee" xml:space="preserve">
     <value>Delete employee account</value>
   </data>
@@ -395,6 +416,12 @@
   </data>
   <data name="Details" xml:space="preserve">
     <value>Details</value>
+  </data>
+  <data name="DetailsOfTraining" xml:space="preserve">
+    <value>Details of your training</value>
+  </data>
+  <data name="DetailsOfVisit" xml:space="preserve">
+    <value>Details of your visit:</value>
   </data>
   <data name="DetailsTraining" xml:space="preserve">
     <value>Training details</value>
@@ -413,6 +440,12 @@
   </data>
   <data name="Done" xml:space="preserve">
     <value>Done</value>
+  </data>
+  <data name="DoneAppointmentState" xml:space="preserve">
+    <value>Your visit has been completed</value>
+  </data>
+  <data name="DoneTrainingInfo" xml:space="preserve">
+    <value>Your training status has been changed to: completed</value>
   </data>
   <data name="Duration" xml:space="preserve">
     <value>Duration</value>
@@ -807,6 +840,21 @@
   <data name="NewPassword" xml:space="preserve">
     <value>New Password</value>
   </data>
+  <data name="NewPostInfo" xml:space="preserve">
+    <value>New post</value>
+  </data>
+  <data name="NewTrainingAdded" xml:space="preserve">
+    <value>New training</value>
+  </data>
+  <data name="NewTrainingInfo" xml:space="preserve">
+    <value>A new training has appeared in the calendar. We invite you to sign up!</value>
+  </data>
+  <data name="NewTrainingRegister" xml:space="preserve">
+    <value>You have registered for a new training</value>
+  </data>
+  <data name="NewVisitRegister" xml:space="preserve">
+    <value>You have registered for a new appointment</value>
+  </data>
   <data name="NewWorkingHours" xml:space="preserve">
     <value>New working hours</value>
   </data>
@@ -821,6 +869,9 @@
   </data>
   <data name="NoScoreList" xml:space="preserve">
     <value>List of appointments without score</value>
+  </data>
+  <data name="NotAcceptedRequestAppointment" xml:space="preserve">
+    <value>The request to cancel your appointment has been canceled</value>
   </data>
   <data name="NothingPrepare" xml:space="preserve">
     <value>You don't need to prepare in any way, just come! :)</value>
@@ -851,6 +902,9 @@
   </data>
   <data name="ParticipantsList" xml:space="preserve">
     <value>List of participants</value>
+  </data>
+  <data name="ParticipationTraining" xml:space="preserve">
+    <value>Participation in training</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
@@ -909,6 +963,12 @@
   <data name="Register" xml:space="preserve">
     <value>Register</value>
   </data>
+  <data name="RegisterCancelAppointment" xml:space="preserve">
+    <value>Your request to cancel your appointment has been recorded</value>
+  </data>
+  <data name="RegisterCancelTraining" xml:space="preserve">
+    <value>Your cancellation of participation in the training has been registered by the system</value>
+  </data>
   <data name="RegisteronSite" xml:space="preserve">
     <value>Register on the website</value>
   </data>
@@ -932,6 +992,9 @@
   </data>
   <data name="RepeatPassword" xml:space="preserve">
     <value>Repeat password</value>
+  </data>
+  <data name="RequestCancelAppointment" xml:space="preserve">
+    <value>Request to cancel a visit</value>
   </data>
   <data name="Requests" xml:space="preserve">
     <value>Requests</value>
@@ -1023,6 +1086,9 @@
   <data name="StayUpdated" xml:space="preserve">
     <value>Stay updated!</value>
   </data>
+  <data name="SuccessfullyCanceledAppo" xml:space="preserve">
+    <value>Your appointment has been successfully canceled.</value>
+  </data>
   <data name="SylwiaText" xml:space="preserve">
     <value>Hard work never hurt anyone, but why take the risk?</value>
   </data>
@@ -1040,6 +1106,12 @@
   </data>
   <data name="ToDo" xml:space="preserve">
     <value>To Do</value>
+  </data>
+  <data name="ToDoAppointmentState" xml:space="preserve">
+    <value>Your visit status has been changed to: incomplete</value>
+  </data>
+  <data name="ToDoTrainingInfo" xml:space="preserve">
+    <value>Your training status has been changed to: incomplete</value>
   </data>
   <data name="Training" xml:space="preserve">
     <value>Training</value>
@@ -1145,6 +1217,12 @@
   </data>
   <data name="YourAppointment" xml:space="preserve">
     <value>Your appointment</value>
+  </data>
+  <data name="YourAppointmentDelete" xml:space="preserve">
+    <value>Your visit has been deleted</value>
+  </data>
+  <data name="YourParticipationTrainingCancel" xml:space="preserve">
+    <value>Your participation in the training has been canceled</value>
   </data>
   <data name="YourPasswordChanged" xml:space="preserve">
     <value>Your password has been successfully changed.</value>

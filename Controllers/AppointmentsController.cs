@@ -1,6 +1,7 @@
 ﻿using Engineer_MVC.Data;
 using Engineer_MVC.Data.Interfaces;
 using Engineer_MVC.Models;
+using Engineer_MVC.Models.Templates;
 using Engineer_MVC.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -9,8 +10,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Localization;
 using Newtonsoft.Json;
+using RazorLight;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
@@ -18,6 +21,7 @@ namespace Engineer_MVC.Controllers
 {
     public class AppointmentsController : CustomBaseController
     {
+        private readonly IWebHostEnvironment _hostEnvironment;
         private readonly EngineerContext _context;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -25,7 +29,8 @@ namespace Engineer_MVC.Controllers
         private readonly IStringLocalizer<SharedResource> _sharedResource;
         private readonly IUserService _userService;
         private readonly IAppointmentService _appointmentService;
-        public AppointmentsController(UserManager<User> userManager,
+        public AppointmentsController(IWebHostEnvironment hostEnvironment,
+        UserManager<User> userManager,
         RoleManager<IdentityRole> roleManager,
         EngineerContext context,
         IEmailSender emailSender,
@@ -33,6 +38,7 @@ namespace Engineer_MVC.Controllers
         IUserService userService,
         IAppointmentService appointmentService)
         {
+            _hostEnvironment = hostEnvironment;
             _userManager = userManager;
             _roleManager = roleManager;
             _context = context;
@@ -90,7 +96,7 @@ namespace Engineer_MVC.Controllers
         }
         public async Task<IActionResult> ChangeToCanceled(int appointmentId)
         {
-            var appointment = _context.Appointment.Where(u => u.Id == appointmentId)
+            var appointment = _context.Appointment.Include(t => t.Employee).Include(t => t.Treatment).Where(u => u.Id == appointmentId)
                 .FirstOrDefault();
             var user = await _userManager.FindByIdAsync(appointment.UserId);
             if (appointment != null)
@@ -98,36 +104,106 @@ namespace Engineer_MVC.Controllers
                 appointment.IsCanceled = true;
                 _context.SaveChanges();
             }
-            var emailMessage = new Message(new string[] { user.Email }, _sharedResource["CancellationAppointment"], _sharedResource["SendCancelAppointment"]);
-            _emailSender.SendEmail(emailMessage);
+
+            var templatePath = "Views/Templates/RequestCancelAppointmentTemplate.cshtml";
+            var template = System.IO.File.ReadAllText(templatePath).ToString();
+            var translationTemplate = new TranslationTemplate(_context, _hostEnvironment, _sharedResource);
+            var translatedTemplateResult = translationTemplate.Translate(template);
+            var translatedTemplate = ((ContentResult)translatedTemplateResult).Content;
+            var engine = new RazorLightEngineBuilder()
+                .UseMemoryCachingProvider()
+                .Build()
+                ;
+
+            var model = new AppointmentEmailModel
+            {
+                Employee = appointment.Employee.FullName,
+                Treatment = $"{_sharedResource[appointment.Treatment.Type]} {_sharedResource[appointment.Treatment.Name]}",
+                StartDate = appointment.Date,
+                EndDate = appointment.EndTime,
+                Price = appointment.Price
+
+            };
+
+            var resultTemplate = await engine.CompileRenderStringAsync("templateKey", translatedTemplate, model, null);
+            var message = new Message(new string[] { user.Email }, _sharedResource["RequestCancelAppointment"], resultTemplate);
+            _emailSender.SendEmailAsync(message);
             return RedirectToAction("Index", "home");
         }
         public async Task<IActionResult> ChangeToNotCanceled(int appointmentId)
         {
-            var appointment = _context.Appointment.Where(u => u.Id == appointmentId)
+            var appointment = _context.Appointment.Include(t=>t.Employee).Include(t=>t.Treatment).Where(u => u.Id == appointmentId)
                 .FirstOrDefault();
             var user = await _userManager.FindByIdAsync(appointment.UserId);
+
             if (appointment != null)
             {
                 appointment.IsCanceled = false;
                 _context.SaveChanges();
             }
-            var emailMessage = new Message(new string[] { user.Email }, _sharedResource["CancellationAppointment"], _sharedResource["AppointmentCancellationDeleted"]);
-            _emailSender.SendEmail(emailMessage);
+
+            var templatePath = "Views/Templates/NotAcceptedCancellationRequestAppoTemplate.cshtml";
+            var template = System.IO.File.ReadAllText(templatePath).ToString();
+            var translationTemplate = new TranslationTemplate(_context, _hostEnvironment, _sharedResource);
+            var translatedTemplateResult = translationTemplate.Translate(template);
+            var translatedTemplate = ((ContentResult)translatedTemplateResult).Content;
+            var engine = new RazorLightEngineBuilder()
+                .UseMemoryCachingProvider()
+                .Build()
+                ;
+
+            var model = new AppointmentEmailModel
+            {
+                Employee = appointment.Employee.FullName,
+                Treatment = $"{_sharedResource[appointment.Treatment.Type]} {_sharedResource[appointment.Treatment.Name]}",
+                StartDate = appointment.Date,
+                EndDate = appointment.EndTime,
+                Price = appointment.Price
+
+            };
+
+            var resultTemplate = await engine.CompileRenderStringAsync("templateKey", translatedTemplate, model, null);
+            var message = new Message(new string[] { user.Email }, _sharedResource["CancelRequestAppointment"], resultTemplate);
+            _emailSender.SendEmailAsync(message);
             return RedirectToAction("Index", "home");
         }
         public async Task<IActionResult> CancelAppointment(int appointmentId)
         {
-            var appointment = _context.Appointment.Include(w=>w.Employee).Include(t=>t.Treatment).Where(u => u.Id == appointmentId)
+            var appointment = _context.Appointment.Include(w => w.Employee).Include(t => t.Treatment).Where(u => u.Id == appointmentId)
                 .FirstOrDefault();
             var user = await _userManager.FindByIdAsync(appointment.UserId);
+
             if (appointment != null)
             {
                 _context.Appointment.Remove(appointment);
             }
 
-            var emailMessage = new Message(new string[] { user.Email }, _sharedResource["CancellationAppointment"], _sharedResource["AppointmentCancelled"]);
-            _emailSender.SendEmail(emailMessage);
+            var templatePath = "Views/Templates/CancelAppointmentTemplate.cshtml";
+            var template = System.IO.File.ReadAllText(templatePath).ToString();
+            var translationTemplate = new TranslationTemplate(_context, _hostEnvironment, _sharedResource);
+            var translatedTemplateResult = translationTemplate.Translate(template);
+
+            var translatedTemplate = ((ContentResult)translatedTemplateResult).Content;
+
+            var engine = new RazorLightEngineBuilder()
+                .UseMemoryCachingProvider()
+                .Build();
+
+            var model = new AppointmentEmailModel
+            {
+                Employee = appointment.Employee.FullName,
+                Treatment = $"{_sharedResource[appointment.Treatment.Type]} {_sharedResource[appointment.Treatment.Name]}",
+                StartDate = appointment.Date,
+                EndDate = appointment.EndTime,
+                Price = appointment.Price
+
+            };
+
+            var resultTemplate = await engine.CompileRenderStringAsync("templateKey", translatedTemplate, model, null);
+
+            var message = new Message(new string[] { user.Email }, _sharedResource["CanceledAppointment"], resultTemplate);
+            _emailSender.SendEmailAsync(message);
+
             await _context.SaveChangesAsync();
             return RedirectToAction("Index", "home");
         }
@@ -283,7 +359,7 @@ namespace Engineer_MVC.Controllers
             fitsEmployees = _appointmentService.GetFitsEmployees(selectedTreatmentType, selectedTreatmentName);
             var treatmentTypesForEmployees = _context.Treatment.Select(t => t.Type).Distinct().ToList();
             var treatmentNamesForEmployees = _context.Treatment.Select(t => t.Name).Distinct().ToList();
-            
+
             var treatments = _context.Treatment.Include(t => t.Employees).ToList();
             var nullAppointments = _context.Appointment.Where(a => a.UserId == null && a.Date >= DateTime.Now.AddHours(2)).ToList();
 
@@ -348,7 +424,7 @@ namespace Engineer_MVC.Controllers
                                 {
                                     var availableEvent = new CalendarEventViewModel
                                     {
-                                        
+
                                         Title = $"{_sharedResource[treatment.Type]} {_sharedResource[treatment.Name]}",
                                         Start = lastEndTime,
                                         End = lastEndTime.AddMinutes(averageTimeInMinutes),
@@ -422,8 +498,8 @@ namespace Engineer_MVC.Controllers
                 }
             }
 
-            
-            
+
+
             return Json(new
             {
                 groups = groups,
@@ -441,7 +517,7 @@ namespace Engineer_MVC.Controllers
             {
                 language = "it";
             }
-            ViewBag.language= language;
+            ViewBag.language = language;
             var treatmentTypes = _context.Treatment.Select(t => t.Type).Distinct().ToList();
             var treatmentNames = _context.Treatment.Select(t => t.Name).Distinct().ToList();
 
@@ -452,7 +528,7 @@ namespace Engineer_MVC.Controllers
         }
         [Authorize]
 
-        public IActionResult MakeAppointment(string employeeId, int treatmentId, string start, string end)
+        public async Task<IActionResult> MakeAppointmentAsync(string employeeId, int treatmentId, string start, string end)
         {
             var employee = _context.Users
                 .Where(u => u.Id == employeeId)
@@ -487,9 +563,32 @@ namespace Engineer_MVC.Controllers
             _context.Appointment.Add(appointment);
             _context.SaveChanges();
 
+            var templatePath = "Views/Templates/NewAppointmentTemplate.cshtml";
+            var template = System.IO.File.ReadAllText(templatePath).ToString();
+            var translationTemplate = new TranslationTemplate(_context, _hostEnvironment, _sharedResource);
+            var translatedTemplateResult = translationTemplate.Translate(template);
+
+            var translatedTemplate = ((ContentResult)translatedTemplateResult).Content;
+
+            var engine = new RazorLightEngineBuilder()
+                .UseMemoryCachingProvider()
+                .Build();
+            var model = new AppointmentEmailModel
+            {
+                Employee = appointment.Employee.FullName,
+                Treatment = $"{_sharedResource[treatment.Type]} {_sharedResource[treatment.Name]}",
+                StartDate = appointment.Date,
+                EndDate = appointment.EndTime,
+                Price = appointment.Price
+
+            };
+            var resultTemplate = await engine.CompileRenderStringAsync("templateKey", translatedTemplate, model, null);
+
+            var message = new Message(new string[] { user.Email }, _sharedResource["NewVisitRegister"], resultTemplate);
+            _emailSender.SendEmailAsync(message);
+
             return RedirectToAction("Calendar");
         }
-
 
         public IActionResult GetAppointmentsForCalendar(string selectedEmployee, string selectedTreatmentType, string selectedTreatmentName)
         {
@@ -746,12 +845,42 @@ namespace Engineer_MVC.Controllers
             else
             {
                 _context.Update(appointment);
+                var templatePath = "Views/Templates/ChangeInfoAppointmentTemplate.cshtml";
+                var template = System.IO.File.ReadAllText(templatePath).ToString();
+                var translationTemplate = new TranslationTemplate(_context, _hostEnvironment, _sharedResource);
+                var translatedTemplateResult = translationTemplate.Translate(template);
+
+                var translatedTemplate = ((ContentResult)translatedTemplateResult).Content;
+
+                var engine = new RazorLightEngineBuilder()
+                    .UseMemoryCachingProvider()
+                    .Build()
+                    ;
+
+                var model = new AppointmentEmailModel
+                {
+                    Employee = appointment.Employee.FullName,
+                    Treatment = $"{_sharedResource[appointment.Treatment.Type]} {_sharedResource[appointment.Treatment.Name]}",
+                    StartDate = appointment.Date,
+                    EndDate = appointment.EndTime,
+                    Price = appointment.Price
+
+                };
+
+                var resultTemplate = await engine.CompileRenderStringAsync("templateKey", translatedTemplate, model, null);
+
+                var message = new Message(new string[] { user.Email }, _sharedResource["ChangeInfoAppointment"], resultTemplate);
+                _emailSender.SendEmailAsync(message);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["EmployeeId"] = new SelectList(_context.Users, "Id", "FullName", appointment.EmployeeId);
             ViewData["TreatmentId"] = new SelectList(_context.Treatment, "Id", "Name", appointment.TreatmentId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "FullName", appointment.UserId);
+           
+            
+
             return View(appointment);
         }
         [Authorize(Roles = "Admin,Employee")]
@@ -785,11 +914,45 @@ namespace Engineer_MVC.Controllers
             {
                 return Problem("Entity set 'EngineerContext.Appointment'  is null.");
             }
+            
             var appointment = await _context.Appointment.FindAsync(id);
+            var treatment = await _context.Treatment.FindAsync(appointment.TreatmentId);
+            var employee = await _context.Users.FindAsync(appointment.EmployeeId);
+            var user = await _context.Users.FindAsync(appointment.UserId);
+            appointment.Treatment = treatment;
+            appointment.Employee = employee;
+            appointment.User = user;
+
             if (appointment != null)
             {
                 _context.Appointment.Remove(appointment);
             }
+
+            var templatePath = "Views/Templates/DeleteAppointmentTemplate.cshtml";
+            var template = System.IO.File.ReadAllText(templatePath).ToString();
+            var translationTemplate = new TranslationTemplate(_context, _hostEnvironment, _sharedResource);
+            var translatedTemplateResult = translationTemplate.Translate(template);
+
+            var translatedTemplate = ((ContentResult)translatedTemplateResult).Content;
+
+            var engine = new RazorLightEngineBuilder()
+                .UseMemoryCachingProvider()
+                .Build()
+                ;
+
+            var model = new AppointmentEmailModel
+            {
+                Employee = appointment.Employee.FullName,
+                Treatment = $"{_sharedResource[appointment.Treatment.Type]} {_sharedResource[appointment.Treatment.Name]}",
+                StartDate = appointment.Date,
+                EndDate = appointment.EndTime,
+                Price = appointment.Price
+
+            };
+
+            var resultTemplate = await engine.CompileRenderStringAsync("templateKey", translatedTemplate, model, null);
+            var message = new Message(new string[] { appointment.User.Email }, _sharedResource["DeleteAppointment"], resultTemplate);
+            _emailSender.SendEmailAsync(message);
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

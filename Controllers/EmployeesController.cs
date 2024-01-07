@@ -1,16 +1,19 @@
 ﻿using Engineer_MVC.Data;
 using Engineer_MVC.Data.Interfaces;
 using Engineer_MVC.Models;
+using Engineer_MVC.Models.Templates;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Localization;
 using Microsoft.Identity.Client;
 using Newtonsoft.Json;
 using NuGet.Protocol.Core.Types;
+using RazorLight;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Globalization;
@@ -27,15 +30,22 @@ namespace Engineer_MVC.Controllers
         private readonly UserManager<User> _userManager;
         private readonly IAppointmentService _appointmentService;
         private readonly IStringLocalizer<SharedResource> _sharedResource;
+        private readonly IEmailSender _emailSender;
+        private readonly IWebHostEnvironment _hostEnvironment;
+
         public EmployeesController(EngineerContext context,
             UserManager<User> userManager,
             IStringLocalizer<SharedResource> sharedResource,
-            IAppointmentService appointmentService)
+            IAppointmentService appointmentService,
+            IEmailSender emailSender,
+            IWebHostEnvironment hostEnvironment)
         {
             _context = context;
             _userManager = userManager;
             _sharedResource = sharedResource;
             _appointmentService = appointmentService;
+            _emailSender = emailSender;
+            _hostEnvironment = hostEnvironment;
         }
         [Authorize(Roles = "Admin,Employee")]
         public IActionResult Index()
@@ -136,7 +146,32 @@ namespace Engineer_MVC.Controllers
                 }
                 else
                 {
-                    
+                    var templatePath = "Views/Templates/DoneAppointmentTemplate.cshtml";
+                    var template = System.IO.File.ReadAllText(templatePath).ToString();
+                    var translationTemplate = new TranslationTemplate(_context, _hostEnvironment, _sharedResource);
+                    var translatedTemplateResult = translationTemplate.Translate(template);
+
+                    var translatedTemplate = ((ContentResult)translatedTemplateResult).Content;
+
+                    var engine = new RazorLightEngineBuilder()
+                        .UseMemoryCachingProvider()
+                        .Build()
+                        ;
+
+                    var model = new AppointmentEmailModel
+                    {
+                        Employee = appointment.Employee.FullName,
+                        Treatment = $"{_sharedResource[appointment.Treatment.Type]} {_sharedResource[appointment.Treatment.Name]}",
+                        StartDate = appointment.Date,
+                        EndDate = appointment.EndTime,
+                        Price = appointment.Price
+
+                    };
+
+                    var resultTemplate = await engine.CompileRenderStringAsync("templateKey", translatedTemplate, model, null);
+
+                    var message = new Message(new string[] { user.Email }, _sharedResource["ChangeInfoAppointment"], resultTemplate);
+                    _emailSender.SendEmailAsync(message);
 
                     appointment.Status = "Done";
                     _context.Update(appointment);
@@ -247,7 +282,35 @@ namespace Engineer_MVC.Controllers
                     // set Modified flag in your entry
                     _context.Entry(training).State = EntityState.Modified;
 
+                    var templatePath = "Views/Templates/DoneTrainingTemplate.cshtml";
+                    var template = System.IO.File.ReadAllText(templatePath).ToString();
+                    var translationTemplate = new TranslationTemplate(_context, _hostEnvironment, _sharedResource);
+                    var translatedTemplateResult = translationTemplate.Translate(template);
 
+                    var translatedTemplate = ((ContentResult)translatedTemplateResult).Content;
+
+                    var engine = new RazorLightEngineBuilder()
+                        .UseMemoryCachingProvider()
+                        .Build()
+                        ;
+
+                    var model = new AppointmentEmailModel
+                    {
+                        Employee = training.Employee.FullName,
+                        Treatment = $"{_sharedResource[training.Treatment.Type]} {_sharedResource[training.Treatment.Name]}",
+                        StartDate = training.Date,
+                        EndDate = training.EndTime,
+                        Price = training.Price
+
+                    };
+
+                    var resultTemplate = await engine.CompileRenderStringAsync("templateKey", translatedTemplate, model, null);
+
+                    foreach (var user in training.Users)
+                    {
+                        var message = new Message(new string[] { user.Email }, _sharedResource["ChangeInfoTraining"], resultTemplate);
+                        _emailSender.SendEmailAsync(message);
+                    }
 
                     training.Status = "Done";
                     _context.Update(training);
@@ -303,6 +366,36 @@ namespace Engineer_MVC.Controllers
             }
             else
             {
+                var templatePath = "Views/Templates/ToDoTrainingTemplate.cshtml";
+                var template = System.IO.File.ReadAllText(templatePath).ToString();
+                var translationTemplate = new TranslationTemplate(_context, _hostEnvironment, _sharedResource);
+                var translatedTemplateResult = translationTemplate.Translate(template);
+
+                var translatedTemplate = ((ContentResult)translatedTemplateResult).Content;
+
+                var engine = new RazorLightEngineBuilder()
+                    .UseMemoryCachingProvider()
+                    .Build()
+                    ;
+
+                var model = new AppointmentEmailModel
+                {
+                    Employee = training.Employee.FullName,
+                    Treatment = $"{_sharedResource[training.Treatment.Type]} {_sharedResource[training.Treatment.Name]}",
+                    StartDate = training.Date,
+                    EndDate = training.EndTime,
+                    Price = training.Price
+
+                };
+
+                var resultTemplate = await engine.CompileRenderStringAsync("templateKey", translatedTemplate, model, null);
+
+                foreach(var user in training.Users)
+                {
+                    var message = new Message(new string[] { user.Email }, _sharedResource["ChangeInfoTraining"], resultTemplate);
+                    _emailSender.SendEmailAsync(message);
+                }
+
                 training.Status = "To Do";
                 _context.Update(training);
                 await _context.SaveChangesAsync();
@@ -366,6 +459,33 @@ namespace Engineer_MVC.Controllers
             }
             else
             {
+                var templatePath = "Views/Templates/ToDoAppointmentTemplate.cshtml";
+                var template = System.IO.File.ReadAllText(templatePath).ToString();
+                var translationTemplate = new TranslationTemplate(_context, _hostEnvironment, _sharedResource);
+                var translatedTemplateResult = translationTemplate.Translate(template);
+
+                var translatedTemplate = ((ContentResult)translatedTemplateResult).Content;
+
+                var engine = new RazorLightEngineBuilder()
+                    .UseMemoryCachingProvider()
+                    .Build()
+                    ;
+
+                var model = new AppointmentEmailModel
+                {
+                    Employee = appointment.Employee.FullName,
+                    Treatment = $"{_sharedResource[appointment.Treatment.Type]} {_sharedResource[appointment.Treatment.Name]}",
+                    StartDate = appointment.Date,
+                    EndDate = appointment.EndTime,
+                    Price = appointment.Price
+
+                };
+
+                var resultTemplate = await engine.CompileRenderStringAsync("templateKey", translatedTemplate, model, null);
+
+                var message = new Message(new string[] { appointment.User.Email }, _sharedResource["ChangeInfoAppointment"], resultTemplate);
+                _emailSender.SendEmailAsync(message);
+
                 appointment.Status = "To Do";
                 _context.Update(appointment);
                 await _context.SaveChangesAsync();

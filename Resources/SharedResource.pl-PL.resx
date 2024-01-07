@@ -135,6 +135,9 @@
   <data name="AdaText" xml:space="preserve">
     <value>Nie narzekaj, że masz pod górę,  gdy zmierzasz na szczyt</value>
   </data>
+  <data name="AddNewPostInfo" xml:space="preserve">
+    <value>W zakładce Aktualności pojawił się nowy post na temat</value>
+  </data>
   <data name="AddNewWorkingHours" xml:space="preserve">
     <value>Dodaj nowe godziny pracy</value>
   </data>
@@ -261,8 +264,14 @@
   <data name="CancelAppointment" xml:space="preserve">
     <value>Odwołaj zabieg</value>
   </data>
+  <data name="CanceledAppointment" xml:space="preserve">
+    <value>Odwołana wizyta</value>
+  </data>
   <data name="CancellationAppointment" xml:space="preserve">
     <value>Odwołanie wizyty</value>
+  </data>
+  <data name="CancelRequestAppointment" xml:space="preserve">
+    <value>Anulacja prośby o odwołanie wizyty</value>
   </data>
   <data name="CancelTrainingUser" xml:space="preserve">
     <value>Odwołaj obecność na szkoleniu</value>
@@ -276,8 +285,17 @@
   <data name="CannotRemoveUserRole" xml:space="preserve">
     <value>Nie ma możliwości usunięcia roli użytkownika</value>
   </data>
+  <data name="ChangedAppointmentInfo" xml:space="preserve">
+    <value>Informacje o twojej wizycie zostały zmienione</value>
+  </data>
   <data name="ChangeEmail" xml:space="preserve">
     <value>Zmień Email</value>
+  </data>
+  <data name="ChangeInfoAppointment" xml:space="preserve">
+    <value>Zmiana twojej wizyty</value>
+  </data>
+  <data name="ChangeInfoTraining" xml:space="preserve">
+    <value>Zmiana twojego szkolenia</value>
   </data>
   <data name="ChangeRoles" xml:space="preserve">
     <value>Zmień role</value>
@@ -384,6 +402,9 @@
   <data name="DeleteAccount" xml:space="preserve">
     <value>Usuń konto</value>
   </data>
+  <data name="DeleteAppointment" xml:space="preserve">
+    <value>Usunięcie wizyty</value>
+  </data>
   <data name="DeleteCancel" xml:space="preserve">
     <value>Usuń odwołanie</value>
   </data>
@@ -398,6 +419,12 @@
   </data>
   <data name="Details" xml:space="preserve">
     <value>Szczegóły</value>
+  </data>
+  <data name="DetailsOfTraining" xml:space="preserve">
+    <value>Szczegóły twojego szkolenia</value>
+  </data>
+  <data name="DetailsOfVisit" xml:space="preserve">
+    <value>Szczegóły twojej wizyty:</value>
   </data>
   <data name="DetailsTraining" xml:space="preserve">
     <value>Szczegóły szkolenia</value>
@@ -416,6 +443,12 @@
   </data>
   <data name="Done" xml:space="preserve">
     <value>Wykonany</value>
+  </data>
+  <data name="DoneAppointmentState" xml:space="preserve">
+    <value>Twoja wizyta została wykonana</value>
+  </data>
+  <data name="DoneTrainingInfo" xml:space="preserve">
+    <value>Status twojego szkolenia został zmieniony na: wykonane</value>
   </data>
   <data name="Duration" xml:space="preserve">
     <value>Czas trwania</value>
@@ -810,6 +843,21 @@
   <data name="NewPassword" xml:space="preserve">
     <value>Nowe hasło</value>
   </data>
+  <data name="NewPostInfo" xml:space="preserve">
+    <value>Nowy post</value>
+  </data>
+  <data name="NewTrainingAdded" xml:space="preserve">
+    <value>Nowe szkolenie</value>
+  </data>
+  <data name="NewTrainingInfo" xml:space="preserve">
+    <value>W kalendarzu pojawiło się nowe szkolenie. Zapraszamy do zapisów!</value>
+  </data>
+  <data name="NewTrainingRegister" xml:space="preserve">
+    <value>Zarejestrowałeś się na nowe szkolenie</value>
+  </data>
+  <data name="NewVisitRegister" xml:space="preserve">
+    <value>Zarejestrowałeś się na nową wizytę</value>
+  </data>
   <data name="NewWorkingHours" xml:space="preserve">
     <value>Nowe godziny pracy</value>
   </data>
@@ -821,6 +869,9 @@
   </data>
   <data name="NoScoreList" xml:space="preserve">
     <value>Lista nieocenionych zabiegów</value>
+  </data>
+  <data name="NotAcceptedRequestAppointment" xml:space="preserve">
+    <value>Prośba o odwołanie twojej wizyty została anulowana</value>
   </data>
   <data name="NothingPrepare" xml:space="preserve">
     <value>Nie musisz w żaden sposób się przygotowywać, po prostu przyjdź! :)</value>
@@ -854,6 +905,9 @@
   </data>
   <data name="ParticipantsList" xml:space="preserve">
     <value>Lista uczestników</value>
+  </data>
+  <data name="ParticipationTraining" xml:space="preserve">
+    <value>Uczestnictwo w szkoleniu</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Hasło</value>
@@ -912,6 +966,12 @@
   <data name="Register" xml:space="preserve">
     <value>Zarejestruj się</value>
   </data>
+  <data name="RegisterCancelAppointment" xml:space="preserve">
+    <value>Zarejestrowano twoją prośbę o odwołanie wizyty</value>
+  </data>
+  <data name="RegisterCancelTraining" xml:space="preserve">
+    <value>Twoje zgłoszenie odwołania uczestnictwa w szkoleniu zostało zarejestrowane przez system</value>
+  </data>
   <data name="RegisteronSite" xml:space="preserve">
     <value>Zarejestruj się na stronie</value>
   </data>
@@ -935,6 +995,9 @@
   </data>
   <data name="RepeatPassword" xml:space="preserve">
     <value>Powtórz hasło</value>
+  </data>
+  <data name="RequestCancelAppointment" xml:space="preserve">
+    <value>Prośba o odwołanie wizyty</value>
   </data>
   <data name="Requests" xml:space="preserve">
     <value>Prośby</value>
@@ -1026,8 +1089,8 @@
   <data name="StayUpdated" xml:space="preserve">
     <value>Bądź na bieżąco!</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value />
+  <data name="SuccessfullyCanceledAppo" xml:space="preserve">
+    <value>Twoja wizyta została pomyślnie odwołana.</value>
   </data>
   <data name="SylwiaText" xml:space="preserve">
     <value>Ciężka praca jeszcze nikomu nie zaszkodziła, ale po co ryzykować?</value>
@@ -1046,6 +1109,12 @@
   </data>
   <data name="ToDo" xml:space="preserve">
     <value>Niewykonany</value>
+  </data>
+  <data name="ToDoAppointmentState" xml:space="preserve">
+    <value>Stan twojej wizyty został zmieniony na: niewykonana</value>
+  </data>
+  <data name="ToDoTrainingInfo" xml:space="preserve">
+    <value>Status twojego szkolenia został zmieniony na: niewykonane</value>
   </data>
   <data name="Training" xml:space="preserve">
     <value>Szkolenie</value>
@@ -1151,6 +1220,15 @@
   </data>
   <data name="YourAppointment" xml:space="preserve">
     <value>Twój zabieg</value>
+  </data>
+  <data name="YourAppointmentDelete" xml:space="preserve">
+    <value>Twoja wizyta została usunięta</value>
+  </data>
+  <data name="YourParticipationTrainingCancel" xml:space="preserve">
+    <value>Twoje uczestnictwo w szkoleniu zostało odwołane</value>
+  </data>
+  <data name="YourParticipationTrainingNotCancel" xml:space="preserve">
+    <value>Twoje uczestnictwo w szkoleniu nie zostało odwołane</value>
   </data>
   <data name="YourPasswordChanged" xml:space="preserve">
     <value>Twoje hasło zostało zmienione.</value>

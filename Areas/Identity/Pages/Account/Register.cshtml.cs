@@ -26,6 +26,7 @@ using RazorLight;
 using Engineer_MVC.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using Engineer_MVC.Models.Templates;
 
 namespace Engineer_MVC.Areas.Identity.Pages.Account
 {

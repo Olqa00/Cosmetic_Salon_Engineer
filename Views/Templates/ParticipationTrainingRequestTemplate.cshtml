@@ -1,9 +1,9 @@
-﻿@model Engineer_MVC.Models.Templates.EmailConfirmationModel
+﻿@model Engineer_MVC.Models.Templates.AppointmentEmailModel
 @using Microsoft.AspNetCore.Localization;
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@sharedResource["ConfirmEmail"]</title>
+    <title>@sharedResource["ParticipationTraining"]</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Manrope:wght@600;800&family=Montagu+Slab:opsz,wght@16..144,400;16..144,600&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -14,29 +14,25 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-
 <body>
-    <h1>@sharedResource["ConfirmEmail"]</h1>
+    <h1>@sharedResource["ParticipationTraining"]</h1>
+    <p style="margin-bottom: 50px;">@sharedResource["RegisterCancelTraining"]</p>
+    <p>
+        @sharedResource["Treatment"]: @Model.Treatment
+    </p>
+    <p>
+        @sharedResource["Date"]: @Model.StartDate.ToString("dd.MM.yyyy HH:mm") - @Model.EndDate.ToString("HH:mm")
+    </p>
+    <p>
+        @sharedResource["Cost"]: @Model.Price Euro
+    </p>
+    <p>
+        @sharedResource["Employee"]: @Model.Employee
+    </p>
 
-    <p style="margin-bottom: 50px;">@sharedResource["ToConfirmPressButton"]</p>
 
-    <a href='@Model.CallbackUrl' style="padding: 16px 24px;
-        align-items: flex-start;
-        gap: 8px;
-        border-radius: 6px;
-        background: #C7EBD1;
-        color: #055160;
-        font-family: 'Manrope', sans-serif;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 800;
-        line-height: 125%; /* 17.5px */
-        letter-spacing: 1.68px;
-        text-transform: uppercase;
-        border: 0;">
 
-        @sharedResource["Confirm"]
-    </a>
+
 
 
     <footer class="footer-container d-flex flex-column w-100 py-3" style="margin-top: 40px;">
@@ -127,8 +123,8 @@
             Cosmetic Panel - All rights reserved by Aleksandra Niedźwiecka. © 2023.
         </div>
     </footer>
-    
-    
+
+
 </body>
 
 </html>

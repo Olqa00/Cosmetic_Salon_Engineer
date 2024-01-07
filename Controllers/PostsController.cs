@@ -16,6 +16,8 @@ using Engineer_MVC.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using RazorLight;
+using Engineer_MVC.Models.Templates;
 
 namespace Engineer_MVC.Controllers
 {
@@ -25,15 +27,18 @@ namespace Engineer_MVC.Controllers
         private readonly IWebHostEnvironment _hostEnvironment;
         private readonly IPostService _postService;
         private readonly IStringLocalizer<SharedResource> _localizer;
+        private readonly IEmailSender _emailSender;
         public PostsController(EngineerContext context, 
             IWebHostEnvironment hostEnvironment,
             IPostService postService,
-            IStringLocalizer<SharedResource> localizer)
+            IStringLocalizer<SharedResource> localizer,
+            IEmailSender emailSender)
         {
             _context = context;
             _hostEnvironment = hostEnvironment;
             _postService = postService;
             _localizer = localizer;
+            _emailSender = emailSender;
         }
 
         // GET: Posts
@@ -176,8 +181,6 @@ namespace Engineer_MVC.Controllers
             }
         }
 
-
-        // GET: Posts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Post == null)
@@ -195,16 +198,12 @@ namespace Engineer_MVC.Controllers
             return View(post);
         }
         [Authorize(Roles = "Admin")]
-        // GET: Posts/Create
         public IActionResult Create()
         {
             return View();
         }
         [Authorize(Roles = "Admin")]
 
-        // POST: Posts/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Body,IsVisible,Language,ImageFile")] Post post, IFormFile file)
@@ -215,6 +214,31 @@ namespace Engineer_MVC.Controllers
                 {
                     post.ImagePath = await _postService.UploadImage(file);
                 }
+
+                var templatePath = "Views/Templates/NewPostTemplate.cshtml";
+                var template = System.IO.File.ReadAllText(templatePath).ToString();
+                var translationTemplate = new TranslationTemplate(_context, _hostEnvironment, _localizer);
+                var translatedTemplateResult = translationTemplate.Translate(template);
+
+                var translatedTemplate = ((ContentResult)translatedTemplateResult).Content;
+
+                var engine = new RazorLightEngineBuilder()
+                    .UseMemoryCachingProvider()
+                    .Build();
+                var model = new NewPostModel
+                {
+                    Title = post.Title,
+                };
+
+                var resultTemplate = await engine.CompileRenderStringAsync("templateKey", translatedTemplate, model, null);
+                var users = _context.Users.ToList();
+
+                foreach(var user in users)
+                {
+                    var message = new Message(new string[] { user.Email }, _localizer["NewPostInfo"], resultTemplate);
+                    _emailSender.SendEmailAsync(message);
+                }
+
                 _context.Add(post);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -222,7 +246,6 @@ namespace Engineer_MVC.Controllers
             return View(post);
         }
 
-        // GET: Posts/Edit/5
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -239,9 +262,6 @@ namespace Engineer_MVC.Controllers
             return View(post);
         }
 
-        // POST: Posts/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -296,7 +316,6 @@ namespace Engineer_MVC.Controllers
             return View(post);
         }
         [Authorize(Roles = "Admin")]
-        // GET: Posts/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Post == null)
@@ -314,7 +333,6 @@ namespace Engineer_MVC.Controllers
             return View(post);
         }
 
-        // POST: Posts/Delete/5
         [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

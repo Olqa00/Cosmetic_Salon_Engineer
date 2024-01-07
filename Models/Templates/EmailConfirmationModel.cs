@@ -1,4 +1,4 @@
-﻿namespace Engineer_MVC.Models.ViewModels
+﻿namespace Engineer_MVC.Models.Templates
 {
     public class EmailConfirmationModel
     {

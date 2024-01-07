@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Engineer_MVC.Data;
 using Engineer_MVC.Models;
+using Engineer_MVC.Models.Templates;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Data;
@@ -19,6 +20,7 @@ using Newtonsoft.Json;
 using Microsoft.Extensions.Hosting;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Localization;
+using RazorLight;
 
 namespace Engineer_MVC.Controllers
 {
@@ -30,8 +32,10 @@ namespace Engineer_MVC.Controllers
         private readonly IEmailSender _emailSender;
         private readonly IStringLocalizer<SharedResource> _sharedResource;
         private readonly IUserService _userService;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
         public TrainingsController(EngineerContext context,
+            IWebHostEnvironment hostEnvironment,
             UserManager<User> userManager,
             RoleManager<IdentityRole> roleManager,
             IEmailSender emailSender,
@@ -44,6 +48,7 @@ namespace Engineer_MVC.Controllers
             _emailSender = emailSender;
             _sharedResource = sharedResource;
             _userService = userService;
+            _hostEnvironment = hostEnvironment;
         }
 
         // GET: Trainings
@@ -185,11 +190,34 @@ namespace Engineer_MVC.Controllers
 
                 _context.SaveChanges();
             }
-            var emailMessage = new Message(new string[] { user.Email }, _sharedResource["CancellationAppointment"], _sharedResource["SendCancelAppointment"]);
-            _emailSender.SendEmail(emailMessage);
+
+            var templatePath = "Views/Templates/ParticipationTrainingRequestTemplate.cshtml";
+            var template = System.IO.File.ReadAllText(templatePath).ToString();
+            var translationTemplate = new TranslationTemplate(_context, _hostEnvironment, _sharedResource);
+            var translatedTemplateResult = translationTemplate.Translate(template);
+
+            var translatedTemplate = ((ContentResult)translatedTemplateResult).Content;
+
+            var engine = new RazorLightEngineBuilder()
+                .UseMemoryCachingProvider()
+                .Build();
+
+            var model = new AppointmentEmailModel
+            {
+                Employee = training.Employee.FullName,
+                Treatment = $"{_sharedResource[training.Treatment.Type]} {_sharedResource[training.Treatment.Name]}",
+                StartDate = training.Date,
+                EndDate = training.EndTime,
+                Price = training.Price
+            };
+
+            var resultTemplate = await engine.CompileRenderStringAsync("templateKey", translatedTemplate, model, null);
+            var message = new Message(new string[] { user.Email }, _sharedResource["ParticipationTraining"], resultTemplate);
+            _emailSender.SendEmailAsync(message);
+
             return RedirectToAction("Index", "home");
         }
-        public async Task<IActionResult> ChangeToNotCanceled(int trainingId,string userId)
+        public async Task<IActionResult> ChangeToNotCanceled(int trainingId, string userId)
         {
             var training = _context.Training.Include(t => t.Users).Include(t => t.Treatment).FirstOrDefault(t => t.Id == trainingId);
             var user = await _userManager.FindByIdAsync(userId);
@@ -214,8 +242,31 @@ namespace Engineer_MVC.Controllers
 
                 _context.SaveChanges();
             }
-            var emailMessage = new Message(new string[] { user.Email }, _sharedResource["CancellationAppointment"], _sharedResource["AppointmentCancellationDeleted"]);
-            _emailSender.SendEmail(emailMessage);
+
+            var templatePath = "Views/Templates/ParticipationTrainingNotCanceledTemplate.cshtml";
+            var template = System.IO.File.ReadAllText(templatePath).ToString();
+            var translationTemplate = new TranslationTemplate(_context, _hostEnvironment, _sharedResource);
+            var translatedTemplateResult = translationTemplate.Translate(template);
+
+            var translatedTemplate = ((ContentResult)translatedTemplateResult).Content;
+
+            var engine = new RazorLightEngineBuilder()
+                .UseMemoryCachingProvider()
+                .Build();
+
+            var model = new AppointmentEmailModel
+            {
+                Employee = training.Employee.FullName,
+                Treatment = $"{_sharedResource[training.Treatment.Type]} {_sharedResource[training.Treatment.Name]}",
+                StartDate = training.Date,
+                EndDate = training.EndTime,
+                Price = training.Price
+            };
+
+            var resultTemplate = await engine.CompileRenderStringAsync("templateKey", translatedTemplate, model, null);
+            var message = new Message(new string[] { user.Email }, _sharedResource["ParticipationTraining"], resultTemplate);
+            _emailSender.SendEmailAsync(message);
+
             return RedirectToAction("Index", "home");
         }
         public async Task<IActionResult> CancelTrainings()
@@ -223,9 +274,9 @@ namespace Engineer_MVC.Controllers
             var trainingsWithRequests = new List<TrainingWithRequestsViewModel>();
             var trainings = _context.Training
                 .Include(t => t.Users)
-                .Include(t=>t.Employee)
+                .Include(t => t.Employee)
                 .Include(t => t.Treatment)
-                .Include(t=>t.Requests)
+                .Include(t => t.Requests)
                 .Where(t => t.Requests.Any(r => r.IsCanceled == true))
                 .ToList();
             foreach (var training in trainings)
@@ -247,9 +298,11 @@ namespace Engineer_MVC.Controllers
         public async Task<IActionResult> CancelTraining(int trainingId, string userId)
         {
             var training = _context.Training
+                .Include(t => t.Employee)
                 .Include(t => t.Users)
                 .Include(t => t.Treatment)
-                .FirstOrDefault(t => t.Id == trainingId);
+                .FirstOrDefault(t => t.Id == trainingId)
+                ;
 
             if (training == null)
             {
@@ -265,11 +318,30 @@ namespace Engineer_MVC.Controllers
 
             training.Users.Remove(user);
 
-            var emailMessage = new Message(new string[] { user.Email }, _sharedResource["CancellationAppointment"], _sharedResource["AppointmentCancelled"]);
-            _emailSender.SendEmail(emailMessage);
+            var templatePath = "Views/Templates/ParticipationTrainingCanceledTemplate.cshtml";
+            var template = System.IO.File.ReadAllText(templatePath).ToString();
+            var translationTemplate = new TranslationTemplate(_context, _hostEnvironment, _sharedResource);
+            var translatedTemplateResult = translationTemplate.Translate(template);
 
+            var translatedTemplate = ((ContentResult)translatedTemplateResult).Content;
+
+            var engine = new RazorLightEngineBuilder()
+                .UseMemoryCachingProvider()
+                .Build();
+
+            var model = new AppointmentEmailModel
+            {
+                Employee = training.Employee.FullName,
+                Treatment = $"{_sharedResource[training.Treatment.Type]} {_sharedResource[training.Treatment.Name]}",
+                StartDate = training.Date,
+                EndDate = training.EndTime,
+                Price = training.Price
+            };
+
+            var resultTemplate = await engine.CompileRenderStringAsync("templateKey", translatedTemplate, model, null);
+            var message = new Message(new string[] { user.Email }, _sharedResource["ParticipationTraining"], resultTemplate);
+            _emailSender.SendEmailAsync(message);
             await _context.SaveChangesAsync();
-
             return RedirectToAction("Index", "Home");
         }
         public async Task<IActionResult> GetTrainingsForCalendar(string selectedEmployee, string selectedTreatmentType, string selectedTreatmentName)
@@ -281,7 +353,7 @@ namespace Engineer_MVC.Controllers
 
             if (selectedEmployee != "all" && selectedEmployee != null)
             {
-                trainings= trainings.Where(a => a.EmployeeId == selectedEmployee).ToList();
+                trainings = trainings.Where(a => a.EmployeeId == selectedEmployee).ToList();
                 ViewData["EmployeeId"] = new SelectList(selectedEmployee, "Id", "FullName");
 
                 treatmentTypesForEmployee = _userService.GetEmployeeAppointmentTypes(selectedEmployee);
@@ -320,7 +392,7 @@ namespace Engineer_MVC.Controllers
             {
                 ViewData["TreatmentNames"] = treatmentNamesForEmployee;
             }
-            var events = trainings.Select(w => new 
+            var events = trainings.Select(w => new
             {
                 Id = w.Id,
                 Title = $"{_sharedResource[w.Treatment.Type]} {_sharedResource[w.Treatment.Name]}",
@@ -366,7 +438,7 @@ namespace Engineer_MVC.Controllers
             ViewBag.TreatmentTypes = treatmentTypes.Select(type => _sharedResource[type].Value).ToList();
             ViewBag.TreatmentNames = treatmentNames.Select(name => _sharedResource[name].Value).ToList();
             ViewBag.SharedResourceTranslations = JsonConvert.SerializeObject(_sharedResource.GetAllStrings());
-            return View();;
+            return View(); ;
         }
         [Authorize]
         public async Task<IActionResult> CalendarClient()
@@ -405,11 +477,12 @@ namespace Engineer_MVC.Controllers
             ViewBag.SharedResourceTranslations = JsonConvert.SerializeObject(_sharedResource.GetAllStrings());
             return View(trainings);
         }
-        public IActionResult SignUpTraining(int trainingId)
+        public async Task<IActionResult> SignUpTrainingAsync(int trainingId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = _context.Users.Where(u => u.Id == userId).FirstOrDefault();
-            var training = _context.Training.Include(u => u.Users).FirstOrDefault(t => t.Id == trainingId);
+            var training = _context.Training.Include(u => u.Users).Include(u => u.Treatment)
+                .Include(u => u.Employee).FirstOrDefault(t => t.Id == trainingId);
             if (user == null || training == null || training.Users.Count >= training.UsersNumber)
             {
                 return RedirectToAction("CalendarClient");
@@ -417,6 +490,29 @@ namespace Engineer_MVC.Controllers
             training.Users.Add(user);
 
             _context.SaveChanges();
+
+            var templatePath = "Views/Templates/SignUpTrainingTemplate.cshtml";
+            var template = System.IO.File.ReadAllText(templatePath).ToString();
+            var translationTemplate = new TranslationTemplate(_context, _hostEnvironment, _sharedResource);
+            var translatedTemplateResult = translationTemplate.Translate(template);
+
+            var translatedTemplate = ((ContentResult)translatedTemplateResult).Content;
+
+            var engine = new RazorLightEngineBuilder()
+                .UseMemoryCachingProvider()
+                .Build();
+            var model = new AppointmentEmailModel
+            {
+                Employee = training.Employee.FullName,
+                Treatment = $"{_sharedResource[training.Treatment.Type]} {_sharedResource[training.Treatment.Name]}",
+                StartDate = training.Date,
+                EndDate = training.EndTime,
+                Price = training.Price
+            };
+            var resultTemplate = await engine.CompileRenderStringAsync("templateKey", translatedTemplate, model, null);
+
+            var message = new Message(new string[] { user.Email }, _sharedResource["NewTrainingRegister"], resultTemplate);
+            _emailSender.SendEmailAsync(message);
 
             return RedirectToAction("CalendarClient");
         }
@@ -656,7 +752,6 @@ namespace Engineer_MVC.Controllers
 
             return Json(new { employeesWithTreatment });
         }
-        // GET: Trainings/Create
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create()
         {
@@ -687,9 +782,6 @@ namespace Engineer_MVC.Controllers
             return View();
         }
 
-        // POST: Trainings/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Date,Duration,Price,Rating,Status,UsersNumber,IsCanceled,TreatmentId,EmployeeId")] Training training)
@@ -708,6 +800,34 @@ namespace Engineer_MVC.Controllers
             }
             else
             {
+                var templatePath = "Views/Templates/NewTrainingTemplate.cshtml";
+                var template = System.IO.File.ReadAllText(templatePath).ToString();
+                var translationTemplate = new TranslationTemplate(_context, _hostEnvironment, _sharedResource);
+                var translatedTemplateResult = translationTemplate.Translate(template);
+
+                var translatedTemplate = ((ContentResult)translatedTemplateResult).Content;
+
+                var engine = new RazorLightEngineBuilder()
+                    .UseMemoryCachingProvider()
+                    .Build();
+                var model = new AppointmentEmailModel
+                {
+                    Employee = training.Employee.FullName,
+                    Treatment = $"{_sharedResource[training.Treatment.Type]} {_sharedResource[training.Treatment.Name]}",
+                    StartDate = training.Date,
+                    EndDate = training.EndTime,
+                    Price = training.Price
+
+                };
+                var resultTemplate = await engine.CompileRenderStringAsync("templateKey", translatedTemplate, model, null);
+                var users = _context.Users.ToList();
+
+                foreach (var user in users)
+                {
+                    var message = new Message(new string[] { user.Email }, _sharedResource["NewTrainingAdded"], resultTemplate);
+                    _emailSender.SendEmailAsync(message);
+                }
+
                 _context.Add(training);
                 var existingWorkingHours = _context.WorkingHours
                 .Where(wh => wh.EmployeeId == employee.Id && wh.StartDate <= training.Date && wh.EndDate >= training.Date.AddMinutes(training.Duration))
@@ -738,7 +858,6 @@ namespace Engineer_MVC.Controllers
             return View(training);
         }
 
-        // GET: Trainings/Edit/5
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -757,9 +876,6 @@ namespace Engineer_MVC.Controllers
             return View(training);
         }
 
-        // POST: Trainings/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Date,Duration,Price,Rating,Status,UsersNumber,IsCanceled,TreatmentId,EmployeeId")] Training training)
@@ -794,7 +910,6 @@ namespace Engineer_MVC.Controllers
             return View(training);
         }
 
-        // GET: Trainings/Delete/5
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -815,7 +930,6 @@ namespace Engineer_MVC.Controllers
             return View(training);
         }
 
-        // POST: Trainings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -824,7 +938,9 @@ namespace Engineer_MVC.Controllers
             {
                 return Problem("Entity set 'EngineerContext.Training'  is null.");
             }
+
             var training = await _context.Training.FindAsync(id);
+
             if (training != null)
             {
                 _context.Training.Remove(training);
