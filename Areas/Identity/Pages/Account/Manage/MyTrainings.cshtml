@@ -262,7 +262,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-5">
-                                    <a asp-controller="Treatments" asp-action="Details" asp-route-id="@training.Id" class="button btn btn-info">@sharedResource["InfoAppointment"]</a>
+                                    <a asp-controller="Treatments" asp-action="@training.Treatment.Type" class="button btn btn-info">@sharedResource["InfoAppointment"]</a>
                                 </div>
                             </div>
                         </div>
@@ -389,7 +389,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-5">
-                                    <a asp-controller="Treatments" asp-action="Details" asp-route-id="@training.Id" class="button btn btn-info">@sharedResource["InfoAppointment"]</a>
+                                    <a asp-controller="Treatments" asp-action="@training.Treatment.Type" class="button btn btn-info">@sharedResource["InfoAppointment"]</a>
                                 </div>
                             </div>
                         </div>

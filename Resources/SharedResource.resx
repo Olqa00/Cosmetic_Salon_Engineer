@@ -123,6 +123,9 @@
   <data name="AboutUsText" xml:space="preserve">
     <value>Our team, through a professional approach to pursuing their passions, has created a place where all people will feel more beautiful, and we will make every effort to show your naturalness and delicacy.</value>
   </data>
+  <data name="AccessDenied" xml:space="preserve">
+    <value>Access denied</value>
+  </data>
   <data name="AccountSettings" xml:space="preserve">
     <value>Account Settings</value>
   </data>
@@ -432,6 +435,9 @@
   <data name="DidTrainingNotPerformed" xml:space="preserve">
     <value>Was the training not completed?</value>
   </data>
+  <data name="DidVisible" xml:space="preserve">
+    <value>Is it visible?</value>
+  </data>
   <data name="Diodelaser" xml:space="preserve">
     <value>Diode laser</value>
   </data>
@@ -615,6 +621,9 @@
   <data name="HybridMain" xml:space="preserve">
     <value>Hybrid manicure is performed using specially prepared preparations and a lamp.</value>
   </data>
+  <data name="Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
   <data name="ImportantInformation" xml:space="preserve">
     <value>Important information:</value>
   </data>
@@ -636,6 +645,9 @@
   <data name="IsAlways" xml:space="preserve">
     <value>is always</value>
   </data>
+  <data name="IsDeleted" xml:space="preserve">
+    <value>Is it deleted?</value>
+  </data>
   <data name="IsVisible" xml:space="preserve">
     <value>Is visible</value>
   </data>
@@ -644,6 +656,9 @@
   </data>
   <data name="ItalianLanguage" xml:space="preserve">
     <value>Italian</value>
+  </data>
+  <data name="ItalianPosts" xml:space="preserve">
+    <value>Italian posts</value>
   </data>
   <data name="KatarzynaText" xml:space="preserve">
     <value>There is no elevator to success. You have to go up the stairs</value>
@@ -867,6 +882,12 @@
   <data name="NoCaffeine" xml:space="preserve">
     <value>Please limit drinks containing caffeine.</value>
   </data>
+  <data name="NoPermissions" xml:space="preserve">
+    <value>No permissions</value>
+  </data>
+  <data name="NoPermissionToPage" xml:space="preserve">
+    <value>You do not have access to this page.</value>
+  </data>
   <data name="NoScoreList" xml:space="preserve">
     <value>List of appointments without score</value>
   </data>
@@ -929,6 +950,9 @@
   </data>
   <data name="PolishLanguage" xml:space="preserve">
     <value>Polish</value>
+  </data>
+  <data name="PolishPosts" xml:space="preserve">
+    <value>Polish posts</value>
   </data>
   <data name="Posts" xml:space="preserve">
     <value>Posts</value>

@@ -11,26 +11,26 @@
 			</div>
 		</div>
 		<div class="col-md-9">
-            <p>
-                <a asp-action="Create">@sharedResource["CreateNewPost"]</a>
-            </p>
+            <div class="button-container mt-4" style=" justify-content: left;">
+                <a asp-action="Create" class="button btn btn-info">@sharedResource["CreateNewPost"]</a>
+            </div>
             <table class="table">
                 <thead>
                     <tr>
                         <th>
-                            Image
+                            @sharedResource["Image"]
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Title)
+                            @sharedResource["Title"]
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.date)
+                            @sharedResource["Date"]
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.IsDeleted)
+                            @sharedResource["IsDeleted"]
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.IsVisible)
+                            @sharedResource["DidVisible"]
                         </th>
 
                         <th></th>
@@ -57,9 +57,9 @@
                                 @Html.DisplayFor(modelItem => item.IsVisible)
                             </td>
                             <td>
-                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                <a asp-action="Edit" asp-route-id="@item.Id">@sharedResource["Edit"]</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">@sharedResource["Details"]</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">@sharedResource["Delete"]</a>
                             </td>
                         </tr>
                     }

@@ -4,63 +4,56 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<div class="row my-3">
+    <form asp-action="Edit" enctype="multipart/form-data" class="create-post gap-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <div class="single-box">
+            <label class="title-label">@sharedResource["Title"]</label>
+            <input asp-for="Title" class="title-input" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="single-box editor-container">
+            <label class="title-label">@sharedResource["Body"]</label>
+            <div id="editor"></div>
+            <input asp-for="Body" id="bodyInput" class="form-control" type="hidden" />
+            <span asp-validation-for="Body" class="text-danger"></span>
+        </div>
+        <div class="single-box">
+            <label class="title-label">@sharedResource["Date"]</label>
+            <input asp-for="date" class="form-input" />
+            <span asp-validation-for="date" class="text-danger"></span>
+        </div>
+        <div class="single-box">
+            <label class="title-label gap-2 d-flex">
+                <input class="form-check-box" asp-for="IsDeleted" /> @sharedResource["IsDeleted"]
+            </label>
+        </div>
+        <div class="single-box">
+            <label class="title-label gap-2 d-flex">
+                <input class="form-check-box" asp-for="IsVisible" /> @sharedResource["DidVisible"]
+            </label>
+        </div>
+        <div class="single-box">
+            <label class="title-label">@sharedResource["Language"]</label>
+            <select asp-for="Language" class="select-container">
+                <option value="Italiano">@sharedResource["ItalianLanguage"]</option>
+                <option value="Polski">@sharedResource["PolishLanguage"]</option>
+            </select>
+            <span asp-validation-for="Language" class="text-danger"></span>
+        </div>
+        <div class="single-box">
+            @if (!string.IsNullOrEmpty(Model.ImagePath))
+            {
+                <img src="~/PostImages/@Model.ImagePath" width="100px" />
+            }
+            <input asp-for="ImagePath" type="file" name="file" class="input-file" />
+        </div>
+        <div class="single-box">
+            <input type="submit" value=@sharedResource["Save"] class="create-button" />
+        </div>
 
-<h4>Post</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group editor-container">
-                <label asp-for="Body" class="control-label"></label>
-                <div id="editor"></div>
-                <input asp-for="Body" id="bodyInput" class="form-control" type="hidden" />
-                <span asp-validation-for="Body" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="date" class="control-label"></label>
-                <input asp-for="date" class="form-control" />
-                <span asp-validation-for="date" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsVisible" /> @Html.DisplayNameFor(model => model.IsVisible)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Language" class="control-label"></label>
-                <input asp-for="Language" class="form-control" />
-                <span asp-validation-for="Language" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                @if (!string.IsNullOrEmpty(Model.ImagePath))
-                {
-                    <img src="~/PostImages/@Model.ImagePath" width="100px" />
-                }
-                <input asp-for="ImagePath" type="file" name="file" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-            
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+    </form>
 </div>
 
 @section Scripts {
@@ -70,33 +63,33 @@
     <script src="~/js/quillresize.js"></script>
     <script>
 
-            document.addEventListener('DOMContentLoaded', function () {
-                var initialContent = @Html.Raw(Json.Serialize(Model.Body)); 
-                var quill = new Quill('#editor', {
-                    theme: 'snow',
-                    modules: {
-                        toolbar: [
-                            [{ 'size': ['small', false, 'large', 'huge'] }],
-                            ['bold', 'italic', 'underline', 'strike'],
-                            ['link', 'image'],
-                            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                            ['clean'],
-                        ],
-                        imageResize: {},
-                    }
-                });
-
-                quill.root.innerHTML = initialContent; 
-
-                quill.on('text-change', function () {
-                    var html = quill.root.innerHTML;
-                    document.getElementById('bodyInput').value = html;
-                });
+        document.addEventListener('DOMContentLoaded', function () {
+            var initialContent = @Html.Raw(Json.Serialize(Model.Body));
+            var quill = new Quill('#editor', {
+                theme: 'snow',
+                modules: {
+                    toolbar: [
+                        [{ 'size': ['small', false, 'large', 'huge'] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        ['link', 'image'],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                        ['clean'],
+                    ],
+                    imageResize: {},
+                }
             });
+
+            quill.root.innerHTML = initialContent;
+
+            quill.on('text-change', function () {
+                var html = quill.root.innerHTML;
+                document.getElementById('bodyInput').value = html;
+            });
+        });
     </script>
 
-        @{
-            await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        }
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
 

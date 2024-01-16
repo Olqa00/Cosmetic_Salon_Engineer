@@ -74,6 +74,11 @@ namespace Engineer_MVC.Controllers
                             pageData.TopText = "AccountSettings";
                             pageData.BottomText = "MyAccount";
                             break;
+                        case "AccessDenied":
+                            pageData.State = "Header";
+                            pageData.TopText = "AccessDenied";
+                            pageData.BottomText = "NoPermissions";
+                            break;
 
                     }
                     break;
@@ -92,6 +97,31 @@ namespace Engineer_MVC.Controllers
                             pageData.State = "Header";
                             pageData.TopText = "Posts";
                             pageData.BottomText = "CreatePost";
+                            break;
+                        case "PolishPosts":
+                            pageData.State = "Header";
+                            pageData.TopText = "BlogList";
+                            pageData.BottomText = "PolishPosts";
+                            break;
+                        case "ItalianPosts":
+                            pageData.State = "Header";
+                            pageData.TopText = "BlogList";
+                            pageData.BottomText = "ItalianPosts";
+                            break;
+                        case "Edit":
+                            pageData.State = "Header";
+                            pageData.TopText = "Post";
+                            pageData.BottomText = "EditPost";
+                            break;
+                        case "Details":
+                            pageData.State = "Header";
+                            pageData.TopText = "Post";
+                            pageData.BottomText = "DetailsPost";
+                            break;
+                        case "Delete":
+                            pageData.State = "Header";
+                            pageData.TopText = "Post";
+                            pageData.BottomText = "DeletePost";
                             break;
                     }
                     break;

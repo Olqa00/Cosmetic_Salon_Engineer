@@ -123,6 +123,9 @@
   <data name="AboutUsText" xml:space="preserve">
     <value>Nasz zespół poprzez profesjonalne podejście do realizacji swoich pasji stworzył miejsce, w którym wszyscy ludzie poczują się piękniej, a my dołożymy wszelkich starań, aby uwidocznić Waszą naturalność i delikatność.</value>
   </data>
+  <data name="AccessDenied" xml:space="preserve">
+    <value>Odmowa dostępu</value>
+  </data>
   <data name="AccountSettings" xml:space="preserve">
     <value>Ustawienia Konta</value>
   </data>
@@ -411,6 +414,9 @@
   <data name="DeleteEmployee" xml:space="preserve">
     <value>Usuń konto pracownika</value>
   </data>
+  <data name="DeletePost" xml:space="preserve">
+    <value>Usuń post</value>
+  </data>
   <data name="DeleteTraining" xml:space="preserve">
     <value>Odwołaj szkolenie</value>
   </data>
@@ -426,6 +432,9 @@
   <data name="DetailsOfVisit" xml:space="preserve">
     <value>Szczegóły twojej wizyty:</value>
   </data>
+  <data name="DetailsPost" xml:space="preserve">
+    <value>Szczegóły postu</value>
+  </data>
   <data name="DetailsTraining" xml:space="preserve">
     <value>Szczegóły szkolenia</value>
   </data>
@@ -434,6 +443,9 @@
   </data>
   <data name="DidTrainingNotPerformed" xml:space="preserve">
     <value>Czy szkolenie nie zostało wykonane?</value>
+  </data>
+  <data name="DidVisible" xml:space="preserve">
+    <value>Czy jest widoczny?</value>
   </data>
   <data name="Diodelaser" xml:space="preserve">
     <value>Laser diodowy</value>
@@ -461,6 +473,9 @@
   </data>
   <data name="EditParticipantsList" xml:space="preserve">
     <value>Edytuj listę uczestników</value>
+  </data>
+  <data name="EditPost" xml:space="preserve">
+    <value>Edytuj post</value>
   </data>
   <data name="EditSkills" xml:space="preserve">
     <value>Edytuj umiejętności</value>
@@ -618,6 +633,9 @@
   <data name="HybridMain" xml:space="preserve">
     <value>Manicure hybrydowy wykonuje się za pomocą specjalnie przygotowanych do tego preparatów i lampy.</value>
   </data>
+  <data name="Image" xml:space="preserve">
+    <value>Zdjęcie</value>
+  </data>
   <data name="ImportantInformation" xml:space="preserve">
     <value>Ważne informacje:</value>
   </data>
@@ -639,6 +657,9 @@
   <data name="IsAlways" xml:space="preserve">
     <value>jest zawsze</value>
   </data>
+  <data name="IsDeleted" xml:space="preserve">
+    <value>Czy usunięty?</value>
+  </data>
   <data name="IsVisible" xml:space="preserve">
     <value>Jest widoczny</value>
   </data>
@@ -647,6 +668,9 @@
   </data>
   <data name="ItalianLanguage" xml:space="preserve">
     <value>Włoski</value>
+  </data>
+  <data name="ItalianPosts" xml:space="preserve">
+    <value>Włoskie posty</value>
   </data>
   <data name="KatarzynaText" xml:space="preserve">
     <value>Do sukcesu nie ma żadnej windy. Trzeba iść po schodach</value>
@@ -867,6 +891,12 @@
   <data name="NoCaffeine" xml:space="preserve">
     <value>Prosimy o ograniczenie napojów zawierających kofeinę.</value>
   </data>
+  <data name="NoPermissions" xml:space="preserve">
+    <value>Brak uprawnień</value>
+  </data>
+  <data name="NoPermissionToPage" xml:space="preserve">
+    <value>Nie masz dostępu do tej strony.</value>
+  </data>
   <data name="NoScoreList" xml:space="preserve">
     <value>Lista nieocenionych zabiegów</value>
   </data>
@@ -932,6 +962,9 @@
   </data>
   <data name="PolishLanguage" xml:space="preserve">
     <value>Polski</value>
+  </data>
+  <data name="PolishPosts" xml:space="preserve">
+    <value>Polskie posty</value>
   </data>
   <data name="Posts" xml:space="preserve">
     <value>Posty</value>

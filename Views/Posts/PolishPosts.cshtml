@@ -11,57 +11,57 @@
             </div>
         </div>
         <div class="col-md-9">
-            <p>
-                <a asp-action="Create">@sharedResource["CreateNewPost"]</a>
-            </p>
+            <div class="button-container mt-4" style=" justify-content: left;">
+                <a asp-action="Create" class="button btn btn-info">@sharedResource["CreateNewPost"]</a>
+            </div>
             <table class="table">
                 <thead>
-                    <tr>
-                        <th>
-                            Image
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Title)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.date)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.IsDeleted)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.IsVisible)
-                        </th>
+                <tr>
+                    <th>
+                            @sharedResource["Image"]
+                    </th>
+                    <th>
+                            @sharedResource["Title"]
+                    </th>
+                    <th>
+                            @sharedResource["Date"]
+                    </th>
+                    <th>
+                            @sharedResource["IsDeleted"]
+                    </th>
+                    <th>
+                            @sharedResource["DidVisible"]
+                    </th>
 
-                        <th></th>
-                    </tr>
+                    <th></th>
+                </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                <img src="@("~/PostImages/"+item.ImagePath)" asp-append-version="true" width="100px" />
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Title)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.date)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.IsDeleted)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.IsVisible)
-                            </td>
-                            <td>
-                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                            </td>
-                        </tr>
-                    }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="@("~/PostImages/" + item.ImagePath)" asp-append-version="true" width="100px"/>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsDeleted)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsVisible)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">@sharedResource["Edit"]</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">@sharedResource["Details"]</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">@sharedResource["Delete"]</a>
+                        </td>
+                    </tr>
+                }
                 </tbody>
             </table>
         </div>

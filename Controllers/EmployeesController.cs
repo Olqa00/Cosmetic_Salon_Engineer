@@ -176,7 +176,7 @@ namespace Engineer_MVC.Controllers
                     appointment.Status = "Done";
                     _context.Update(appointment);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("ManageAppointments");
                 }
             }
             {
@@ -399,11 +399,11 @@ namespace Engineer_MVC.Controllers
                 training.Status = "To Do";
                 _context.Update(training);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("ManageTrainings");
+                return RedirectToAction("ArchiveTrainings");
             }
 
 
-            return RedirectToAction("ManageTrainings");
+            return RedirectToAction("ArchiveTrainings");
         }
         public async Task<IActionResult> LoadTrainingsArchive(int skip)
         {
@@ -493,7 +493,7 @@ namespace Engineer_MVC.Controllers
             }
 
 
-            return RedirectToAction("ManageAppointments");
+            return RedirectToAction("ArchiveAppointments");
         }
         private bool AppointmentExists(int id)
         {

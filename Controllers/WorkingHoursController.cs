@@ -285,7 +285,7 @@ namespace Engineer_MVC.Controllers
             {
                 _context.Add(workingHours);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index), new { userId = workingHours.EmployeeId });
+                return RedirectToAction("WorkingHoursEmployee", new { userId = workingHours.EmployeeId });
             }
 
             return RedirectToAction("Index","Employees");
